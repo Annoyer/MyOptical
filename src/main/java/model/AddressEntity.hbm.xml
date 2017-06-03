@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.AddressEntity" table="address" schema="dbo" catalog="glasses_shop">
+        <composite-id mapped="true" class="model.AddressEntityPK">
+            <key-property name="addNo" column="add_no"/>
+            <key-property name="customerId" column="customer_id"/>
+        </composite-id>
+        <property name="state" column="state"/>
+        <property name="city" column="city"/>
+        <property name="street" column="street"/>
+        <property name="other" column="other"/>
+    </class>
+</hibernate-mapping>

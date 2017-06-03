@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.CommentEntity" table="comment" schema="dbo" catalog="glasses_shop">
+        <composite-id mapped="true" class="model.CommentEntityPK">
+            <key-property name="commId" column="comm_id"/>
+            <key-property name="frameId" column="frame_id"/>
+        </composite-id>
+        <property name="commText" column="comm_text"/>
+        <property name="commPhoto" column="comm_photo"/>
+        <property name="commTime" column="comm_time"/>
+        <property name="customerId" column="customer_id"/>
+    </class>
+</hibernate-mapping>

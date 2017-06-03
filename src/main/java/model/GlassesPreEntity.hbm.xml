@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.GlassesPreEntity" table="glasses_pre" schema="dbo" catalog="glasses_shop">
+        <composite-id mapped="true" class="model.GlassesPreEntityPK">
+            <key-property name="presId" column="pres_id"/>
+            <key-property name="customerId" column="customer_id"/>
+            <key-property name="glassesItemId" column="glasses_item_id"/>
+        </composite-id>
+    </class>
+</hibernate-mapping>

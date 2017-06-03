@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.CollectsEntity" table="collects" schema="dbo" catalog="glasses_shop">
+        <composite-id mapped="true" class="model.CollectsEntityPK">
+            <key-property name="id" column="id"/>
+            <key-property name="frameId" column="frame_id"/>
+        </composite-id>
+    </class>
+</hibernate-mapping>

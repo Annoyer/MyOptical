@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses_shop">
+        <id name="orderId" column="order_id"/>
+        <property name="orderTime" column="order_time"/>
+        <property name="totalPrice" column="total_price"/>
+        <property name="customerId" column="customer_id"/>
+        <property name="addNo" column="add_no"/>
+        <property name="orderStatus" column="order_status"/>
+    </class>
+</hibernate-mapping>

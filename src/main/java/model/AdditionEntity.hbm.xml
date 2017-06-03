@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.AdditionEntity" table="addition" schema="dbo" catalog="glasses_shop">
+        <composite-id mapped="true" class="model.AdditionEntityPK">
+            <key-property name="glassesItemId" column="glasses_item_id"/>
+            <key-property name="addId" column="add_id"/>
+        </composite-id>
+        <property name="addType" column="add_type"/>
+    </class>
+</hibernate-mapping>

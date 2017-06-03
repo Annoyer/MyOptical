@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.GlassesItemEntity" table="glasses_item" schema="dbo" catalog="glasses_shop">
+        <id name="glassesItemId" column="glasses_item_id"/>
+        <property name="price" column="price"/>
+        <property name="lensType" column="lens_type"/>
+        <property name="lensColor" column="lens_color"/>
+        <property name="lensTint" column="lens_tint"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses_shop">
+        <id name="frameId" column="frame_id"/>
+        <property name="glassesType" column="glasses_type"/>
+        <property name="color" column="color"/>
+        <property name="style" column="style"/>
+        <property name="userType" column="user_type"/>
+        <property name="framePrice" column="frame_price"/>
+        <property name="form" column="form"/>
+        <property name="material" column="material"/>
+        <property name="framePhoto" column="frame_photo"/>
+        <property name="accessTime" column="access_time"/>
+    </class>
+</hibernate-mapping>
