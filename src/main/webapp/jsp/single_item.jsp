@@ -19,7 +19,7 @@
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onload="loadComments()">
+<body onload="getFrameInfo()">
 <!-- Page Header -->
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -40,8 +40,8 @@
 
         <div class="offset_40">
             <div class="display_inlineblock">
-                <div class="display_sm_inlineblocks display_center" id="itemPrice">
-                    <div class="text_content ">¥399.00</div>
+                <div class="display_sm_inlineblocks display_center">
+                    <div class="text_content" id="itemPrice">¥399.00</div>
                 </div>
                 <div class="divider_vertical"> | </div>
                 <div class="display_sm_inlineblocks display_center">
@@ -130,55 +130,69 @@
 </body>
 
 <script type="text/javascript">
+    var frameId = "${param.frameId}";
+
+    function getFrameInfo() {
+        alert("<%=request.getContextPath()%>/jsp/search/getSingleItem");
+        $.ajax({
+            type: "post",//请求方式
+            url: "<%=request.getContextPath()%>/jsp/search/getSingleItem",
+            data:{
+                frameId:frameId
+            },
+            timeout: 80000,//超时时间：8秒
+            //请求成功后的回调函数 data为json格式
+            success: function (data) {
+                $('#itemId').html(data.frameInfo.frameId);
+                $('#itemImgLg').src(data.frameInfo.framePhoto);
+                $('#itemPrice').html(data.frameInfo.framePrice);
+                $('#userType').html(data.frameInfo.userType);
+                $('#form').html(data.frameInfo.form);
+                $('#glassesType').html(data.frameInfo.glassesType);
+                $('#material').html(data.frameInfo.material);
+                showComments(data.commentList);
+            },
+            //请求出错的处理
+            error: function () {
+                alert("请求出错");
+            }
+        })
+    }
+
     function toBuy(){
         //获取该物品信息并跳转到参数选择页面
         window.location.href='';
     }
 
-    function loadComments() {
-        var msg = ${msg};
-        if (msg == "success"){
-            var size = ${commentListSize};
-            var commentList = ${commentList};
-            var parent = $('#commentListBody');
-            //！！还没有考虑多张评论图片的状况 分页的实现
-            jQuery.each(commentList, function(i,item){
-                alert(item.frameId);
-                var comment = $('<tr><td class="comment_wrapper"><div class="comment_user_name">' +
-                    item.customerId +
-                    '</div><div class="comment_content">' +
-                    item.commText +
-                    '<div><img class="comment_img" src="' +
-                    item.commPhoto +
-                    '"></div></div><div class="comment_timestamp">' +
-                    item.commTime +
-                    '</div></td></tr>')
-                parent.append(comment);
-            });
-        }else if (msg == "failure"){
-            alert("该商品已下架");
-        }else {
-            alert("系统正忙");
-        }
-
-
+    function showComments(list) {
+        var parent = $('#commentListBody');
+        //！！还没有考虑多张评论图片的状况 分页的实现
+        jQuery.each(list, function(i,item){
+            alert(item.frameId);
+            var comment = $('<tr><td class="comment_wrapper"><div class="comment_user_name">' +
+                item.customerId +
+                '</div><div class="comment_content">' +
+                item.commText +
+                '<div><img class="comment_img" src="' +
+                item.commPhoto +
+                '"></div></div><div class="comment_timestamp">' +
+                item.commTime +
+                '</div></td></tr>')
+            parent.append(comment);
+        });
     }
 
     $(document).ready(function(){
-        $(".item_list_show").hover(function(){
-            $(this).children('div.item_wrap_brief').toggle();
-            $(this).children('div.item_panel').toggle();
-        });
-
         //收藏
         $(".btn_collect").click(function(){
+            alert("frameId:" + frameId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/collect",
                 timeout: 80000,//超时时间：8秒
                 dataType: "json",//设置返回数据的格式
                 data: {
-                    "frameId": ${frameInfo.frameId}
+                    "frameId": frameId
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
@@ -201,13 +215,14 @@
 
         //取消收藏
         $(".btn_uncollect").click(function(){
+            alert("frameId:" + frameId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/uncollect",
                 timeout: 80000,//超时时间：8秒
                 dataType: "json",//设置返回数据的格式
                 data: {
-                    "frameId": ${frameInfo.frameId}
+                    "frameId": frameId
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {

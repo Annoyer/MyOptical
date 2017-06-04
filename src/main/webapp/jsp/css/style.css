@@ -180,8 +180,11 @@ hr.my_hr_long {
 	font-size:10px;
 }
 
-.btn_collect{}
+.btn_collect{
+	margin: 5px;
+}
 .btn_uncollect{
+	margin: 5px;
 	display: none;
 }
 
@@ -225,6 +228,7 @@ hr.my_hr_long {
 	width:100%;
 	/*! text-align: center; */
 	margin: 0 auto;
+	cursor: pointer;
 }
 
 .item_list_show {
@@ -493,7 +497,7 @@ td.comment_wrapper > .comment_timestamp {
 footer {
 	background-color: #eeeeee;
 	height: 200px;
-	font-family: 微软雅黑；
+	font-family: 微软雅黑;
 	color: #000000;
 	border: none;
 	word-break: normal;

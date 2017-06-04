@@ -32,22 +32,26 @@ public class SearchController extends BaseController {
     private ISearchService searchService = new SearchServiceImpl();
 
     //使用required = false时，若前台没有这个参数，会赋值null
-    @RequestMapping(value = "/jsp/search/firstLoad")
+    @RequestMapping(value = "/jsp/search/firstLoad",method=RequestMethod.POST)
     @ResponseBody
-    public Map toSearchItems(@RequestParam(value = "key", required = false) String key,
-                             @RequestParam(value = "value", required=false) String value,
-                             @RequestParam(value = "keyWord", required = false) String keyWord){
+    public Map toSearchItems(HttpServletRequest request){
         Map result = new HashMap();
         List<FrameEntity> frames = new ArrayList<FrameEntity>();
         String msg;
-        if (key != null && value != null && keyWord == null){
+        String key = request.getParameter("key");
+        String value = request.getParameter("value");
+        String keyWord = request.getParameter("keyWord");
+        System.out.println("key=" + key);
+        System.out.println("value=" + value);
+        System.out.println("keyWord=" + keyWord);
+        if (!key.isEmpty() && !value.isEmpty() && keyWord.isEmpty()){
             System.out.println("SearchController：得到key: " + key + "  value: " + value);
             Map<String,String> attrMap = new HashMap<String, String>();
             attrMap.put(key,":"+value);
             frames.addAll(searchService.getFramesByAttrs(attrMap));
-        } else if (key == null && value == null && keyWord != null){
+        } else if (key.isEmpty() && value.isEmpty() && !keyWord.isEmpty()){
             System.out.println("SearchController：得到keyWord: " + keyWord);
-            frames.addAll(searchService.getFramesByKeyword(request.getParameter("keyWord")));
+            frames.addAll(searchService.getFramesByKeyword(keyWord));
         } else {
             System.out.println("SearchController：前台参数错误");
         }
@@ -67,6 +71,7 @@ public class SearchController extends BaseController {
     @RequestMapping(value = "/jsp/search/panelOptions", method = RequestMethod.POST)
     @ResponseBody
     public Map searchByPanel(HttpServletRequest request){
+        System.out.println("start panelOptions");
         Map result = new HashMap();
         List<FrameEntity> frames = new ArrayList<FrameEntity>();
         Map<String,String> attrMap = new HashMap<String, String>();
@@ -79,6 +84,7 @@ public class SearchController extends BaseController {
         attrMap.put("material",request.getParameter("material"));
         attrMap.put("form",request.getParameter("form"));
         frames.addAll(searchService.getFramesByAttrs(attrMap));
+        System.out.println("SearchController: panelOptions: listsize=" + frames.size());
 
         if (frames.size() > 0){
             msg = "success";
@@ -90,47 +96,4 @@ public class SearchController extends BaseController {
         result.put("msg", msg);
         return result;
     }
-
-//    @RequestMapping(value = "/jsp/search/searchBarAction")
-//    public ModelAndView searchBysearchBar(HttpServletRequest request){
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("search_items");
-//        List<FrameEntity> frames = new ArrayList<FrameEntity>();
-//        frames.addAll(searchService.getFramesByKeyword(request.getParameter("keyWord")));
-//        String msg;
-//        if (frames.size() > 0){
-//            msg = "success";
-//            mv.addObject("framelist",frames);
-//        } else {
-//            msg = "no_result";
-//        }
-//
-//        mv.addObject("msg", msg);
-//
-//        return mv;
-//    }
-
-//    @RequestMapping(value = "/jsp/search/naverbarAction", method = RequestMethod.POST)
-//    public ModelAndView searchByNaverbar(HttpServletRequest request){
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("redirect:/search_items.jsp");
-//        List<FrameEntity> frames = new ArrayList<FrameEntity>();
-//        Map<String,String> attrMap = new HashMap<String, String>();
-//        String msg;
-//        attrMap.put(request.getParameter("key"),":"+request.getParameter("value"));
-//        System.out.println("search/naverbarAction::value=" + attrMap.get(request.getParameter("key")));
-//        frames.addAll(searchService.getFramesByAttrs(attrMap));
-//
-//        System.out.println("search/naverbarAction::framesize=" + frames.size());
-//        if (frames.size() > 0){
-//            msg = "success";
-//            mv.addObject("framelist",frames);
-//        } else {
-//            msg = "no_result";
-//        }
-//
-//        mv.addObject("msg", msg);
-//
-//        return mv;
-//    }
 }

@@ -1,21 +1,23 @@
 package model;
 
+import java.sql.Timestamp;
+
 /**
  * Created by 86761 on 2017/5/27.
  */
 public class CommentEntity {
-    private String commId;
+    private int commId;
     private String frameId;
     private String commText;
     private String commPhoto;
-    private String commTime;
+    private Timestamp commTime;
     private String customerId;
 
-    public String getCommId() {
+    public int getCommId() {
         return commId;
     }
 
-    public void setCommId(String commId) {
+    public void setCommId(int commId) {
         this.commId = commId;
     }
 
@@ -43,11 +45,11 @@ public class CommentEntity {
         this.commPhoto = commPhoto;
     }
 
-    public String getCommTime() {
+    public Timestamp getCommTime() {
         return commTime;
     }
 
-    public void setCommTime(String commTime) {
+    public void setCommTime(Timestamp commTime) {
         this.commTime = commTime;
     }
 
@@ -66,7 +68,7 @@ public class CommentEntity {
 
         CommentEntity that = (CommentEntity) o;
 
-        if (commId != null ? !commId.equals(that.commId) : that.commId != null) return false;
+        if (commId != that.commId) return false;
         if (frameId != null ? !frameId.equals(that.frameId) : that.frameId != null) return false;
         if (commText != null ? !commText.equals(that.commText) : that.commText != null) return false;
         if (commPhoto != null ? !commPhoto.equals(that.commPhoto) : that.commPhoto != null) return false;
@@ -78,7 +80,7 @@ public class CommentEntity {
 
     @Override
     public int hashCode() {
-        int result = commId != null ? commId.hashCode() : 0;
+        int result = commId;
         result = 31 * result + (frameId != null ? frameId.hashCode() : 0);
         result = 31 * result + (commText != null ? commText.hashCode() : 0);
         result = 31 * result + (commPhoto != null ? commPhoto.hashCode() : 0);

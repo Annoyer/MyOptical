@@ -1,16 +1,20 @@
 package daos;
 
 import framework.dao.ExtHibernateDaoSupport;
+import model.CommentEntity;
+import model.FrameEntity;
 import org.hibernate.*;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * 数据库操作封装层，供service使用
@@ -176,5 +180,20 @@ public class BaseDAO extends ExtHibernateDaoSupport {
             log.error("save failed", re);
             throw re;
         }
+    }
+
+    public List<CommentEntity> getCommentsByPage(final String frameId, final int pageNumber, final int pageSize) {
+        List<CommentEntity> result = (List<CommentEntity>) getHibernateTemplate().executeFind(new HibernateCallback<List<CommentEntity>>() {
+            @Override
+            public List<CommentEntity> doInHibernate(Session session) throws HibernateException, SQLException {
+                SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM comment WHERE frame_id = ? ORDER BY comm_time DESC");
+                sqlQuery.setParameter(0, frameId).setMaxResults(pageSize).setFirstResult(pageNumber * pageSize);
+                List<CommentEntity> list = new ArrayList<CommentEntity>();
+                list.addAll(sqlQuery.list());
+                System.out.println("找到" + list.size() + "条关于" + frameId + "的评论");
+                return list;
+            }
+        });
+        return result;
     }
 }

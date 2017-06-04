@@ -44,19 +44,19 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
     @Override
     public List<FrameEntity> getFramesByKeyword(String keyword) {
         List<FrameEntity> result = new ArrayList<FrameEntity>();
-        String sql = "select * from frame where ? like '%?%'";
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"frameId",keyword}));
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"userType",keyword}));
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"color",keyword}));
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"style",keyword}));
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"form",keyword}));
-        result.addAll(baseDAO.findBySQL(sql,new Object[]{"material",keyword}));
+        String[] attrs = {"frameId","userType","color","style","form","material"};
+        for (int i=0; i<attrs.length; i++){
+            String sql = "from FrameEntity as f where f." + attrs[i] + " like '%" + keyword + "%'";
+            System.out.println("sql:" + sql);
+            result.addAll(baseDAO.find(sql));
+        }
 
         System.out.println("SearchService: getFramesByKeyword()查找结束，共找到" + result.size() + "个结果");
 
         return result;
     }
 
+    //问题：这个地方一直都是空指针，找不到
     @Override
     public FrameEntity getFrameByFrameId(String frameId) {
         FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);
@@ -64,8 +64,8 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
     }
 
     @Override
-    public List<CommentEntity> getCommentsByFrameId(String frameId) {
-        List<CommentEntity> commentEntityList = baseDAO.findByProperty("frameId",frameId,CommentEntity.class);
+    public List<CommentEntity> getCommentsByFrameIdByPage(String frameId, int pageNum, int pageSize) {
+        List<CommentEntity> commentEntityList = baseDAO.getCommentsByPage(frameId,pageNum,pageSize);
         return commentEntityList;
     }
 
