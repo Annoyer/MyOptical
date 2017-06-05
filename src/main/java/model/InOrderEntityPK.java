@@ -3,25 +3,25 @@ package model;
 import java.io.Serializable;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class InOrderEntityPK implements Serializable {
-    private String glassesItemId;
-    private String orderId;
+    private int glassesItemId;
+    private int orderId;
 
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
@@ -32,17 +32,16 @@ public class InOrderEntityPK implements Serializable {
 
         InOrderEntityPK that = (InOrderEntityPK) o;
 
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
+        if (glassesItemId != that.glassesItemId) return false;
+        if (orderId != that.orderId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = glassesItemId != null ? glassesItemId.hashCode() : 0;
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
+        int result = glassesItemId;
+        result = 31 * result + orderId;
         return result;
     }
 }

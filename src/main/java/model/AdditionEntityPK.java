@@ -3,17 +3,17 @@ package model;
 import java.io.Serializable;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class AdditionEntityPK implements Serializable {
-    private String glassesItemId;
+    private int glassesItemId;
     private int addId;
 
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
@@ -32,16 +32,15 @@ public class AdditionEntityPK implements Serializable {
 
         AdditionEntityPK that = (AdditionEntityPK) o;
 
+        if (glassesItemId != that.glassesItemId) return false;
         if (addId != that.addId) return false;
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = glassesItemId != null ? glassesItemId.hashCode() : 0;
+        int result = glassesItemId;
         result = 31 * result + addId;
         return result;
     }

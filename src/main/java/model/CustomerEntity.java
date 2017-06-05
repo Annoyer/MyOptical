@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class CustomerEntity {
     private String customerId;

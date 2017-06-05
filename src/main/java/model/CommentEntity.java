@@ -3,15 +3,15 @@ package model;
 import java.sql.Timestamp;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class CommentEntity {
     private int commId;
-    private String frameId;
+    private int frameId;
     private String commText;
     private String commPhoto;
-    private Timestamp commTime;
     private String customerId;
+    private Timestamp commTime;
 
     public int getCommId() {
         return commId;
@@ -21,11 +21,11 @@ public class CommentEntity {
         this.commId = commId;
     }
 
-    public String getFrameId() {
+    public int getFrameId() {
         return frameId;
     }
 
-    public void setFrameId(String frameId) {
+    public void setFrameId(int frameId) {
         this.frameId = frameId;
     }
 
@@ -45,20 +45,20 @@ public class CommentEntity {
         this.commPhoto = commPhoto;
     }
 
-    public Timestamp getCommTime() {
-        return commTime;
-    }
-
-    public void setCommTime(Timestamp commTime) {
-        this.commTime = commTime;
-    }
-
     public String getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public Timestamp getCommTime() {
+        return commTime;
+    }
+
+    public void setCommTime(Timestamp commTime) {
+        this.commTime = commTime;
     }
 
     @Override
@@ -69,11 +69,11 @@ public class CommentEntity {
         CommentEntity that = (CommentEntity) o;
 
         if (commId != that.commId) return false;
-        if (frameId != null ? !frameId.equals(that.frameId) : that.frameId != null) return false;
+        if (frameId != that.frameId) return false;
         if (commText != null ? !commText.equals(that.commText) : that.commText != null) return false;
         if (commPhoto != null ? !commPhoto.equals(that.commPhoto) : that.commPhoto != null) return false;
-        if (commTime != null ? !commTime.equals(that.commTime) : that.commTime != null) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
+        if (commTime != null ? !commTime.equals(that.commTime) : that.commTime != null) return false;
 
         return true;
     }
@@ -81,11 +81,11 @@ public class CommentEntity {
     @Override
     public int hashCode() {
         int result = commId;
-        result = 31 * result + (frameId != null ? frameId.hashCode() : 0);
+        result = 31 * result + frameId;
         result = 31 * result + (commText != null ? commText.hashCode() : 0);
         result = 31 * result + (commPhoto != null ? commPhoto.hashCode() : 0);
-        result = 31 * result + (commTime != null ? commTime.hashCode() : 0);
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
+        result = 31 * result + (commTime != null ? commTime.hashCode() : 0);
         return result;
     }
 }

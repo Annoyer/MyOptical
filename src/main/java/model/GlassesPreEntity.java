@@ -1,34 +1,25 @@
 package model;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class GlassesPreEntity {
-    private String presId;
-    private String customerId;
-    private String glassesItemId;
+    private int presId;
+    private int glassesItemId;
 
-    public String getPresId() {
+    public int getPresId() {
         return presId;
     }
 
-    public void setPresId(String presId) {
+    public void setPresId(int presId) {
         this.presId = presId;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
@@ -39,19 +30,16 @@ public class GlassesPreEntity {
 
         GlassesPreEntity that = (GlassesPreEntity) o;
 
-        if (presId != null ? !presId.equals(that.presId) : that.presId != null) return false;
-        if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
+        if (presId != that.presId) return false;
+        if (glassesItemId != that.glassesItemId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = presId != null ? presId.hashCode() : 0;
-        result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
-        result = 31 * result + (glassesItemId != null ? glassesItemId.hashCode() : 0);
+        int result = presId;
+        result = 31 * result + glassesItemId;
         return result;
     }
 }

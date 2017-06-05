@@ -3,18 +3,18 @@ package model;
 import java.io.Serializable;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class AddressEntityPK implements Serializable {
-    private String addNo;
+    private int addrId;
     private String customerId;
 
-    public String getAddNo() {
-        return addNo;
+    public int getAddrId() {
+        return addrId;
     }
 
-    public void setAddNo(String addNo) {
-        this.addNo = addNo;
+    public void setAddrId(int addrId) {
+        this.addrId = addrId;
     }
 
     public String getCustomerId() {
@@ -32,7 +32,7 @@ public class AddressEntityPK implements Serializable {
 
         AddressEntityPK that = (AddressEntityPK) o;
 
-        if (addNo != null ? !addNo.equals(that.addNo) : that.addNo != null) return false;
+        if (addrId != that.addrId) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
 
         return true;
@@ -40,7 +40,7 @@ public class AddressEntityPK implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = addNo != null ? addNo.hashCode() : 0;
+        int result = addrId;
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         return result;
     }

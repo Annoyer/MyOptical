@@ -1,25 +1,25 @@
 package model;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class CollectsEntity {
-    private String id;
-    private String frameId;
+    private String customerId;
+    private int frameId;
 
-    public String getId() {
-        return id;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    public String getFrameId() {
+    public int getFrameId() {
         return frameId;
     }
 
-    public void setFrameId(String frameId) {
+    public void setFrameId(int frameId) {
         this.frameId = frameId;
     }
 
@@ -30,16 +30,16 @@ public class CollectsEntity {
 
         CollectsEntity that = (CollectsEntity) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (frameId != null ? !frameId.equals(that.frameId) : that.frameId != null) return false;
+        if (frameId != that.frameId) return false;
+        if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (frameId != null ? frameId.hashCode() : 0);
+        int result = customerId != null ? customerId.hashCode() : 0;
+        result = 31 * result + frameId;
         return result;
     }
 }

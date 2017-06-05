@@ -3,25 +3,25 @@ package model;
 import java.io.Serializable;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class GlassesFrameEntityPK implements Serializable {
-    private String frameId;
-    private String glassesItemId;
+    private int frameId;
+    private int glassesItemId;
 
-    public String getFrameId() {
+    public int getFrameId() {
         return frameId;
     }
 
-    public void setFrameId(String frameId) {
+    public void setFrameId(int frameId) {
         this.frameId = frameId;
     }
 
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
@@ -32,17 +32,16 @@ public class GlassesFrameEntityPK implements Serializable {
 
         GlassesFrameEntityPK that = (GlassesFrameEntityPK) o;
 
-        if (frameId != null ? !frameId.equals(that.frameId) : that.frameId != null) return false;
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
+        if (frameId != that.frameId) return false;
+        if (glassesItemId != that.glassesItemId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = frameId != null ? frameId.hashCode() : 0;
-        result = 31 * result + (glassesItemId != null ? glassesItemId.hashCode() : 0);
+        int result = frameId;
+        result = 31 * result + glassesItemId;
         return result;
     }
 }

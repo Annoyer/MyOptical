@@ -3,29 +3,29 @@ package model;
 import java.math.BigDecimal;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class GlassesItemEntity {
-    private String glassesItemId;
-    private BigDecimal price;
+    private int glassesItemId;
+    private BigDecimal glassesPrice;
     private String lensType;
     private String lensColor;
-    private String lensTint;
+    private String lensMaterial;
 
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getGlassesPrice() {
+        return glassesPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setGlassesPrice(BigDecimal glassesPrice) {
+        this.glassesPrice = glassesPrice;
     }
 
     public String getLensType() {
@@ -44,12 +44,12 @@ public class GlassesItemEntity {
         this.lensColor = lensColor;
     }
 
-    public String getLensTint() {
-        return lensTint;
+    public String getLensMaterial() {
+        return lensMaterial;
     }
 
-    public void setLensTint(String lensTint) {
-        this.lensTint = lensTint;
+    public void setLensMaterial(String lensMaterial) {
+        this.lensMaterial = lensMaterial;
     }
 
     @Override
@@ -59,23 +59,22 @@ public class GlassesItemEntity {
 
         GlassesItemEntity that = (GlassesItemEntity) o;
 
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        if (glassesItemId != that.glassesItemId) return false;
+        if (glassesPrice != null ? !glassesPrice.equals(that.glassesPrice) : that.glassesPrice != null) return false;
         if (lensType != null ? !lensType.equals(that.lensType) : that.lensType != null) return false;
         if (lensColor != null ? !lensColor.equals(that.lensColor) : that.lensColor != null) return false;
-        if (lensTint != null ? !lensTint.equals(that.lensTint) : that.lensTint != null) return false;
+        if (lensMaterial != null ? !lensMaterial.equals(that.lensMaterial) : that.lensMaterial != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = glassesItemId != null ? glassesItemId.hashCode() : 0;
-        result = 31 * result + (price != null ? price.hashCode() : 0);
+        int result = glassesItemId;
+        result = 31 * result + (glassesPrice != null ? glassesPrice.hashCode() : 0);
         result = 31 * result + (lensType != null ? lensType.hashCode() : 0);
         result = 31 * result + (lensColor != null ? lensColor.hashCode() : 0);
-        result = 31 * result + (lensTint != null ? lensTint.hashCode() : 0);
+        result = 31 * result + (lensMaterial != null ? lensMaterial.hashCode() : 0);
         return result;
     }
 }

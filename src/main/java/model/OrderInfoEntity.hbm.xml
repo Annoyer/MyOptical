@@ -4,12 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses_shop">
+    <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses">
         <id name="orderId" column="order_id"/>
-        <property name="orderTime" column="order_time"/>
+        <property name="orderDate" column="order_date"/>
         <property name="totalPrice" column="total_price"/>
         <property name="customerId" column="customer_id"/>
-        <property name="addNo" column="add_no"/>
-        <property name="orderStatus" column="order_status"/>
+        <property name="addrId" column="addr_id"/>
+        <property name="orderTime" column="order_time"/>
     </class>
 </hibernate-mapping>

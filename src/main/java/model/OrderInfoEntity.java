@@ -1,37 +1,41 @@
 package model;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class OrderInfoEntity {
-    private String orderId;
-    private String orderTime;
-    private String totalPrice;
+    private int orderId;
+    private Date orderDate;
+    private BigDecimal totalPrice;
     private String customerId;
-    private String addNo;
-    private String orderStatus;
+    private Integer addrId;
+    private Timestamp orderTime;
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public String getOrderTime() {
-        return orderTime;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setOrderTime(String orderTime) {
-        this.orderTime = orderTime;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public String getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -43,20 +47,20 @@ public class OrderInfoEntity {
         this.customerId = customerId;
     }
 
-    public String getAddNo() {
-        return addNo;
+    public Integer getAddrId() {
+        return addrId;
     }
 
-    public void setAddNo(String addNo) {
-        this.addNo = addNo;
+    public void setAddrId(Integer addrId) {
+        this.addrId = addrId;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public Timestamp getOrderTime() {
+        return orderTime;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderTime(Timestamp orderTime) {
+        this.orderTime = orderTime;
     }
 
     @Override
@@ -66,24 +70,24 @@ public class OrderInfoEntity {
 
         OrderInfoEntity that = (OrderInfoEntity) o;
 
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        if (orderTime != null ? !orderTime.equals(that.orderTime) : that.orderTime != null) return false;
+        if (orderId != that.orderId) return false;
+        if (orderDate != null ? !orderDate.equals(that.orderDate) : that.orderDate != null) return false;
         if (totalPrice != null ? !totalPrice.equals(that.totalPrice) : that.totalPrice != null) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
-        if (addNo != null ? !addNo.equals(that.addNo) : that.addNo != null) return false;
-        if (orderStatus != null ? !orderStatus.equals(that.orderStatus) : that.orderStatus != null) return false;
+        if (addrId != null ? !addrId.equals(that.addrId) : that.addrId != null) return false;
+        if (orderTime != null ? !orderTime.equals(that.orderTime) : that.orderTime != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = orderId != null ? orderId.hashCode() : 0;
-        result = 31 * result + (orderTime != null ? orderTime.hashCode() : 0);
+        int result = orderId;
+        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         result = 31 * result + (totalPrice != null ? totalPrice.hashCode() : 0);
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
-        result = 31 * result + (addNo != null ? addNo.hashCode() : 0);
-        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
+        result = 31 * result + (addrId != null ? addrId.hashCode() : 0);
+        result = 31 * result + (orderTime != null ? orderTime.hashCode() : 0);
         return result;
     }
 }

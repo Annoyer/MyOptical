@@ -1,18 +1,18 @@
 package model;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class ManagerEntity {
-    private int managerId;
+    private String managerId;
     private String managerName;
     private String managerPassword;
 
-    public int getManagerId() {
+    public String getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(int managerId) {
+    public void setManagerId(String managerId) {
         this.managerId = managerId;
     }
 
@@ -39,7 +39,7 @@ public class ManagerEntity {
 
         ManagerEntity that = (ManagerEntity) o;
 
-        if (managerId != that.managerId) return false;
+        if (managerId != null ? !managerId.equals(that.managerId) : that.managerId != null) return false;
         if (managerName != null ? !managerName.equals(that.managerName) : that.managerName != null) return false;
         if (managerPassword != null ? !managerPassword.equals(that.managerPassword) : that.managerPassword != null)
             return false;
@@ -49,7 +49,7 @@ public class ManagerEntity {
 
     @Override
     public int hashCode() {
-        int result = managerId;
+        int result = managerId != null ? managerId.hashCode() : 0;
         result = 31 * result + (managerName != null ? managerName.hashCode() : 0);
         result = 31 * result + (managerPassword != null ? managerPassword.hashCode() : 0);
         return result;

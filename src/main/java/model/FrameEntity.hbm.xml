@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses_shop">
+    <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses">
         <id name="frameId" column="frame_id"/>
         <property name="glassesType" column="glasses_type"/>
         <property name="color" column="color"/>

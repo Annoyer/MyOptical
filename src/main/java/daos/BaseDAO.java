@@ -182,7 +182,7 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         }
     }
 
-    public List<CommentEntity> getCommentsByPage(final String frameId, final int pageNumber, final int pageSize) {
+    public List<CommentEntity> getCommentsByPage(final Integer frameId, final int pageNumber, final int pageSize) {
         List<CommentEntity> result = (List<CommentEntity>) getHibernateTemplate().executeFind(new HibernateCallback<List<CommentEntity>>() {
             @Override
             public List<CommentEntity> doInHibernate(Session session) throws HibernateException, SQLException {

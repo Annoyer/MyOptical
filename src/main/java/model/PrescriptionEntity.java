@@ -1,43 +1,38 @@
 package model;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class PrescriptionEntity {
-    private String presId;
-    private String userId;
-    private String presDate;
+    private int presId;
+    private String customerId;
     private String presName;
-    private String rSph;
-    private String lSph;
-    private String rCyl;
-    private String lCyl;
-    private String rAxis;
-    private String lAxis;
-    private String pd;
+    private BigDecimal rSph;
+    private BigDecimal lSph;
+    private BigDecimal rCyl;
+    private BigDecimal lCyl;
+    private Integer rAxis;
+    private Integer lAxis;
+    private Integer pd;
+    private Timestamp presTime;
 
-    public String getPresId() {
+    public int getPresId() {
         return presId;
     }
 
-    public void setPresId(String presId) {
+    public void setPresId(int presId) {
         this.presId = presId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPresDate() {
-        return presDate;
-    }
-
-    public void setPresDate(String presDate) {
-        this.presDate = presDate;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getPresName() {
@@ -48,60 +43,68 @@ public class PrescriptionEntity {
         this.presName = presName;
     }
 
-    public String getrSph() {
+    public BigDecimal getrSph() {
         return rSph;
     }
 
-    public void setrSph(String rSph) {
+    public void setrSph(BigDecimal rSph) {
         this.rSph = rSph;
     }
 
-    public String getlSph() {
+    public BigDecimal getlSph() {
         return lSph;
     }
 
-    public void setlSph(String lSph) {
+    public void setlSph(BigDecimal lSph) {
         this.lSph = lSph;
     }
 
-    public String getrCyl() {
+    public BigDecimal getrCyl() {
         return rCyl;
     }
 
-    public void setrCyl(String rCyl) {
+    public void setrCyl(BigDecimal rCyl) {
         this.rCyl = rCyl;
     }
 
-    public String getlCyl() {
+    public BigDecimal getlCyl() {
         return lCyl;
     }
 
-    public void setlCyl(String lCyl) {
+    public void setlCyl(BigDecimal lCyl) {
         this.lCyl = lCyl;
     }
 
-    public String getrAxis() {
+    public Integer getrAxis() {
         return rAxis;
     }
 
-    public void setrAxis(String rAxis) {
+    public void setrAxis(Integer rAxis) {
         this.rAxis = rAxis;
     }
 
-    public String getlAxis() {
+    public Integer getlAxis() {
         return lAxis;
     }
 
-    public void setlAxis(String lAxis) {
+    public void setlAxis(Integer lAxis) {
         this.lAxis = lAxis;
     }
 
-    public String getPd() {
+    public Integer getPd() {
         return pd;
     }
 
-    public void setPd(String pd) {
+    public void setPd(Integer pd) {
         this.pd = pd;
+    }
+
+    public Timestamp getPresTime() {
+        return presTime;
+    }
+
+    public void setPresTime(Timestamp presTime) {
+        this.presTime = presTime;
     }
 
     @Override
@@ -111,9 +114,8 @@ public class PrescriptionEntity {
 
         PrescriptionEntity that = (PrescriptionEntity) o;
 
-        if (presId != null ? !presId.equals(that.presId) : that.presId != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (presDate != null ? !presDate.equals(that.presDate) : that.presDate != null) return false;
+        if (presId != that.presId) return false;
+        if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
         if (presName != null ? !presName.equals(that.presName) : that.presName != null) return false;
         if (rSph != null ? !rSph.equals(that.rSph) : that.rSph != null) return false;
         if (lSph != null ? !lSph.equals(that.lSph) : that.lSph != null) return false;
@@ -122,15 +124,15 @@ public class PrescriptionEntity {
         if (rAxis != null ? !rAxis.equals(that.rAxis) : that.rAxis != null) return false;
         if (lAxis != null ? !lAxis.equals(that.lAxis) : that.lAxis != null) return false;
         if (pd != null ? !pd.equals(that.pd) : that.pd != null) return false;
+        if (presTime != null ? !presTime.equals(that.presTime) : that.presTime != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = presId != null ? presId.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (presDate != null ? presDate.hashCode() : 0);
+        int result = presId;
+        result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         result = 31 * result + (presName != null ? presName.hashCode() : 0);
         result = 31 * result + (rSph != null ? rSph.hashCode() : 0);
         result = 31 * result + (lSph != null ? lSph.hashCode() : 0);
@@ -139,6 +141,7 @@ public class PrescriptionEntity {
         result = 31 * result + (rAxis != null ? rAxis.hashCode() : 0);
         result = 31 * result + (lAxis != null ? lAxis.hashCode() : 0);
         result = 31 * result + (pd != null ? pd.hashCode() : 0);
+        result = 31 * result + (presTime != null ? presTime.hashCode() : 0);
         return result;
     }
 }

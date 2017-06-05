@@ -4,9 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.CollectsEntity" table="collects" schema="dbo" catalog="glasses_shop">
+    <class name="model.CollectsEntity" table="collects" schema="dbo" catalog="glasses">
         <composite-id mapped="true" class="model.CollectsEntityPK">
-            <key-property name="id" column="id"/>
+            <key-property name="customerId" column="customer_id"/>
             <key-property name="frameId" column="frame_id"/>
         </composite-id>
     </class>

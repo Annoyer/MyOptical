@@ -12,6 +12,6 @@ import service.common.ICommService;
  * 功能5：取消收藏
  */
 public interface IUserBasicSearvice extends ICommService {
-    int collect(String userId, String frameId);
-    int uncollect(String userId, String frameId);
+    int collect(String userId, Integer frameId);
+    int uncollect(String userId, Integer frameId);
 }

@@ -3,17 +3,17 @@ package model;
 import java.io.Serializable;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class InCartEntityPK implements Serializable {
-    private String glassesItemId;
+    private int glassesItemId;
     private String customerId;
 
-    public String getGlassesItemId() {
+    public int getGlassesItemId() {
         return glassesItemId;
     }
 
-    public void setGlassesItemId(String glassesItemId) {
+    public void setGlassesItemId(int glassesItemId) {
         this.glassesItemId = glassesItemId;
     }
 
@@ -32,8 +32,7 @@ public class InCartEntityPK implements Serializable {
 
         InCartEntityPK that = (InCartEntityPK) o;
 
-        if (glassesItemId != null ? !glassesItemId.equals(that.glassesItemId) : that.glassesItemId != null)
-            return false;
+        if (glassesItemId != that.glassesItemId) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
 
         return true;
@@ -41,7 +40,7 @@ public class InCartEntityPK implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = glassesItemId != null ? glassesItemId.hashCode() : 0;
+        int result = glassesItemId;
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         return result;
     }

@@ -58,13 +58,13 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
 
     //问题：这个地方一直都是空指针，找不到
     @Override
-    public FrameEntity getFrameByFrameId(String frameId) {
-        FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);
+    public FrameEntity getFrameByFrameId(Integer frameId) {
+        FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);//jins-w1
         return frameInfo;
     }
 
     @Override
-    public List<CommentEntity> getCommentsByFrameIdByPage(String frameId, int pageNum, int pageSize) {
+    public List<CommentEntity> getCommentsByFrameIdByPage(Integer frameId, int pageNum, int pageSize) {
         List<CommentEntity> commentEntityList = baseDAO.getCommentsByPage(frameId,pageNum,pageSize);
         return commentEntityList;
     }

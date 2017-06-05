@@ -25,20 +25,20 @@ import java.util.Random;
 public class UserBasicServiceImpl extends CommServiceImpl implements IUserBasicSearvice {
 
     @Override
-    public int collect(String userId, String frameId) {
+    public int collect(String userId, Integer frameId) {
         int retcode = 0;
         CollectsEntity collectsEntity = new CollectsEntity();
-        collectsEntity.setId(userId);
+        collectsEntity.setCustomerId(userId);
         collectsEntity.setFrameId(frameId);
         baseDAO.save(collectsEntity);
         return retcode;
     }
 
     @Override
-    public int uncollect(String userId, String frameId) {
+    public int uncollect(String userId, Integer frameId) {
         int retcode = 0;
         CollectsEntity collectsEntity = new CollectsEntity();
-        collectsEntity.setId(userId);
+        collectsEntity.setCustomerId(userId);
         collectsEntity.setFrameId(frameId);
         if(baseDAO.findByExample(collectsEntity,CollectsEntity.class).isEmpty()){
             retcode = 1;

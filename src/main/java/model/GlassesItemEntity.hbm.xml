@@ -4,11 +4,11 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.GlassesItemEntity" table="glasses_item" schema="dbo" catalog="glasses_shop">
+    <class name="model.GlassesItemEntity" table="glasses_item" schema="dbo" catalog="glasses">
         <id name="glassesItemId" column="glasses_item_id"/>
-        <property name="price" column="price"/>
+        <property name="glassesPrice" column="glasses_price"/>
         <property name="lensType" column="lens_type"/>
         <property name="lensColor" column="lens_color"/>
-        <property name="lensTint" column="lens_tint"/>
+        <property name="lensMaterial" column="lens_material"/>
     </class>
 </hibernate-mapping>

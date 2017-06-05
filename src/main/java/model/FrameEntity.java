@@ -3,25 +3,25 @@ package model;
 import java.math.BigDecimal;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class FrameEntity {
-    private String frameId;
-    private String glassesType;//功能
+    private int frameId;
+    private String glassesType;
     private String color;
-    private String style;//风格
+    private String style;
     private String userType;
     private BigDecimal framePrice;
-    private String form;//框型
+    private String form;
     private String material;
     private String framePhoto;
     private Integer accessTime;
 
-    public String getFrameId() {
+    public int getFrameId() {
         return frameId;
     }
 
-    public void setFrameId(String frameId) {
+    public void setFrameId(int frameId) {
         this.frameId = frameId;
     }
 
@@ -104,7 +104,7 @@ public class FrameEntity {
 
         FrameEntity that = (FrameEntity) o;
 
-        if (frameId != null ? !frameId.equals(that.frameId) : that.frameId != null) return false;
+        if (frameId != that.frameId) return false;
         if (glassesType != null ? !glassesType.equals(that.glassesType) : that.glassesType != null) return false;
         if (color != null ? !color.equals(that.color) : that.color != null) return false;
         if (style != null ? !style.equals(that.style) : that.style != null) return false;
@@ -120,7 +120,7 @@ public class FrameEntity {
 
     @Override
     public int hashCode() {
-        int result = frameId != null ? frameId.hashCode() : 0;
+        int result = frameId;
         result = 31 * result + (glassesType != null ? glassesType.hashCode() : 0);
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (style != null ? style.hashCode() : 0);

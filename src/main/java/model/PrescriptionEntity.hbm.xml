@@ -4,12 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.PrescriptionEntity" table="prescription" schema="dbo" catalog="glasses_shop">
-        <composite-id mapped="true" class="model.PrescriptionEntityPK">
-            <key-property name="presId" column="pres_id"/>
-            <key-property name="userId" column="user_id"/>
-        </composite-id>
-        <property name="presDate" column="pres_date"/>
+    <class name="model.PrescriptionEntity" table="prescription" schema="dbo" catalog="glasses">
+        <id name="presId" column="pres_id"/>
+        <property name="customerId" column="customer_id"/>
         <property name="presName" column="pres_name"/>
         <property name="rSph" column="r_sph"/>
         <property name="lSph" column="l_sph"/>
@@ -18,5 +15,6 @@
         <property name="rAxis" column="r_axis"/>
         <property name="lAxis" column="l_axis"/>
         <property name="pd" column="pd"/>
+        <property name="presTime" column="pres_time"/>
     </class>
 </hibernate-mapping>

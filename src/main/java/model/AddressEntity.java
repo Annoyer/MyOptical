@@ -1,22 +1,22 @@
 package model;
 
 /**
- * Created by 86761 on 2017/5/27.
+ * Created by 86761 on 2017/6/5.
  */
 public class AddressEntity {
-    private String addNo;
+    private int addrId;
     private String customerId;
     private String state;
     private String city;
     private String street;
     private String other;
 
-    public String getAddNo() {
-        return addNo;
+    public int getAddrId() {
+        return addrId;
     }
 
-    public void setAddNo(String addNo) {
-        this.addNo = addNo;
+    public void setAddrId(int addrId) {
+        this.addrId = addrId;
     }
 
     public String getCustomerId() {
@@ -66,7 +66,7 @@ public class AddressEntity {
 
         AddressEntity that = (AddressEntity) o;
 
-        if (addNo != null ? !addNo.equals(that.addNo) : that.addNo != null) return false;
+        if (addrId != that.addrId) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
         if (state != null ? !state.equals(that.state) : that.state != null) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
@@ -78,7 +78,7 @@ public class AddressEntity {
 
     @Override
     public int hashCode() {
-        int result = addNo != null ? addNo.hashCode() : 0;
+        int result = addrId;
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
