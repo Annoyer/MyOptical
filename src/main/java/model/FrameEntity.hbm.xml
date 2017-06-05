@@ -6,7 +6,6 @@
 
     <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses_shop">
         <id name="frameId" column="frame_id">
-            <generator class="identity" />
         </id>
         <property name="glassesType" column="glasses_type"/>
         <property name="color" column="color"/>

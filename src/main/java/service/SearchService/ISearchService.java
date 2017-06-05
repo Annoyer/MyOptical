@@ -18,5 +18,5 @@ public interface ISearchService extends ICommService {
     List<FrameEntity> getFramesByAttrs(Map<String,String> attrMap);
     List<FrameEntity> getFramesByKeyword(String keyword);
     FrameEntity getFrameByFrameId(Integer frameId);
-    List<CommentEntity> getCommentsByFrameIdByPage(Integer frameId, int pageNum, int pageSize);
+    List<CommentEntity> getAllCommentsByFrameId(Integer frameId);
 }

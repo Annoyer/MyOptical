@@ -25,9 +25,9 @@
 
 <div class="offset_80">
     <div class="page_content">
-        <div class="text_title" id="itemId">${frameInfo.frameId}</div>
+        <div class="text_title" id="itemId"></div>
         <div class="item_img_wrapper_lg">
-            <img class="img_lg" id="itemImgLg" src="${frameInfo.framePhoto}"/>
+            <img class="img_lg" id="itemImgLg" src=""/>
         </div>
         <div class="offset_40">
             <div class="color_panel">
@@ -71,19 +71,19 @@
                 <table class="table_attribute">
                     <tbody>
                     <tr>
-                        <td id="userType">款式：  ${frameInfo.userType}</td>
+                        <td id="userType">款式：  </td>
                         <td id="lensHeight">镜框高度：  </td>
                     </tr>
                     <tr>
-                        <td id="form">框型：  ${frameInfo.form}</td>
+                        <td id="form">框型：  </td>
                         <td id="lensWidth">镜框宽度：  </td>
                     </tr>
                     <tr>
-                        <td id="glassesType">功能：  ${frameInfo.glassesType}</td>
+                        <td id="glassesType">功能：  </td>
                         <td id="bridgeWidth">鼻梁宽度：  </td>
                     </tr>
                     <tr>
-                        <td id="material">材质：  ${frameInfo.material}</td>
+                        <td id="material">材质：  </td>
                         <td id="templeLength">镜脚长度：  </td>
                     </tr>
                     </tbody>
@@ -98,26 +98,26 @@
             <div>
                 <table class="table">
                     <tbody id="commentListBody">
-                    <tr>
-                        <td class="comment_wrapper">
-                            <div class="comment_user_name">相叶雅纪</div>
-                            <div class="comment_content">hhhhhhhhhhhhhhhhh哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或、hhhhh哈哈哈哈哈哈哈哈哈哈哈</div>
-                            <div class="comment_timestamp">2016-12-25 16:00:00</div>
-                        </td>
-                    </tr>
+                    <%--<tr>--%>
+                        <%--<td class="comment_wrapper">--%>
+                            <%--<div class="comment_user_name">相叶雅纪</div>--%>
+                            <%--<div class="comment_content">hhhhhhhhhhhhhhhhh哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或、hhhhh哈哈哈哈哈哈哈哈哈哈哈</div>--%>
+                            <%--<div class="comment_timestamp">2016-12-25 16:00:00</div>--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
 
                     </tbody>
                 </table>
                 <hr class="my_hr_long"/>
                 <div class="display_center">
-                    <ul class="pagination pagination-sm">
-                        <li><a href="#">&laquo;</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
+                    <ul id="commentNavbar" class="pagination pagination-sm">
+                        <%--<li><a href="#">&laquo;</a></li>--%>
+                        <%--<li class="active"><a href="#">1</a></li>--%>
+                        <%--<li><a href="#">2</a></li>--%>
+                        <%--<li><a href="#">3</a></li>--%>
+                        <%--<li><a href="#">4</a></li>--%>
+                        <%--<li><a href="#">5</a></li>--%>
+                        <%--<li><a href="#">&raquo;</a></li>--%>
                     </ul>
                 </div>
             </div>
@@ -130,7 +130,11 @@
 </body>
 
 <script type="text/javascript">
-    var frameId = "${param.frameId}";
+    var thisframeId = "${param.frameId}";
+    var allComments = null;
+    var maxPageIndex = 0;
+    var currentPageIndex = 0;
+    var pageSize = 5;
 
     function getFrameInfo() {
         alert("<%=request.getContextPath()%>/jsp/search/getSingleItem");
@@ -138,19 +142,41 @@
             type: "post",//请求方式
             url: "<%=request.getContextPath()%>/jsp/search/getSingleItem",
             data:{
-                frameId:frameId
+                thisframeId:thisframeId
             },
             timeout: 80000,//超时时间：8秒
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                $('#itemId').html(data.frameInfo.frameId);
-                $('#itemImgLg').src(data.frameInfo.framePhoto);
-                $('#itemPrice').html(data.frameInfo.framePrice);
-                $('#userType').html(data.frameInfo.userType);
-                $('#form').html(data.frameInfo.form);
-                $('#glassesType').html(data.frameInfo.glassesType);
-                $('#material').html(data.frameInfo.material);
-                showComments(data.commentList);
+                $('#itemId').html(data.frameInfo.frameName);
+                $('#itemImgLg').attr('src',data.frameInfo.framePhoto);
+                $('#itemPrice').html("￥ " + data.frameInfo.framePrice);
+                $('#userType').html("款式：  " + data.frameInfo.userType);
+                $('#form').html("框型：  " + data.frameInfo.form);
+                $('#glassesType').html("功能：  " + data.frameInfo.glassesType);
+                $('#material').html("材质：  " + data.frameInfo.material);
+                alert(data.commentList.length + "条评论");
+                allComments = data.commentList;
+                if (allComments.length == 0){
+                    $('#commentListBody').html("暂无评论");
+                }else{
+                    maxPageIndex = (allComments.length%5 == 0)? (allComments.length/5) : (allComments.length/5+1);
+                    for (var i=1; i<=maxPageIndex && i<=10; i++){
+                        var node = $('<li id="page' +
+                            i +'"><a href="#" onclick="showComments(' +
+                            i + ')">' +
+                            i +'</a></li>');
+                        $('#commentNavbar').append(node);
+                    }
+                    var node = $('<li id="previous"><a href="#"  onclick="showComments(-1)">&laquo;</a></li>');
+                    $('#commentNavbar').prepend(node);
+                    node = $('<li id="next"><a href="#" onclick="showComments(-2)">&raquo;</a></li>');
+                    $('#commentNavbar').append(node);
+
+                    alert(maxPageIndex + "页评论");
+                    currentPageIndex = 1;
+                    showComments(1);
+                }
+
             },
             //请求出错的处理
             error: function () {
@@ -164,35 +190,76 @@
         window.location.href='';
     }
 
-    function showComments(list) {
+    function showComments(pageIndex) {
         var parent = $('#commentListBody');
-        //！！还没有考虑多张评论图片的状况 分页的实现
-        jQuery.each(list, function(i,item){
-            alert(item.frameId);
-            var comment = $('<tr><td class="comment_wrapper"><div class="comment_user_name">' +
-                item.customerId +
-                '</div><div class="comment_content">' +
-                item.commText +
-                '<div><img class="comment_img" src="' +
-                item.commPhoto +
-                '"></div></div><div class="comment_timestamp">' +
-                item.commTime +
-                '</div></td></tr>')
+        var currentId = "#page" + currentPageIndex;
+        if (pageIndex == -1){
+            if (currentPageIndex == 1) return;
+            $(currentId).removeClass("active");
+            currentPageIndex = currentPageIndex - 1;
+        }else if (pageIndex == -2){
+            if (currentPageIndex == maxPageIndex) return;
+            $(currentId).removeClass("active");
+            currentPageIndex = currentPageIndex + 1;
+        }else{
+            $(currentId).removeClass("active");
+            currentPageIndex = pageIndex;
+        }
+        var pageId = "#page" + currentPageIndex;
+        $(pageId).addClass("active");
+        var start = (currentPageIndex-1)*5;
+        var end = (start+5) <= (allComments.length) ? (start+5) : (allComments.length);
+        //一次全部加载到前台，前台控制分页，一页5条
+        for (var i=start; i<end; i++){
+            var time = formatTime(allComments[i].commTime);
+            if (allComments[i].commPhoto != null){
+                var comment = $('<tr><td class="comment_wrapper"><div class="comment_user_name">' +
+                    allComments[i].customerId +
+                    '</div><div class="comment_content">' +
+                    allComments[i].commText +
+                    '<div><img class="comment_img" src="' +
+                    allComments[i].commPhoto +
+                    '"></div></div><div class="comment_timestamp">' +
+                    time +
+                    '</div></td></tr>');
+            }else{
+                var comment = $('<tr><td class="comment_wrapper"><div class="comment_user_name">' +
+                    allComments[i].customerId +
+                    '</div><div class="comment_content">' +
+                    allComments[i].commText +
+                    '</div><div class="comment_timestamp">' +
+                    time +
+                    '</div></td></tr>');
+            }
+
             parent.append(comment);
-        });
+        }
+    }
+
+    function add0(m){return m<10?'0'+m:m }
+    function formatTime(shijianchuo) {
+//shijianchuo是整数，否则要parseInt转换
+        var time = new Date(shijianchuo);
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
     }
 
     $(document).ready(function(){
         //收藏
         $(".btn_collect").click(function(){
-            alert("frameId:" + frameId);
+            alert("frameId:" + thisframeId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/collect",
                 timeout: 80000,//超时时间：8秒
                 dataType: "json",//设置返回数据的格式
                 data: {
-                    "frameId": frameId
+                    "frameId": thisframeId
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
@@ -215,14 +282,14 @@
 
         //取消收藏
         $(".btn_uncollect").click(function(){
-            alert("frameId:" + frameId);
+            alert("frameId:" + thisframeId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/uncollect",
                 timeout: 80000,//超时时间：8秒
                 dataType: "json",//设置返回数据的格式
                 data: {
-                    "frameId": frameId
+                    "frameId": thisframeId
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {

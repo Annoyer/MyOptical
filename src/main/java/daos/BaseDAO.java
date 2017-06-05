@@ -95,13 +95,16 @@ public class BaseDAO extends ExtHibernateDaoSupport {
 
     //cls
     public List findByProperty(String propertyName, Object value, Class cls) {
+        System.out.println("start findByProperty");
         String tableName = cls.getName();
-        log.debug("finding " + tableName + " instance with property: "
+        System.out.println("tableName: " + tableName + "   propertyName:" + propertyName + "value" + value.toString());
+        log.debug("finding "+tableName+" instance with property: "
                 + propertyName + ", value: " + value);
         try {
-            String queryString = "from " + tableName + " as model where model."
+            String queryString = "from "+tableName+" as model where model."
                     + propertyName + "= ?";
-            return getHibernateTemplate().find(queryString, value);
+            System.out.println(queryString);
+            return getHibernateTemplate().find(queryString,value);
         } catch (RuntimeException re) {
             log.error("find by property name failed", re);
             throw re;
