@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.GlassesPreEntity" table="glasses_pre" schema="dbo" catalog="glasses">
+    <class name="model.GlassesPreEntity" table="glasses_pre" schema="dbo" catalog="glasses_shop">
         <composite-id mapped="true" class="model.GlassesPreEntityPK">
             <key-property name="presId" column="pres_id"/>
             <key-property name="glassesItemId" column="glasses_item_id"/>

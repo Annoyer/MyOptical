@@ -51,7 +51,7 @@ public class UserBasicController extends BaseController {
         //做登录注册的时候，登录以后要将本人的用户id存进session里
         //以及还需要做登录验证
         String userId = request.getSession().getAttribute("userId").toString();
-        String frameId = request.getParameter("frameId");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
         System.out.println("UserBasicController: 开始收藏 user: " + userId + "  frame: " + frameId);
         int retcode = userBasicSearvice.collect(userId,frameId);
 
@@ -65,7 +65,7 @@ public class UserBasicController extends BaseController {
         //做登录注册的时候，登录以后要将本人的用户id存进session里
         //以及还需要做登录验证
         String userId = request.getSession().getAttribute("userId").toString();
-        String frameId = request.getParameter("frameId");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
         System.out.println("UserBasicController: 开始取消收藏 user: " + userId + "  frame: " + frameId);
         int retcode = userBasicSearvice.uncollect(userId,frameId);
 

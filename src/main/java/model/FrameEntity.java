@@ -16,6 +16,7 @@ public class FrameEntity {
     private String material;
     private String framePhoto;
     private Integer accessTime;
+    private String frameName;
 
     public int getFrameId() {
         return frameId;
@@ -97,6 +98,14 @@ public class FrameEntity {
         this.accessTime = accessTime;
     }
 
+    public String getFrameName() {
+        return frameName;
+    }
+
+    public void setFrameName(String frameName) {
+        this.frameName = frameName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -114,6 +123,7 @@ public class FrameEntity {
         if (material != null ? !material.equals(that.material) : that.material != null) return false;
         if (framePhoto != null ? !framePhoto.equals(that.framePhoto) : that.framePhoto != null) return false;
         if (accessTime != null ? !accessTime.equals(that.accessTime) : that.accessTime != null) return false;
+        if (frameName != null ? !frameName.equals(that.frameName) : that.frameName != null) return false;
 
         return true;
     }
@@ -130,6 +140,7 @@ public class FrameEntity {
         result = 31 * result + (material != null ? material.hashCode() : 0);
         result = 31 * result + (framePhoto != null ? framePhoto.hashCode() : 0);
         result = 31 * result + (accessTime != null ? accessTime.hashCode() : 0);
+        result = 31 * result + (frameName != null ? frameName.hashCode() : 0);
         return result;
     }
 }

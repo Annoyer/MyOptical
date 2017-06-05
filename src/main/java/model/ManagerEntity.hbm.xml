@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.ManagerEntity" table="manager" schema="dbo" catalog="glasses">
+    <class name="model.ManagerEntity" table="manager" schema="dbo" catalog="glasses_shop">
         <id name="managerId" column="manager_id"/>
         <property name="managerName" column="manager_name"/>
         <property name="managerPassword" column="manager_password"/>

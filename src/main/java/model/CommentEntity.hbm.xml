@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.CommentEntity" table="comment" schema="dbo" catalog="glasses">
+    <class name="model.CommentEntity" table="comment" schema="dbo" catalog="glasses_shop">
         <id name="commId" column="comm_id"/>
         <property name="frameId" column="frame_id"/>
         <property name="commText" column="comm_text"/>

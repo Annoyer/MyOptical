@@ -4,8 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses">
-        <id name="frameId" column="frame_id"/>
+    <class name="model.FrameEntity" table="frame" schema="dbo" catalog="glasses_shop">
+        <id name="frameId" column="frame_id">
+            <generator class="identity" />
+        </id>
         <property name="glassesType" column="glasses_type"/>
         <property name="color" column="color"/>
         <property name="style" column="style"/>
@@ -15,5 +17,6 @@
         <property name="material" column="material"/>
         <property name="framePhoto" column="frame_photo"/>
         <property name="accessTime" column="access_time"/>
+        <property name="frameName" column="frame_name"/>
     </class>
 </hibernate-mapping>

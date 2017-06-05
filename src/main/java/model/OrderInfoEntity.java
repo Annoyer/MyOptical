@@ -9,7 +9,6 @@ import java.sql.Timestamp;
  */
 public class OrderInfoEntity {
     private int orderId;
-    private Date orderDate;
     private BigDecimal totalPrice;
     private String customerId;
     private Integer addrId;
@@ -21,14 +20,6 @@ public class OrderInfoEntity {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
 
     public BigDecimal getTotalPrice() {
@@ -71,7 +62,6 @@ public class OrderInfoEntity {
         OrderInfoEntity that = (OrderInfoEntity) o;
 
         if (orderId != that.orderId) return false;
-        if (orderDate != null ? !orderDate.equals(that.orderDate) : that.orderDate != null) return false;
         if (totalPrice != null ? !totalPrice.equals(that.totalPrice) : that.totalPrice != null) return false;
         if (customerId != null ? !customerId.equals(that.customerId) : that.customerId != null) return false;
         if (addrId != null ? !addrId.equals(that.addrId) : that.addrId != null) return false;
@@ -83,7 +73,6 @@ public class OrderInfoEntity {
     @Override
     public int hashCode() {
         int result = orderId;
-        result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         result = 31 * result + (totalPrice != null ? totalPrice.hashCode() : 0);
         result = 31 * result + (customerId != null ? customerId.hashCode() : 0);
         result = 31 * result + (addrId != null ? addrId.hashCode() : 0);

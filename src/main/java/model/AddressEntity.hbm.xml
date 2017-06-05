@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.AddressEntity" table="address" schema="dbo" catalog="glasses">
+    <class name="model.AddressEntity" table="address" schema="dbo" catalog="glasses_shop">
         <composite-id mapped="true" class="model.AddressEntityPK">
             <key-property name="addrId" column="addr_id"/>
             <key-property name="customerId" column="customer_id"/>

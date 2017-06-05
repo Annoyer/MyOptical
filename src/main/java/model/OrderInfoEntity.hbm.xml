@@ -4,9 +4,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses">
+    <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses_shop">
         <id name="orderId" column="order_id"/>
-        <property name="orderDate" column="order_date"/>
         <property name="totalPrice" column="total_price"/>
         <property name="customerId" column="customer_id"/>
         <property name="addrId" column="addr_id"/>

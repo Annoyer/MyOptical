@@ -31,7 +31,7 @@ public class SingleItemController extends BaseController {
     @ResponseBody
     public Map toSingleItem(HttpServletRequest request){
         Map result = new HashMap();
-        String frameId = request.getParameter("frameId");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
 
         FrameEntity frameInfo = searchService.getFrameByFrameId(frameId);
 
@@ -53,7 +53,7 @@ public class SingleItemController extends BaseController {
     @ResponseBody
     public Map getCommentsByPage(HttpServletRequest request){
         Map result = new HashMap();
-        String frameId = request.getParameter("frameId");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
     //    int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 

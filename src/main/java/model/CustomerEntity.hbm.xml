@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="model.CustomerEntity" table="customer" schema="dbo" catalog="glasses">
+    <class name="model.CustomerEntity" table="customer" schema="dbo" catalog="glasses_shop">
         <id name="customerId" column="customer_id"/>
         <property name="name" column="name"/>
         <property name="email" column="email"/>
