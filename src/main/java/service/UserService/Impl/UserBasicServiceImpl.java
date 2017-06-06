@@ -10,7 +10,9 @@ import service.UserService.IUserBasicSearvice;
 import service.common.impl.CommServiceImpl;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -25,22 +27,63 @@ import java.util.Random;
 public class UserBasicServiceImpl extends CommServiceImpl implements IUserBasicSearvice {
 
     @Override
-    public int collect(String userId, Integer frameId) {
+    //1-已注册过 0-成功
+    public int register(String id, String password, String nickName,String phone, String email) {
+        int retcode = 0;
+        //检查用户名是否注册过
+        if(baseDAO.findById(id,CustomerEntity.class) == null){
+            CustomerEntity newCustomer = new CustomerEntity();
+            newCustomer.setCustomerId(id);
+            newCustomer.setPassword(password);
+            newCustomer.setName(nickName);
+            newCustomer.setPhone(phone);
+            newCustomer.setEmail(email);
+            baseDAO.save(newCustomer);
+        }else {
+            retcode = 1;
+        }
+        return retcode;
+    }
+
+
+    @Override
+    //2-用户不存在 1-密码错误 0-成功
+    public Map login(String id, String password) {
+        Map result = new HashMap();
+        int retcode = 0;
+        CustomerEntity customerInfo = baseDAO.findById(id,CustomerEntity.class);
+
+        if (customerInfo == null){
+            retcode = 2;
+        }else if (!customerInfo.getPassword().contentEquals(password)){
+            retcode = 1;
+        }else {
+            result.put("customerInfo",customerInfo);
+        }
+        result.put("retcode",retcode);
+        return result;
+    }
+
+    @Override
+    public int collect(String customerId, Integer frameId) {
         int retcode = 0;
         CollectsEntity collectsEntity = new CollectsEntity();
-        collectsEntity.setCustomerId(userId);
+        collectsEntity.setCustomerId(customerId);
         collectsEntity.setFrameId(frameId);
-        baseDAO.save(collectsEntity);
+        if(!baseDAO.findByExample(collectsEntity,CollectsEntity.class).isEmpty()){
+            retcode = 1;
+        }else {
+            baseDAO.save(collectsEntity);
+        }
         return retcode;
     }
 
     @Override
-    public int uncollect(String userId, Integer frameId) {
+    public int uncollect(String customerId, Integer frameId) {
         int retcode = 0;
-        CollectsEntity collectsEntity = new CollectsEntity();
-        collectsEntity.setCustomerId(userId);
-        collectsEntity.setFrameId(frameId);
-        if(baseDAO.findByExample(collectsEntity,CollectsEntity.class).isEmpty()){
+        String hql = "from CollectsEntity as model where model.frameId=? and model.customerId=?";
+        CollectsEntity collectsEntity = (CollectsEntity) baseDAO.findByHQL(hql,new Object[]{frameId,customerId}).get(0);
+        if(collectsEntity == null){
             retcode = 1;
         }else{
             baseDAO.delete(collectsEntity);

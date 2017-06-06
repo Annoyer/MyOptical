@@ -25,25 +25,58 @@
 
 <div class="page-content-s">
     <h1 class="center">登录</h1>
-    <form>
+    <div>
         <div class="form-group">
-            <label>手机号码</label>
-            <input class="form-control">
+            <label>用户名</label>
+            <input class="form-control" id="login_account">
         </div>
         <div class="form-group">
             <label>密码</label>
-            <input class="form-control">
+            <input class="form-control" id="login_password">
         </div>
-    </form>
+    </div>
     <div class="offset-top-30">
-        <button type="submit" class="btn btn-block btn-primary">登录</button></div>
-    <div class="right offset-top-20"><a>还没有账号</a></div>
+        <button class="btn btn-block btn-primary" onclick="loginFunc()">登录</button></div>
+    <div class="right offset-top-20"><a href="register.jsp">还没有账号</a></div>
 </div>
 
 
 <!-- Page Footer -->
 <jsp:include page="footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+    function loginFunc() {
+        var login_account=$("#login_account").val();
+        var login_password=$("#login_password").val();
+
+        if (login_account == null){
+            $("#login_account").after('<div class="error-msg">用户名不能为空</div>');
+        }else if (login_password == null){
+            $("#login_password").after('<div class="error-msg">密码不能为空</div>');
+        }else {
+            $.ajax({
+                type: "post",//请求方式
+                url: "login",
+                timeout: 80000,//超时时间：8秒
+                dataType: "json",//设置返回数据的格式
+                data: {
+                    "login_account": login_account,
+                    "login_password": login_password
+                },
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    alert(data.msg);
+                    if (data.retcode == 0)
+                        window.location.href = "index.jsp";
+                },
+                //请求出错的处理
+                error: function () {
+                    alert("请求出错");
+                }
+            });
+        }
+    }
+</script>
+
 </body>
-
-
 </html>

@@ -56,7 +56,6 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
         return result;
     }
 
-    //问题：这个地方一直都是空指针，找不到
     @Override
     public FrameEntity getFrameByFrameId(Integer frameId) {
         FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);

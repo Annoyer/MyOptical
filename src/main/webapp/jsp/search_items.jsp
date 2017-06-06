@@ -292,6 +292,7 @@
 
         //收藏
         $(".btn_collect").click(function(){
+            var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameid");
             alert("frameId:" + frameId);
             $.ajax({
@@ -304,14 +305,19 @@
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
-                    if (data.retcode == 0){
-                        alert("收藏成功");
+                    if (data.retcode == -1){
+                        alert("请先登录");
+                        window.location.href = "login.jsp";
+                    }else {
+                        if (data.retcode == 0){
+                            alert("收藏成功");
+                        }
+                        else if (data.retcode == 1){
+                            alert("您已收藏过该商品");
+                        }
+                        currentBtn.next('div').css("display","inline-block");
+                        currentBtn.css("display","none");
                     }
-                    else {
-                        alert("您已收藏过该商品");
-                    }
-                    $(this).next('div').css("display","inline-block");
-                    $(this).css("display","none");
                 },
                 //请求出错的处理
                 error: function () {
@@ -323,6 +329,7 @@
 
         //取消收藏
         $(".btn_uncollect").click(function(){
+            var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameId");
             alert("frameId:" + frameId);
             $.ajax({
@@ -335,14 +342,18 @@
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
-                    if (data.retcode == 0){
-                        alert("取消收藏成功");
+                    if (data.retcode == -1){
+                        alert("请先登录");
+                        window.location.href = "login.jsp";
+                    }else{
+                        if (data.retcode == 1){
+                            alert("您未收藏过该商品");
+                        }else if (data.retcode == 0){
+                            alert("取消收藏成功");
+                        }
+                        currentBtn.prev('div').css("display","inline-block");
+                        currentBtn.css("display","none");
                     }
-                    else {
-                        alert("您未收藏过该商品");
-                    }
-                    $(this).prev('div').css("display","inline-block");
-                    $(this).css("display","none");
                 },
                 //请求出错的处理
                 error: function () {

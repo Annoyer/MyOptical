@@ -84,6 +84,14 @@
     <context:component-scan base-package="service" />
     <context:component-scan base-package="model" />
 
+
     <!--&lt;!&ndash;拦截器的beans&ndash;&gt;-->
     <!--<import resource="interceptorBeans.xml"/>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+        <!-- 拦截所有URL中包含/user/的请求 -->
+        <mvc:mapping path="**/user/**"/>
+            <bean class="interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

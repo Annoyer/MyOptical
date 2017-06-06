@@ -40,7 +40,7 @@
 	color: #fff;
 }
 .navbar-default .navbar-nav > li > a{
-	color: ##f2e6db;
+	color: #f2e6db;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
     color: #555;
@@ -178,4 +178,8 @@
 	margin-top: 50px;
 	margin-bottom: 50px;
 	width: 200px;
+}
+
+.error-msg{
+	color: red;
 }

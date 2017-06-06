@@ -1,7 +1,10 @@
 package service.UserService;
 
 import framework.exceptions.ServiceException;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import service.common.ICommService;
+
+import java.util.Map;
 
 /**
  * Created by joy12 on 2017/5/27.
@@ -12,6 +15,8 @@ import service.common.ICommService;
  * 功能5：取消收藏
  */
 public interface IUserBasicSearvice extends ICommService {
-    int collect(String userId, Integer frameId);
-    int uncollect(String userId, Integer frameId);
+    int register(String id, String password, String nickName, String phone,String email);
+    Map login(String id, String password);
+    int collect(String customerId, Integer frameId);
+    int uncollect(String customerId, Integer frameId);
 }
