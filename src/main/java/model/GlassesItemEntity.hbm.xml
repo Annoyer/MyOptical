@@ -10,5 +10,7 @@
         <property name="lensType" column="lens_type"/>
         <property name="lensColor" column="lens_color"/>
         <property name="lensMaterial" column="lens_material"/>
+        <property name="frameId" column="frame_id"/>
+        <property name="presId" column="pres_id"/>
     </class>
 </hibernate-mapping>
