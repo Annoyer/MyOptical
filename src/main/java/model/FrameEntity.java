@@ -3,7 +3,7 @@ package model;
 import java.math.BigDecimal;
 
 /**
- * Created by 86761 on 2017/6/5.
+ * Created by 86761 on 2017/6/7.
  */
 public class FrameEntity {
     private int frameId;
@@ -17,6 +17,10 @@ public class FrameEntity {
     private String framePhoto;
     private Integer accessTime;
     private String frameName;
+    private Integer lensWidth;
+    private Integer lensHeight;
+    private Integer templeLength;
+    private Integer bridgeWidth;
 
     public int getFrameId() {
         return frameId;
@@ -106,6 +110,38 @@ public class FrameEntity {
         this.frameName = frameName;
     }
 
+    public Integer getLensWidth() {
+        return lensWidth;
+    }
+
+    public void setLensWidth(Integer lensWidth) {
+        this.lensWidth = lensWidth;
+    }
+
+    public Integer getLensHeight() {
+        return lensHeight;
+    }
+
+    public void setLensHeight(Integer lensHeight) {
+        this.lensHeight = lensHeight;
+    }
+
+    public Integer getTempleLength() {
+        return templeLength;
+    }
+
+    public void setTempleLength(Integer templeLength) {
+        this.templeLength = templeLength;
+    }
+
+    public Integer getBridgeWidth() {
+        return bridgeWidth;
+    }
+
+    public void setBridgeWidth(Integer bridgeWidth) {
+        this.bridgeWidth = bridgeWidth;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,6 +160,10 @@ public class FrameEntity {
         if (framePhoto != null ? !framePhoto.equals(that.framePhoto) : that.framePhoto != null) return false;
         if (accessTime != null ? !accessTime.equals(that.accessTime) : that.accessTime != null) return false;
         if (frameName != null ? !frameName.equals(that.frameName) : that.frameName != null) return false;
+        if (lensWidth != null ? !lensWidth.equals(that.lensWidth) : that.lensWidth != null) return false;
+        if (lensHeight != null ? !lensHeight.equals(that.lensHeight) : that.lensHeight != null) return false;
+        if (templeLength != null ? !templeLength.equals(that.templeLength) : that.templeLength != null) return false;
+        if (bridgeWidth != null ? !bridgeWidth.equals(that.bridgeWidth) : that.bridgeWidth != null) return false;
 
         return true;
     }
@@ -141,6 +181,10 @@ public class FrameEntity {
         result = 31 * result + (framePhoto != null ? framePhoto.hashCode() : 0);
         result = 31 * result + (accessTime != null ? accessTime.hashCode() : 0);
         result = 31 * result + (frameName != null ? frameName.hashCode() : 0);
+        result = 31 * result + (lensWidth != null ? lensWidth.hashCode() : 0);
+        result = 31 * result + (lensHeight != null ? lensHeight.hashCode() : 0);
+        result = 31 * result + (templeLength != null ? templeLength.hashCode() : 0);
+        result = 31 * result + (bridgeWidth != null ? bridgeWidth.hashCode() : 0);
         return result;
     }
 }
