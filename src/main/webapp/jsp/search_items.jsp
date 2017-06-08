@@ -42,13 +42,13 @@
                                 <div class="checkbox_group_label text_center">款式</div>
                                 <div class="checkbox_group_options" id="panel_user_type">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="man" value="男式">男式
+                                        <input type="checkbox" id="man" value="男款">男款
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="woman" value="女式">女式
+                                        <input type="checkbox" id="woman" value="女款">女款
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="child" value="儿童">儿童
+                                        <input type="checkbox" id="both" value="通用款">通用款
                                     </label>
                                 </div>
                             </div>
@@ -56,16 +56,10 @@
                                 <div class="checkbox_group_label text_center">功能</div>
                                 <div class="checkbox_group_options" id="panel_glasses_type">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="nearsighted" value="近视眼镜">近视眼镜
+                                        <input type="checkbox" id="normal" value="框架眼镜">框架眼镜
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="sun" value="太阳眼镜">太阳眼镜
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="farsighted" value="老花眼镜">老花眼镜
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="sports" value="运动眼镜">运动眼镜
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="radiation" value="防辐射眼镜">防辐射眼镜
@@ -74,8 +68,8 @@
                             </div>
                             <div class="checkbox_group_row">
                                 <div class="checkbox_group_label text_center">框型</div>
-                                <div class="checkbox_group_options">
-                                    <label class="checkbox-inline" id="panel_form">
+                                <div class="checkbox_group_options" id="panel_form">
+                                    <label class="checkbox-inline">
                                         <input type="checkbox" id="full" value="全框">全框
                                     </label>
                                     <label class="checkbox-inline">
@@ -99,16 +93,10 @@
                                         <input type="checkbox" id="bancai" value="板材">板材
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="jinshu" value="金属">金属
+                                        <input type="checkbox" id="jinshu" value="金属:金属合金:钛合金">金属
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="sugang" value="塑钢">塑钢
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="trtaisu" value="TR钛塑">TR钛塑
-                                    </label>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="tanqianwei" value="碳纤维">碳纤维
+                                        <input type="checkbox" id="tr" value="TR90:超轻TR">TR
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="chuntai" value="纯钛">纯钛
@@ -119,13 +107,22 @@
                                 <div class="checkbox_group_label text_center">风格</div>
                                 <div class="checkbox_group_options" id="panel_style">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="business" value="商务">商务
+                                        <input type="checkbox" id="business" value="商务:职场">商务
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="casual" value="休闲">休闲
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="fashion" value="潮款">潮款
+                                        <input type="checkbox" id="sports" value="运动">运动
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="fashion" value="潮流">潮流
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="shishang" value="时尚">时尚
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="classic" value="经典">经典
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="retro" value="复古">复古
@@ -136,10 +133,19 @@
                                 <div class="checkbox_group_label text_center">颜色</div>
                                 <div class="checkbox_group_options" id="panel_color">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="blackorwhite" value="黑白">黑白
+                                        <input type="checkbox" id="black" value="黑色">黑色
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="gray" value="灰色">灰色
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="white" value="白色">白色
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="blue" value="蓝色">蓝色
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="green" value="绿色">绿色
                                     </label>
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="red" value="红色">红色
@@ -148,16 +154,23 @@
                                         <input type="checkbox" id="yellow" value="黄色">黄色
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="brown" value="咖啡">咖啡
+                                        <input type="checkbox" id="brown" value="棕色:巧克力:咖啡色">棕色
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="silver" value="银色">银色
+                                        <input type="checkbox" id="purple" value="紫色">紫色
                                     </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="golden" value="金色">金色
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" id="silver" value="银色" style="margin-left: 0px;">银色
+                                    </label>
+                                    <!--换行第一个-->
                                     <label class="checkbox-inline">
                                         <input type="checkbox" id="pattern" value="花纹">花纹
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="other" value="其他">其他
+                                        <input type="checkbox" id="other" value="金属色:枪色:铜色:木纹:混合色:琥珀色">其他
                                     </label>
                                 </div>
                             </div>
@@ -171,7 +184,17 @@
         </div>
     </div>
 
-    <div class="offset_80">
+    <div class="offset_20 display_right">
+        <ul id="commentNavbar" class="pagination pagination-sm">
+            <li id="pageMark" class="display_inline" style="font-size: 18px; color: #888888"> 0 / 0 </li>
+            <li><a href="#" id="first" class="display_inline">&laquo;</a></li>
+            <li><a href="#" id="previous" class="display_inline"><</a></li>
+            <li><a href="#" id="next" class="display_inline">></a></li>
+            <li><a href="#" id="last" class="display_inline">&raquo;</a></li>
+        </ul>
+    </div>
+
+    <div>
         <ul class="imgs_wrap_4_info">
             <li class="item_list_show" data-frameId="">
                 <div class="item_wrap_brief">
@@ -220,7 +243,10 @@
 </body>
 
 <script type="text/javascript">
-
+    var maxPageIndex = 0;
+    var currentPageIndex = 0;
+    var pageSize = 20;
+    var itemList = null;
     //第一次加载本页面时，获取后台从mv传来的list
     function firstLoad() {
         alert("<%=request.getContextPath()%>/jsp/search/firstLoad");
@@ -238,44 +264,77 @@
             timeout: 80000,//超时时间：8秒
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                showList(data);
+                if (data.msg == "success"){
+                    itemList = data.framelist;
+                    maxPageIndex = Math.ceil(itemList.length/pageSize);
+                    if (maxPageIndex > 0){
+                        currentPageIndex = 1;
+                    }
+                    showList();
+                }else if (data.msg == "no_result"){
+                    $(".imgs_wrap_4_info").html("无查找结果");
+                }
+                
             },
             //请求出错的处理
             error: function () {
                 alert("请求出错");
             }
-        })
+        });
+        
+        $("#previous").click(function () {
+            if (maxPageIndex > 0 && currentPageIndex > 1){
+                currentPageIndex = currentPageIndex - 1;
+                showList();
+            }
+        });
+        $("#next").click(function () {
+            if (maxPageIndex > 0 && currentPageIndex < maxPageIndex){
+                currentPageIndex = currentPageIndex + 1;
+                showList();
+            }
+        });
+        $("#first").click(function () {
+            if (currentPageIndex > 1){
+                currentPageIndex = 1;
+                showList();
+            }
+        });
+        $("#last").click(function () {
+            if (maxPageIndex > 0 && currentPageIndex < maxPageIndex){
+                currentPageIndex = maxPageIndex;
+                showList();
+            }
+        });
     }
 
-    function showList(d) {
+    function showList() {
         alert("进入显示阶段");
+        $("#pageMark").html(currentPageIndex + " / " + maxPageIndex);
         var parent = $(".imgs_wrap_4_info");
         parent.html("");
-        if (d.msg == "success"){
-            var list = d.framelist;
-            alert(d);
-            alert(list);
-            for (var i=0; i<list.length; i++){
-                parent.append('<li class="item_list_show" data-frameid="' +
-                    list[i].frameId +
-                    '"><div class="item_wrap_brief"> <img class="item_img_4_info" src="' +
-                    list[i].framePhoto +
-                    '"/><div class="item_info_price">¥' +
-                    list[i].framePrice +
-                    '</div></div><div class="item_panel" style="display: none"><img class="item_img_4_info" src="' +
-                    list[i].framePhoto +
-                    '"/><div class="item_info_price">¥' +
-                    list[i].framePrice +
-                    '</div><div class="item_info_brief">材料：' +
-                    list[i].material +
-                    '</div><div class="display_inline"><div class="btn btn_primary btn-xs btn_collect"><span class="glyphicon glyphicon-heart-empty"></span>收藏</div>' +
-                    '<div class="btn btn_primary btn-xs btn_uncollect"><span class="glyphicon glyphicon-heart"></span>取消</div>' +
-                    '<div class="btn btn_primary btn-xs" id="btnBuy" onclick="toBuy()"><span class="glyphicon glyphicon-shopping-cart"></span>购买</div></div></div></li>');
-            }
-        } else if (d.msg == "no_result"){
-            parent.html("无查找结果");
+        var start = (currentPageIndex-1) * pageSize;
+        var end = (start+pageSize) <= (itemList.length) ? (start+pageSize) : (itemList.length);
+        for (var i=start; i<end; i++){
+            parent.append('<li class="item_list_show" data-frameid="' +
+                itemList[i].frameId +
+                '"><div class="item_wrap_brief"> <img class="item_img_4_info" src="' +
+                itemList[i].framePhoto +
+                '"/><div class="item_info_price">¥' +
+                itemList[i].framePrice +
+                '</div></div><div class="item_panel" style="display: none"><img class="item_img_4_info" src="' +
+                itemList[i].framePhoto +
+                '"/><div class="item_info_price">¥' +
+                itemList[i].framePrice +
+                '</div><div class="item_info_brief">' +
+                itemList[i].frameName +
+                '</div><div class="item_info_brief">材料：' +
+                itemList[i].material +
+                '</div><div class="display_inline"><div class="btn btn_primary btn-xs btn_collect"><span class="glyphicon glyphicon-heart-empty"></span>收藏</div>' +
+                '<div class="btn btn_primary btn-xs btn_uncollect"><span class="glyphicon glyphicon-heart"></span>取消</div>' +
+                '<div class="btn btn_primary btn-xs" id="btnBuy" onclick="toBuy()"><span class="glyphicon glyphicon-shopping-cart"></span>购买</div></div></div></li>');
         }
-
+        
         //给新添加的元素绑定事件监听函数
 
         $(".item_list_show").hover(function(){
@@ -410,7 +469,16 @@
                 },
                 //请求成功后的回调函数 data为json格式
                 success: function (data) {
-                    showList(data);
+                    if (data.msg == "success"){
+                        itemList = data.framelist;
+                        maxPageIndex = Math.ceil(itemList.length/pageSize);
+                        if (maxPageIndex > 0){
+                            currentPageIndex = 1;
+                        }
+                        showList();
+                    }else if (data.msg == "no_result"){
+                        $(".imgs_wrap_4_info").html("无查找结果");
+                    }
                 },
                 //请求出错的处理
                 error: function () {

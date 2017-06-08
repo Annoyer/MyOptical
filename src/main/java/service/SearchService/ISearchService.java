@@ -6,6 +6,7 @@ import service.common.ICommService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by joy12 on 2017/5/28.
@@ -15,8 +16,8 @@ import java.util.Map;
  * 功能4：根据frameId获取评论信息
  */
 public interface ISearchService extends ICommService {
-    List<FrameEntity> getFramesByAttrs(Map<String,String> attrMap);
-    List<FrameEntity> getFramesByKeyword(String keyword);
+    Set<FrameEntity> getFramesByAttrs(Map<String,String> attrMap);
+    Set<FrameEntity> getFramesByKeyword(String keyword);
     FrameEntity getFrameByFrameId(Integer frameId);
     List<CommentEntity> getAllCommentsByFrameId(Integer frameId);
 }

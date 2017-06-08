@@ -27,16 +27,16 @@
     <div class="page_content">
         <div class="text_title" id="itemId"></div>
         <div class="item_img_wrapper_lg">
-            <img class="img_lg" id="itemImgLg" src=""/>
+            <img class="img_fill" id="itemImgLg" src=""/>
         </div>
-        <div class="offset_40">
-            <div class="color_panel">
-                <a class="color_choosen" style="background-color: #000000"></a>
-                <a class="color_choice" style="background-color: red"></a>
-                <a class="color_choice" style="background-color: blue"></a>
-                <a class="color_choice" style="background-color: #ffffff"></a>
-            </div>
-        </div>
+        <%--<div class="offset_40">--%>
+            <%--<div class="color_panel">--%>
+                <%--<a class="color_choosen" style="background-color: #000000"></a>--%>
+                <%--<a class="color_choice" style="background-color: red"></a>--%>
+                <%--<a class="color_choice" style="background-color: blue"></a>--%>
+                <%--<a class="color_choice" style="background-color: #ffffff"></a>--%>
+            <%--</div>--%>
+        <%--</div>--%>
 
         <div class="offset_40">
             <div class="display_inlineblock">
@@ -154,12 +154,16 @@
                 $('#form').html("框型：  " + data.frameInfo.form);
                 $('#glassesType').html("功能：  " + data.frameInfo.glassesType);
                 $('#material').html("材质：  " + data.frameInfo.material);
+                $('#lensHeight').html("镜框高度：  " + data.frameInfo.lensHeight + " mm");
+                $('#lensWidth').html("镜框宽度：  " + data.frameInfo.lensWidth + " mm");
+                $('#bridgeWidth').html("鼻梁宽度：  " + data.frameInfo.bridgeWidth + " mm");
+                $('#templeLength').html("镜脚长度：  " + data.frameInfo.templeLength + " mm");
                 alert(data.commentList.length + "条评论");
                 allComments = data.commentList;
                 if (allComments.length == 0){
                     $('#commentListBody').html("暂无评论");
                 }else{
-                    maxPageIndex = (allComments.length%5 == 0)? (allComments.length/5) : (allComments.length/5+1);
+                    maxPageIndex = (allComments.length%pageSize == 0)? (allComments.length/pageSize) : (allComments.length/pageSize+1);
                     for (var i=1; i<=maxPageIndex && i<=10; i++){
                         var node = $('<li id="page' +
                             i +'"><a href="#" onclick="showComments(' +

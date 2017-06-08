@@ -21,19 +21,19 @@
 
 <body>
 <header>
-    <div class="container">
+    <div class="container" style="display:flex; justify-content:right; align-items:center">
         <div class="row">
             <div class="col-md-3">
                 <img src="" class="logo_img"/>
             </div>
-            <div class="col-md-4 col-md-push-4">
+            <div class="col-md-3">
                 <form id="searchBarForm" class="display_inlineblock">
                     <input type="search" id="searchBar" class="search_bar" placeholder="搜索">
                 </form>
                 <button class="btn_primary btn-sm display_inlineblock" id="btnSearchSubmit">搜索</button>
             </div>
             </div>
-            <div class="col-md-2 col-md-push-4">
+            <div class="col-md-1">
                 <button id="user" class="btn btn-link"></button>
                 <button id="shopping" class="btn btn-link"></button>
             </div>
@@ -50,10 +50,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu naver_searchkey" data-v="glassesType">
-                            <li class="naver_searchvalue" data-v="nearsight">近视眼镜</li>
+                            <li class="naver_searchvalue" data-v="normal">框架眼镜</li>
                             <li class="naver_searchvalue" data-v="sun">太阳眼镜</li>
-                            <li class="naver_searchvalue" data-v="farsight">老花眼镜</li>
-                            <li class="naver_searchvalue" data-v="sports">运动眼镜</li>
                             <li class="naver_searchvalue" data-v="radiation">防辐射眼镜</li>
                         </ul>
                     </li>
@@ -63,9 +61,9 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu naver_searchkey" data-v="userType">
-                            <li class="naver_searchvalue" data-v="man">男式</li>
-                            <li class="naver_searchvalue" data-v="woman">女式</li>
-                            <li class="naver_searchvalue" data-v="child">儿童</li>
+                            <li class="naver_searchvalue" data-v="man">男款</li>
+                            <li class="naver_searchvalue" data-v="woman">女款</li>
+                            <li class="naver_searchvalue" data-v="child">通用款</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -89,9 +87,7 @@
                         <ul class="dropdown-menu naver_searchkey" data-v="material">
                             <li class="naver_searchvalue" data-v="bancai">板材</li>
                             <li class="naver_searchvalue" data-v="jinshu">金属</li>
-                            <li class="naver_searchvalue" data-v="sugang">塑钢</li>
-                            <li class="naver_searchvalue" data-v="trtaisu">TR钛塑</li>
-                            <li class="naver_searchvalue" data-v="tanqianwei">碳纤维</li>
+                            <li class="naver_searchvalue" data-v="trtaisu">TR90</li>
                             <li class="naver_searchvalue" data-v="chuntai">纯钛</li>
                         </ul>
                     </li>
@@ -103,7 +99,10 @@
                         <ul class="dropdown-menu naver_searchkey" data-v="style">
                             <li class="naver_searchvalue" data-v="business">商务</li>
                             <li class="naver_searchvalue" data-v="casual">休闲</li>
-                            <li class="naver_searchvalue" data-v="fashion">潮款</li>
+                            <li class="naver_searchvalue" data-v="sports">运动</li>
+                            <li class="naver_searchvalue" data-v="fashion">潮流</li>
+                            <li class="naver_searchvalue" data-v="shishang">时尚</li>
+                            <li class="naver_searchvalue" data-v="classic">经典</li>
                             <li class="naver_searchvalue" data-v="retro">复古</li>
                         </ul>
                     </li>
@@ -113,14 +112,18 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu naver_searchkey" data-v="color">
-                            <li class="naver_searchvalue" data-v="bw">黑白</li>
+                            <li class="naver_searchvalue" data-v="black">黑色</li>
+                            <li class="naver_searchvalue" data-v="gray">灰色</li>
+                            <li class="naver_searchvalue" data-v="white">白色</li>
                             <li class="naver_searchvalue" data-v="blue">蓝色</li>
+                            <li class="naver_searchvalue" data-v="green">绿色</li>
                             <li class="naver_searchvalue" data-v="red">红色</li>
                             <li class="naver_searchvalue" data-v="yellow">黄色</li>
-                            <li class="naver_searchvalue" data-v="brown">咖啡</li>
+                            <li class="naver_searchvalue" data-v="brown">棕色</li>
+                            <li class="naver_searchvalue" data-v="purple">紫色</li>
+                            <li class="naver_searchvalue" data-v="golden">金色</li>
                             <li class="naver_searchvalue" data-v="silver">银色</li>
                             <li class="naver_searchvalue" data-v="pattern">花纹</li>
-                            <li class="naver_searchvalue" data-v="other">其他</li>
                         </ul>
                     </li>
                 </ul>
