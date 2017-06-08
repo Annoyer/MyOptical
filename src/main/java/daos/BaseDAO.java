@@ -3,6 +3,8 @@ package daos;
 import framework.dao.ExtHibernateDaoSupport;
 import model.CommentEntity;
 import model.FrameEntity;
+import model.GlassesItemEntity;
+import model.InCartEntity;
 import org.hibernate.*;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
@@ -198,5 +200,19 @@ public class BaseDAO extends ExtHibernateDaoSupport {
             }
         });
         return result;
+    }
+
+    public List<Integer> getCartItemByCustomerId(final String customerId){
+        List<Integer> list=(List<Integer>)getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>(){
+            @Override
+            public List<Integer> doInHibernate(Session session) {
+                SQLQuery sqlQuery=session.createSQLQuery(("SELECT glasses_item_id FROM in_cart WHERE customer_id=?"));
+                sqlQuery.setParameter(0,customerId);
+                List<Integer> result=new ArrayList<Integer>();
+                result.addAll(sqlQuery.list());
+                return result;
+            }
+        });
+        return list;
     }
 }

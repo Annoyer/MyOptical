@@ -26,4 +26,5 @@ public interface ICartService extends ICommService {
     PrescriptionEntity setPrescription(BigDecimal rSph, BigDecimal lSph, BigDecimal rCyl, BigDecimal lCyl,
                                        Integer rAxis, Integer lAxis, Integer pd);
     FrameEntity getFrameEntity(int frameId);
+    List<FrameEntity> getGlassesFrameList(List<GlassesItemEntity> glassesItemEntities);
 }

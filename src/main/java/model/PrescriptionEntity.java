@@ -1,10 +1,10 @@
 package model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * Created by 86761 on 2017/6/5.
+ * Created by 86761 on 2017/6/8.
  */
 public class PrescriptionEntity {
     private int presId;
@@ -17,7 +17,7 @@ public class PrescriptionEntity {
     private Integer rAxis;
     private Integer lAxis;
     private Integer pd;
-    private Timestamp presTime;
+    private Date presTime;
 
     public int getPresId() {
         return presId;
@@ -99,11 +99,11 @@ public class PrescriptionEntity {
         this.pd = pd;
     }
 
-    public Timestamp getPresTime() {
+    public Date getPresTime() {
         return presTime;
     }
 
-    public void setPresTime(Timestamp presTime) {
+    public void setPresTime(Date presTime) {
         this.presTime = presTime;
     }
 

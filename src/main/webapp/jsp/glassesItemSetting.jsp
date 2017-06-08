@@ -21,114 +21,8 @@
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <img src="" class="logo_img"/>
-            </div>
-            <div class="col-md-4 col-md-push-4">
-                <form id="search">
-                    <input type="search" id="searchBar" class="search_bar" placeholder="搜索">
-                </form>
-            </div>
-            <div class="col-md-2 col-md-push-4">
-                <button id="user" class="btn btn-link"></button>
-                <button id="shopping" class="btn btn-link"></button>
-            </div>
-        </div>
-    </div>
-    <div class="my_navbar">
-        <nav class="navbar" role="navigation" style="margin-bottom: 0px; border:none;">
-            <div class="container-fluid">
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">首页</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                功能
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">近视眼镜</a></li>
-                                <li><a href="#">太阳眼镜</a></li>
-                                <li><a href="#">老花眼镜</a></li>
-                                <li><a href="#">运动眼镜</a></li>
-                                <li><a href="#">防辐射眼镜</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                款式
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">男式</a></li>
-                                <li><a href="#">女式</a></li>
-                                <li><a href="#">儿童</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                框形
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">全框</a></li>
-                                <li><a href="#">半框</a></li>
-                                <li><a href="#">无框</a></li>
-                                <li><a href="#">方框</a></li>
-                                <li><a href="#">圆框</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                材质
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">板材</a></li>
-                                <li><a href="#">金属</a></li>
-                                <li><a href="#">塑钢</a></li>
-                                <li><a href="#">TR钛塑</a></li>
-                                <li><a href="#">碳纤维</a></li>
-                                <li><a href="#">纯钛</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                风格
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">商务</a></li>
-                                <li><a href="#">休闲</a></li>
-                                <li><a href="#">潮款</a></li>
-                                <li><a href="#">复古</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                颜色
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">黑白</a></li>
-                                <li><a href="#">蓝色</a></li>
-                                <li><a href="#">红色</a></li>
-                                <li><a href="#">黄色</a></li>
-                                <li><a href="#">咖啡</a></li>
-                                <li><a href="#">银色</a></li>
-                                <li><a href="#">花纹</a></li>
-                                <li><a href="#">其他</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-</header>
+<!-- Page Header -->
+<jsp:include page="header.jsp"></jsp:include>
 
 <div class="offset_60">
     <div class="page_content">
@@ -318,28 +212,8 @@
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <img src="" class="logo_img"/>
-            </div>
-            <div class="col-md-3 footer_item">
-                <div class="item_title">关于我们</div>
-                <div class="item_content">联系电话：800-125-125</div>
-            </div>
-            <div class="col-md-3 footer_item">
-                <div class="item_title">配送服务</div>
-                <div class="item_content">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
-            </div>
-            <div class="col-md-3 footer_item">
-                <div class="item_title">售后服务</div>
-                <div class="item_content">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
-            </div>
-        </div>
-    </div>
-
-</footer>
+<!-- Page Footer -->
+<jsp:include page="footer.jsp"></jsp:include>
 
 <script type="text/javascript">
     function settingFunc() {
@@ -376,8 +250,10 @@
             },
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                if(data.returnCode=="1")
+                if(data.returnCode=="1"){
                     alert("添加成功！");
+                    window.location.href ="cart";
+                }
                 else
                     alert("添加失败!");
             },

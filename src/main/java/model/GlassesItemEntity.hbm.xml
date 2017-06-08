@@ -5,9 +5,7 @@
 <hibernate-mapping>
 
     <class name="model.GlassesItemEntity" table="glasses_item" schema="dbo" catalog="glasses_shop">
-        <id name="glassesItemId" column="glasses_item_id">
-            <generator class="native"/>
-        </id>
+        <id name="glassesItemId" column="glasses_item_id"/>
         <property name="glassesPrice" column="glasses_price"/>
         <property name="lensType" column="lens_type"/>
         <property name="lensColor" column="lens_color"/>

@@ -5,9 +5,7 @@
 <hibernate-mapping>
 
     <class name="model.PrescriptionEntity" table="prescription" schema="dbo" catalog="glasses_shop">
-        <id name="presId" column="pres_id" >
-            <generator class="native"/>
-        </id>
+        <id name="presId" column="pres_id"/>
         <property name="customerId" column="customer_id"/>
         <property name="presName" column="pres_name"/>
         <property name="rSph" column="r_sph"/>
@@ -17,6 +15,6 @@
         <property name="rAxis" column="r_axis"/>
         <property name="lAxis" column="l_axis"/>
         <property name="pd" column="pd"/>
-        <property name="presTime" column="pres_time" insert="false"/>
+        <property name="presTime" column="pres_time"/>
     </class>
 </hibernate-mapping>

@@ -9,10 +9,17 @@ import service.CartService.ICartService;
 import service.common.impl.CommServiceImpl;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by 86761 on 2017/6/6.
+ * 1.添加glasses_item（in_cart,in_pre,glasses_frame,addition）
+ * 2.删除glasses_item(in_cart,in_pre,glasses_frame,addition)
+ * 3.在购物车中展示用户的glasses item list
+ * 4.保存prescription到数据库中，customerId设为用户Id（点击保存设置）
  */
 @Service("ICartService")
 public class CartServiceImpl extends CommServiceImpl implements ICartService {
@@ -38,7 +45,7 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
         InCartEntity inCartEntity=new InCartEntity();
         inCartEntity.setCustomerId(customerId);
         inCartEntity.setGlassesItemId(glassesItemId);
-
+        baseDAO.save(inCartEntity);
     }
 
     @Override
@@ -49,7 +56,15 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
 
     @Override
     public List<GlassesItemEntity> getGlassesItemList(String customerId){
-        List<GlassesItemEntity> glassesItemEntities=baseDAO.findByProperty("customer_id",customerId, GlassesItemEntity.class);
+        List<Integer> glassesIdList=baseDAO.getCartItemByCustomerId(customerId);
+        System.out.println(glassesIdList.toString());
+        List<GlassesItemEntity> glassesItemEntities=new ArrayList<GlassesItemEntity>();
+
+        for(Integer glassesId:glassesIdList){
+            System.out.println(glassesId);
+            GlassesItemEntity glassesItemEntity=baseDAO.findById(glassesId,GlassesItemEntity.class);
+            glassesItemEntities.add(glassesItemEntity);
+        }
         return glassesItemEntities;
     }
 
@@ -72,5 +87,14 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
     @Override
     public FrameEntity getFrameEntity(int frameId){
         return baseDAO.findById(frameId, FrameEntity.class);
+    }
+
+    @Override
+    public List<FrameEntity> getGlassesFrameList(List<GlassesItemEntity> glassesItemEntities){
+        List<FrameEntity> frameEntityList=new ArrayList<FrameEntity>();
+        for(GlassesItemEntity glassesItemEntity:glassesItemEntities){
+            frameEntityList.add(getFrameEntity(glassesItemEntity.getFrameId()));
+        }
+        return frameEntityList;
     }
 }

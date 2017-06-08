@@ -1,9 +1,9 @@
 package model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * Created by 86761 on 2017/6/5.
+ * Created by 86761 on 2017/6/8.
  */
 public class CommentEntity {
     private int commId;
@@ -11,7 +11,7 @@ public class CommentEntity {
     private String commText;
     private String commPhoto;
     private String customerId;
-    private Timestamp commTime;
+    private Date commTime;
 
     public int getCommId() {
         return commId;
@@ -53,11 +53,11 @@ public class CommentEntity {
         this.customerId = customerId;
     }
 
-    public Timestamp getCommTime() {
+    public Date getCommTime() {
         return commTime;
     }
 
-    public void setCommTime(Timestamp commTime) {
+    public void setCommTime(Date commTime) {
         this.commTime = commTime;
     }
 

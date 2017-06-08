@@ -10,5 +10,6 @@
             <key-property name="addId" column="add_id"/>
         </composite-id>
         <property name="addType" column="add_type"/>
+        <property name="addText" column="add_text"/>
     </class>
 </hibernate-mapping>
