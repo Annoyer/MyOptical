@@ -21,7 +21,7 @@
 
 <body>
 <!-- Page Header -->
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp" flush="true" ></jsp:include>
 
 <!--广告轮转-->
 <div id="myCarousel" class="carousel slide">
