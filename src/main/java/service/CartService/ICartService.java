@@ -24,7 +24,7 @@ public interface ICartService extends ICommService {
     void removeGlassesItem(int glassesItemId);
     List<GlassesItemEntity> getGlassesItemList(String customerId);
     PrescriptionEntity setPrescription(BigDecimal rSph, BigDecimal lSph, BigDecimal rCyl, BigDecimal lCyl,
-                                       Integer rAxis, Integer lAxis, Integer pd);
+                                       Integer rAxis, Integer lAxis, Integer pd,String presName,String customerId);
     FrameEntity getFrameEntity(int frameId);
     List<FrameEntity> getGlassesFrameList(List<GlassesItemEntity> glassesItemEntities);
 }

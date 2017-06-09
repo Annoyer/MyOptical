@@ -47,7 +47,7 @@
             <div class="offset_bottom_-10">
                 <div class="text_title_xs_normal display_inlineblock">镜片选择</div>
                 <label class="display_inlineblock text_title_xxs_normal margin_left_right_30"><input type="checkbox"> 只要镜框</label>
-                <button id="btnSaveSetting" class="btn btn_rectangle btn_primary btn-sm" style="float: right; margin-right: 10px;"><span class="glyphicon glyphicon-floppy-disk"></span> 保存设置</button>
+                <button id="btnSaveSetting" class="btn btn_rectangle btn_primary btn-sm" style="float: right; margin-right: 10px;"  onclick="saveFunc()"><span class="glyphicon glyphicon-floppy-disk"></span> 保存设置</button>
             </div>
             <hr class="my_hr_long"/>
             <div class="offset_40">
@@ -216,6 +216,51 @@
 <jsp:include page="footer.jsp"></jsp:include>
 
 <script type="text/javascript">
+    function saveFunc() {
+
+        alert("save!");
+        var presName=prompt("请输入处方持有人：");
+        var lSph = $("#sphL").val();
+        var lCyl =$("#cylL").val();
+        var lAxis=$("#axisL").val();
+        var pd=$("#pd").val();
+        var rSph=$("#sphR").val();
+        var rCyl=$("#cylR").val();
+        var rAxis=$("#axisR").val();
+        alert(lSph);
+        $.ajax({
+            type: "post",//请求方式
+            url: "save/prescription",
+            timeout: 80000,//超时时间：8秒
+            dataType: "json",//设置返回数据的格式
+            data: {
+                "presName":presName,
+                "lSph": lSph,
+                "lCyl":lCyl,
+                "lAxis":lAxis,
+                "pd":pd,
+                "rSph":rSph,
+                "rCyl":rCyl,
+                "rAxis":rAxis
+            },
+            success: function (data) {
+                if(data.returnCode=="1"){
+                    alert("添加成功！");
+                }
+                if(data.returnCode=="0"){
+                    alert("请先登录！");
+                    window.location.href="login";
+                }
+                else
+                    alert("添加失败!");
+            },
+            //请求出错的处理
+            error: function () {
+                alert("请求出错");
+            }
+        });
+    }
+
     function settingFunc() {
         var lSph = $("#sphL").val();
         alert(lSph);
@@ -248,6 +293,7 @@
                 "lensColor":lensColor,
                 "glassesPrice":glassesPrice
             },
+
             //请求成功后的回调函数 data为json格式
             success: function (data) {
                 if(data.returnCode=="1"){

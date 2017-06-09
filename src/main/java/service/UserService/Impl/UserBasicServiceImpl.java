@@ -3,6 +3,7 @@ package service.UserService.Impl;
 import framework.exceptions.ServiceException;
 import model.CollectsEntity;
 import model.CustomerEntity;
+import model.FrameEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,7 @@ import service.UserService.IUserBasicSearvice;
 import service.common.impl.CommServiceImpl;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by joy12 on 2017/5/27.
@@ -89,5 +87,18 @@ public class UserBasicServiceImpl extends CommServiceImpl implements IUserBasicS
             baseDAO.delete(collectsEntity);
         }
         return retcode;
+    }
+
+    @Override
+    public List<FrameEntity> getCollectList(String customerId){
+        List<Integer> frameIdList=new ArrayList<Integer>();
+        frameIdList.addAll(baseDAO.getCollectionByCustomerId(customerId));
+        System.out.println("frameIdListGet!");
+        List<FrameEntity> frameEntityList=new ArrayList<FrameEntity>();
+        for(Integer frameId:frameIdList){
+            FrameEntity frameEntity=baseDAO.findById(frameId,FrameEntity.class);
+            frameEntityList.add(frameEntity);
+        }
+        return frameEntityList;
     }
 }

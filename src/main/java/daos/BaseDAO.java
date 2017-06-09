@@ -215,4 +215,18 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         });
         return list;
     }
+
+    public List<Integer> getCollectionByCustomerId(final String customerId){
+        List<Integer> list=(List<Integer>)getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>(){
+            @Override
+            public List<Integer> doInHibernate(Session session) {
+                SQLQuery sqlQuery=session.createSQLQuery(("SELECT frame_id FROM collects WHERE customer_id=?"));
+                sqlQuery.setParameter(0,customerId);
+                List<Integer> result=new ArrayList<Integer>();
+                result.addAll(sqlQuery.list());
+                return result;
+            }
+        });
+        return list;
+    }
 }

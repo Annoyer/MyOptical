@@ -29,7 +29,7 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
                                BigDecimal rSph, BigDecimal lSph, BigDecimal rCyl, BigDecimal lCyl,
                                Integer rAxis, Integer lAxis, Integer pd){
         System.out.println("addGlassesItem");
-        PrescriptionEntity prescriptionEntity=setPrescription( rSph,lSph,rCyl,lCyl, rAxis, lAxis,pd);
+        PrescriptionEntity prescriptionEntity=setPrescription( rSph,lSph,rCyl,lCyl, rAxis, lAxis,pd,null,null);
 
         int presId=prescriptionEntity.getPresId();
         GlassesItemEntity glassesItemEntity=new GlassesItemEntity();
@@ -70,9 +70,12 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
 
     @Override
     public PrescriptionEntity setPrescription(BigDecimal rSph, BigDecimal lSph, BigDecimal rCyl, BigDecimal lCyl,
-                                              Integer rAxis, Integer lAxis, Integer pd){
+                                              Integer rAxis, Integer lAxis, Integer pd,String presName,String customerId){
         System.out.println("setPrescription");
         PrescriptionEntity prescriptionEntity=new PrescriptionEntity();
+        if(presName!=null) {
+            prescriptionEntity.setPresName(presName);
+        }
         prescriptionEntity.setrSph(rSph);
         prescriptionEntity.setrCyl(rCyl);
         prescriptionEntity.setrAxis(rAxis);
@@ -80,6 +83,9 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
         prescriptionEntity.setlSph(lSph);
         prescriptionEntity.setlCyl(lCyl);
         prescriptionEntity.setlAxis(lAxis);
+        if(customerId!=null){
+            prescriptionEntity.setCustomerId(customerId);
+        }
         baseDAO.save(prescriptionEntity);
         return prescriptionEntity;
     }

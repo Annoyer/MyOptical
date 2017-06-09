@@ -1,9 +1,11 @@
 package service.UserService;
 
 import framework.exceptions.ServiceException;
+import model.FrameEntity;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import service.common.ICommService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +21,5 @@ public interface IUserBasicSearvice extends ICommService {
     Map login(String id, String password);
     int collect(String customerId, Integer frameId);
     int uncollect(String customerId, Integer frameId);
+    List<FrameEntity> getCollectList(String customerId);
 }

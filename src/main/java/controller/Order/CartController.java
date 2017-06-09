@@ -22,7 +22,8 @@ import java.util.Map;
 /**
  * Created by 86761 on 2017/6/6.
  * 1.将单个眼镜设置添加到购物车，保存到数据库
- * 2.展现购物车页面
+ * 2.将处方设置保存在我的处方中
+ * 3.展现购物车页面
  */
 @Controller("CartController")
 public class CartController extends BaseController {
@@ -89,11 +90,40 @@ public class CartController extends BaseController {
         System.out.println(rSph.toString()+' '+lSph.toString());
 
         CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");
-        String customerId=customerEntity.getCustomerId();
-        System.out.println(customerId);
-        cartService.addGlassesItem(frameId,customerId,lensColor,material,glassesPrice,
-                rSph,lSph,rCyl,lCyl, rAxis, lAxis,pd);
-        result.put("returnCode",1);
+        if(customerEntity==null){
+            result.put("returnCode",0);
+            System.out.println("还未登录");
+        }
+        else {
+            String customerId = customerEntity.getCustomerId();
+            System.out.println(customerId);
+            cartService.addGlassesItem(frameId, customerId, lensColor, material, glassesPrice,
+                    rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd);
+            result.put("returnCode", 1);
+        }
         return result;
+    }
+
+    @RequestMapping(value = "jsp/save/prescription",method = RequestMethod.POST)
+    @ResponseBody
+    public Map savePrescription(){
+        Map map=new HashMap();
+        String presName=request.getParameter("presName");
+        BigDecimal rSph=new BigDecimal(request.getParameter("rSph"));
+        BigDecimal lSph=new BigDecimal(request.getParameter("lSph"));
+        BigDecimal rCyl=new BigDecimal(request.getParameter("rCyl"));
+        BigDecimal lCyl=new BigDecimal(request.getParameter("lCyl"));
+        Integer rAxis=new Integer(request.getParameter("rAxis"));
+        Integer lAxis=new Integer(request.getParameter("lAxis"));
+        Integer pd=new Integer(request.getParameter("pd"));
+        CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");
+        if(customerEntity==null){
+            map.put("returnCode",0);
+        }
+        else {
+            cartService.setPrescription(rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd,presName, customerEntity.getCustomerId());
+            map.put("returnCode", 1);
+        }
+        return map;
     }
 }
