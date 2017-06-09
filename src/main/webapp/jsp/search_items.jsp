@@ -21,7 +21,7 @@
 
 <body onload="firstLoad()">
 <!-- Page Footer -->
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp" flush="true" ></jsp:include>
 
 <div class="page_content">
     <div class="offset_40">
@@ -163,10 +163,10 @@
                                         <input type="checkbox" id="golden" value="金色">金色
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" id="silver" value="银色" style="margin-left: 0px;">银色
+                                        <input type="checkbox" id="silver" value="银色">银色
                                     </label>
                                     <!--换行第一个-->
-                                    <label class="checkbox-inline">
+                                    <label class="checkbox-inline" style="margin-left: 0px;">
                                         <input type="checkbox" id="pattern" value="花纹">花纹
                                     </label>
                                     <label class="checkbox-inline">
@@ -345,6 +345,9 @@
         $(".item_img_4_info").click(function(){
             var frameId = $(this).parent().parent().data("frameid");
             alert(frameId);
+            if (${not empty sessionScope.managerInfo}){
+                window.location.href = "admin_single_item.jsp?frameId=" + frameId;
+            }
             window.location.href = "single_item.jsp?frameId=" + frameId;
         });
 

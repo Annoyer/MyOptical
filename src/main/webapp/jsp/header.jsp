@@ -21,8 +21,8 @@
 
 <body>
 <header>
-    <div class="container" style="display:flex; justify-content:right; align-items:center">
-        <div class="row">
+    <div class="container">
+        <div class="row" style="display:flex; justify-content:right; align-items:center">
             <div class="col-md-3">
                 <img src="" class="logo_img"/>
             </div>
@@ -32,12 +32,16 @@
                 </form>
                 <button class="btn_primary btn-sm display_inlineblock" id="btnSearchSubmit">搜索</button>
             </div>
-            </div>
             <div class="col-md-1">
                 <button id="user" class="btn btn-link"></button>
                 <button id="shopping" class="btn btn-link"></button>
             </div>
+            <div class="col-md-1">
+                <a href="admin_login.jsp" id="linkLogin" style="font-size: 12px;">管理员入口</a>
+                <a href="admin_add_item.jsp" id="linkAddItem" style="font-size: 12px;display: none;">商品上架</a>
+            </div>
         </div>
+
     </div>
     <div class="my_navbar">
         <nav class="navbar" role="navigation" style="margin-bottom: 0px; border:none;">
@@ -134,6 +138,12 @@
 </body>
 
 <script type="text/javascript">
+    window.onload = function () {
+        if (${not empty sessionScope.managerInfo}){
+            $("#linkLogin").css("display","none");
+            $("#linkAddItem").css("display","inline-block");
+        }
+    }
     $(document).ready(function(){
         //根据关键字搜索，在图片上设置跳转到单个页面的带参数超链接
         $("#btnSearchSubmit").click(function () {
@@ -145,7 +155,7 @@
                 alert("请先输入关键词");
             }
 
-        })
+        });
 
         $(".naver_searchvalue").click(function () {
             var key = $(this).parent().data("v");
@@ -169,7 +179,7 @@
 //                }
 //            })
 
-        })
+        });
 
     });
 </script>
