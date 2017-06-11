@@ -37,12 +37,14 @@ public class CartController extends BaseController {
         CustomerEntity customerEntity=(CustomerEntity)request.getSession().getAttribute("customerInfo");
         if(customerEntity==null){
             mv.addObject("returnCode",0);//未登录
+            System.out.println("还未登录");
         }
         else {
             List<InCartGlassesBean> getGlassesItemBeans=cartService.getGlassesItemBeans(customerEntity.getCustomerId());
        //     List<GlassesItemEntity> glassesItemEntityList = cartService.getGlassesItemList(customerEntity.getCustomerId());
          //   mv.addObject("glassesList",glassesItemEntityList);
             mv.addObject("glassesList",getGlassesItemBeans);
+            mv.addObject("returnCode",1);
         }
         mv.setViewName("cart");
         return mv;
