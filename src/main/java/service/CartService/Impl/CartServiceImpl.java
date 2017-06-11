@@ -1,9 +1,6 @@
 package service.CartService.Impl;
 
-import model.FrameEntity;
-import model.GlassesItemEntity;
-import model.InCartEntity;
-import model.PrescriptionEntity;
+import model.*;
 import org.springframework.stereotype.Service;
 import service.CartService.ICartService;
 import service.common.impl.CommServiceImpl;
@@ -102,5 +99,38 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
             frameEntityList.add(getFrameEntity(glassesItemEntity.getFrameId()));
         }
         return frameEntityList;
+    }
+
+    @Override
+    public List<InCartGlassesBean> getGlassesItemBeans(String customerId){
+        List<Integer> glassesIdList=baseDAO.getCartItemByCustomerId(customerId);
+        System.out.println(glassesIdList.toString());
+        List<InCartGlassesBean> beans=new ArrayList<InCartGlassesBean>();
+
+        for(Integer glassesId:glassesIdList){
+            System.out.println(glassesId);
+            InCartGlassesBean bean=new InCartGlassesBean();
+
+            GlassesItemEntity glassesItemEntity=baseDAO.findById(glassesId,GlassesItemEntity.class);
+            bean.setGlassesItemId(glassesId);
+            bean.setGlassesPrice(glassesItemEntity.getGlassesPrice());
+
+            FrameEntity frameEntity=baseDAO.findById(glassesItemEntity.getFrameId(),FrameEntity.class);
+            bean.setFrameId(frameEntity.getFrameId());
+            bean.setFrameName(frameEntity.getFrameName());
+            bean.setFramePhoto(frameEntity.getFramePhoto());
+
+            PrescriptionEntity prescriptionEntity=baseDAO.findById(glassesItemEntity.getPresId(),PrescriptionEntity.class);
+            bean.setlAxis(prescriptionEntity.getlAxis());
+            bean.setlCyl(prescriptionEntity.getlCyl());
+            bean.setlSph(prescriptionEntity.getlSph());
+            bean.setrSph(prescriptionEntity.getrSph());
+            bean.setrAxis(prescriptionEntity.getrAxis());
+            bean.setrCyl(prescriptionEntity.getrCyl());
+            bean.setPd(prescriptionEntity.getPd());
+
+            beans.add(bean);
+        }
+        return beans;
     }
 }

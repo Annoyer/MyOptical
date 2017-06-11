@@ -100,13 +100,13 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         System.out.println("start findByProperty");
         String tableName = cls.getName();
         System.out.println("tableName: " + tableName + "   propertyName:" + propertyName + "value" + value.toString());
-        log.debug("finding "+tableName+" instance with property: "
+        log.debug("finding " + tableName + " instance with property: "
                 + propertyName + ", value: " + value);
         try {
-            String queryString = "from "+tableName+" as model where model."
+            String queryString = "from " + tableName + " as model where model."
                     + propertyName + "= ?";
             System.out.println(queryString);
-            return getHibernateTemplate().find(queryString,value);
+            return getHibernateTemplate().find(queryString, value);
         } catch (RuntimeException re) {
             log.error("find by property name failed", re);
             throw re;
@@ -202,13 +202,13 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         return result;
     }
 
-    public List<Integer> getCartItemByCustomerId(final String customerId){
-        List<Integer> list=(List<Integer>)getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>(){
+    public List<Integer> getCartItemByCustomerId(final String customerId) {
+        List<Integer> list = (List<Integer>) getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>() {
             @Override
             public List<Integer> doInHibernate(Session session) {
-                SQLQuery sqlQuery=session.createSQLQuery(("SELECT glasses_item_id FROM in_cart WHERE customer_id=?"));
-                sqlQuery.setParameter(0,customerId);
-                List<Integer> result=new ArrayList<Integer>();
+                SQLQuery sqlQuery = session.createSQLQuery(("SELECT glasses_item_id FROM in_cart WHERE customer_id=?"));
+                sqlQuery.setParameter(0, customerId);
+                List<Integer> result = new ArrayList<Integer>();
                 result.addAll(sqlQuery.list());
                 return result;
             }
@@ -216,17 +216,22 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         return list;
     }
 
-    public List<Integer> getCollectionByCustomerId(final String customerId){
-        List<Integer> list=(List<Integer>)getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>(){
+    public List<Integer> getCollectionByCustomerId(final String customerId) {
+        System.out.println("baseDAO");
+        List<Integer> list = (List<Integer>) getHibernateTemplate().executeFind(new HibernateCallback<List<Integer>>() {
             @Override
             public List<Integer> doInHibernate(Session session) {
-                SQLQuery sqlQuery=session.createSQLQuery(("SELECT frame_id FROM collects WHERE customer_id=?"));
-                sqlQuery.setParameter(0,customerId);
-                List<Integer> result=new ArrayList<Integer>();
+                System.out.println("List:  " + customerId);
+                SQLQuery sqlQuery = session.createSQLQuery(("SELECT frame_id FROM collects WHERE customer_id=?"));
+                System.out.println("sql~");
+                sqlQuery.setParameter(0, customerId);
+                List<Integer> result = new ArrayList<Integer>();
                 result.addAll(sqlQuery.list());
+                System.out.println("result~");
                 return result;
             }
         });
         return list;
     }
+
 }

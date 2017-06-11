@@ -33,8 +33,8 @@
                 <button class="btn_primary btn-sm display_inlineblock" id="btnSearchSubmit">搜索</button>
             </div>
             <div class="col-md-1">
-                <button id="user" class="btn btn-link"></button>
-                <button id="shopping" class="btn btn-link"></button>
+                <button id="user" class="btn btn-link" onclick="toMyPage()"></button>
+                <button id="shopping" class="btn btn-link" onclick="toCart()"></button>
             </div>
             <div class="col-md-1">
                 <a href="admin_login.jsp" id="linkLogin" style="font-size: 12px;">管理员入口</a>
@@ -182,5 +182,12 @@
         });
 
     });
+
+    function toMyPage() {
+        window.location.href="myInfo";
+    }
+    function toCart() {
+        window.location.href="cart";
+    }
 </script>
 </html>

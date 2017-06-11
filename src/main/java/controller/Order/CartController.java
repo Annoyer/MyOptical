@@ -4,6 +4,7 @@ import controller.BaseController;
 import model.CustomerEntity;
 import model.FrameEntity;
 import model.GlassesItemEntity;
+import model.InCartGlassesBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,22 +39,16 @@ public class CartController extends BaseController {
             mv.addObject("returnCode",0);//未登录
         }
         else {
-            List<GlassesItemEntity> glassesItemEntityList = cartService.getGlassesItemList(customerEntity.getCustomerId());
-            mv.addObject("glassesList",glassesItemEntityList);
+            List<InCartGlassesBean> getGlassesItemBeans=cartService.getGlassesItemBeans(customerEntity.getCustomerId());
+       //     List<GlassesItemEntity> glassesItemEntityList = cartService.getGlassesItemList(customerEntity.getCustomerId());
+         //   mv.addObject("glassesList",glassesItemEntityList);
+            mv.addObject("glassesList",getGlassesItemBeans);
         }
         mv.setViewName("cart");
         return mv;
     }
 
-    @RequestMapping(value = "jsp/cart/getNameByFrameId",method = RequestMethod.POST)
-    public Map getNameByFrameId(HttpServletRequest request){
-        String frameId=request.getParameter("thisframeId");
-        System.out.println("frameId   "+frameId);
-        FrameEntity frameEntity=cartService.getFrameEntity(Integer.valueOf(frameId));
-        Map result=new HashMap();
-        result.put("frameName",frameEntity.getFrameName());
-        return result;
-    }
+
 
     @RequestMapping(value="jsp/glassesItemSetting")
     public ModelAndView toGlassesItemSettingPage(HttpServletRequest request){

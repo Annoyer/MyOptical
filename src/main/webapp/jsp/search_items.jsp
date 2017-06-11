@@ -346,7 +346,7 @@
             var frameId = $(this).parent().parent().data("frameid");
             alert(frameId);
             if (${not empty sessionScope.managerInfo}){
-                window.location.href = "admin_single_item.jsp?frameId=" + frameId;
+                window.location.href = "C
             }
             window.location.href = "single_item.jsp?frameId=" + frameId;
         });

@@ -191,7 +191,7 @@
 
     function toBuy(){
         //获取该物品信息并跳转到参数选择页面
-        window.location.href='';
+        window.location.href="glassesItemSetting?frameId=" + thisframeId;
     }
 
     function showComments(pageIndex) {

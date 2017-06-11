@@ -89,16 +89,5 @@ public class UserBasicServiceImpl extends CommServiceImpl implements IUserBasicS
         return retcode;
     }
 
-    @Override
-    public List<FrameEntity> getCollectList(String customerId){
-        List<Integer> frameIdList=new ArrayList<Integer>();
-        frameIdList.addAll(baseDAO.getCollectionByCustomerId(customerId));
-        System.out.println("frameIdListGet!");
-        List<FrameEntity> frameEntityList=new ArrayList<FrameEntity>();
-        for(Integer frameId:frameIdList){
-            FrameEntity frameEntity=baseDAO.findById(frameId,FrameEntity.class);
-            frameEntityList.add(frameEntity);
-        }
-        return frameEntityList;
-    }
+
 }

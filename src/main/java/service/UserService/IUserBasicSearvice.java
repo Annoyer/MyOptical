@@ -21,5 +21,4 @@ public interface IUserBasicSearvice extends ICommService {
     Map login(String id, String password);
     int collect(String customerId, Integer frameId);
     int uncollect(String customerId, Integer frameId);
-    List<FrameEntity> getCollectList(String customerId);
 }

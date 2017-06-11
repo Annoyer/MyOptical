@@ -130,9 +130,9 @@
                     </tr>
                     <tr>
                         <form>
-                            <td><input type="radio" name="material" value="commLense" /> 普通镜片</td>
-                            <td><input type="radio" name="material" value="resinLense" /> 树脂镜片</td>
-                            <td><input type="radio" name="material" value="antiBlueLense" /> 防蓝光镜片</td>
+                            <td><input type="radio" name="material" value="普通"/> 普通镜片</td>
+                            <td><input type="radio" name="material"  value="树脂"/> 树脂镜片</td>
+                            <td><input type="radio" name="material" value="防蓝光"/> 防蓝光镜片</td>
                         </form>
                     </tr>
                     <tr>
@@ -251,8 +251,6 @@
                     alert("请先登录！");
                     window.location.href="login";
                 }
-                else
-                    alert("添加失败!");
             },
             //请求出错的处理
             error: function () {

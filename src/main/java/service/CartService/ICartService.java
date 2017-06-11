@@ -2,6 +2,7 @@ package service.CartService;
 
 import model.FrameEntity;
 import model.GlassesItemEntity;
+import model.InCartGlassesBean;
 import model.PrescriptionEntity;
 import service.common.ICommService;
 
@@ -27,4 +28,5 @@ public interface ICartService extends ICommService {
                                        Integer rAxis, Integer lAxis, Integer pd,String presName,String customerId);
     FrameEntity getFrameEntity(int frameId);
     List<FrameEntity> getGlassesFrameList(List<GlassesItemEntity> glassesItemEntities);
+    List<InCartGlassesBean> getGlassesItemBeans(String customerId);
 }
