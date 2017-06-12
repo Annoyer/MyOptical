@@ -47,7 +47,7 @@
         <nav class="navbar" role="navigation" style="margin-bottom: 0px; border:none;">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.jsp">首页</a></li>
+                    <li><a href="index">首页</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             功能
@@ -138,12 +138,12 @@
 </body>
 
 <script type="text/javascript">
-    window.onload = function () {
+    $(window).bind("load", function () {
         if (${not empty sessionScope.managerInfo}){
             $("#linkLogin").css("display","none");
             $("#linkAddItem").css("display","inline-block");
         }
-    }
+    });
     $(document).ready(function(){
         //根据关键字搜索，在图片上设置跳转到单个页面的带参数超链接
         $("#btnSearchSubmit").click(function () {

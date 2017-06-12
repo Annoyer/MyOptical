@@ -248,6 +248,7 @@
     var pageSize = 20;
     var itemList = null;
     //第一次加载本页面时，获取后台从mv传来的list
+    $(window).bind("load",firstLoad);
     function firstLoad() {
         alert("<%=request.getContextPath()%>/jsp/search/firstLoad");
         var key = "${param.key}";
@@ -282,19 +283,19 @@
             }
         });
         
-        $("#previous").click(function () {
+        $("#previous").unbind("click").click(function () {
             if (maxPageIndex > 0 && currentPageIndex > 1){
                 currentPageIndex = currentPageIndex - 1;
                 showList();
             }
         });
-        $("#next").click(function () {
+        $("#next").unbind("click").click(function () {
             if (maxPageIndex > 0 && currentPageIndex < maxPageIndex){
                 currentPageIndex = currentPageIndex + 1;
                 showList();
             }
         });
-        $("#first").click(function () {
+        $("#first").unbind("click").click(function () {
             if (currentPageIndex > 1){
                 currentPageIndex = 1;
                 showList();
@@ -337,23 +338,23 @@
         
         //给新添加的元素绑定事件监听函数
 
-        $(".item_list_show").hover(function(){
+        $(".item_list_show").unbind("hover").hover(function(){
             $(this).children('div.item_wrap_brief').toggle();
             $(this).children('div.item_panel').toggle();
         });
 
-        $(".item_img_4_info").click(function(){
+        $(".item_img_4_info").unbind("click").click(function(){
             var frameId = $(this).parent().parent().data("frameid");
             alert(frameId);
             if (${not empty sessionScope.managerInfo}){
-                window.location.href = "C
+                window.location.href = "admin_single_item.jsp?frameId=" + frameId
             }
             window.location.href = "single_item.jsp?frameId=" + frameId;
         });
 
 
         //收藏
-        $(".btn_collect").click(function(){
+        $(".btn_collect").unbind("click").click(function(){
             var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameid");
             alert("frameId:" + frameId);
@@ -390,7 +391,7 @@
         });
 
         //取消收藏
-        $(".btn_uncollect").click(function(){
+        $(".btn_uncollect").unbind("click").click(function(){
             var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameId");
             alert("frameId:" + frameId);
@@ -429,7 +430,7 @@
 
 
     $(document).ready(function(){
-        $("#btnPanelSubmit").click( function () {
+        $("#btnPanelSubmit").unbind("click").click( function () {
             alert("catch submit btn click");
             var glasses_type = "";
             var color = "";

@@ -67,6 +67,13 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
     @Override
     public FrameEntity getFrameByFrameId(Integer frameId) {
         FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);
+        Integer times = frameInfo.getAccessTime();
+        if (times == null){
+            frameInfo.setAccessTime(1);
+        }else {
+            frameInfo.setAccessTime(times+1);
+        }
+        baseDAO.update(frameInfo);
         return frameInfo;
     }
 
