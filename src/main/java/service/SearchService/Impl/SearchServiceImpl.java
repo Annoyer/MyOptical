@@ -28,12 +28,15 @@ public class SearchServiceImpl extends CommServiceImpl implements ISearchService
     @Override
     public Set<FrameEntity> getFramesByKeyword(String keyword) {
         Set<FrameEntity> result = new HashSet<FrameEntity>();
-        String[] attrs = {"frameName","userType","color","style","form","material"};
-        for (int i=0; i<attrs.length; i++){
-            String sql = "from FrameEntity as f where f." + attrs[i] + " like '%" + keyword + "%'";
-            System.out.println("sql:" + sql);
-            result.addAll(baseDAO.find(sql));
-        }
+        result.addAll(baseDAO.find("from FrameEntity as f where f.frameName like '%" + keyword + "%'"));
+        result.addAll(baseDAO.findFramesByKeyword(keyword));
+//        Set<FrameEntity> result = new HashSet<FrameEntity>();
+//        String[] attrs = {"frameName","userType","color","style","form","material"};
+//        for (int i=0; i<attrs.length; i++){
+//            String sql = "from FrameEntity as f where f." + attrs[i] + " like '%" + keyword + "%'";
+//            System.out.println("sql:" + sql);
+//            result.addAll(baseDAO.find(sql));
+//        }
 
         System.out.println("SearchService: getFramesByKeyword()查找结束，共找到" + result.size() + "个结果");
 

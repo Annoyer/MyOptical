@@ -239,7 +239,7 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         List<FrameEntity> list = (List<FrameEntity>) getHibernateTemplate().executeFind(new HibernateCallback<List<FrameEntity>>() {
             @Override
             public List<FrameEntity> doInHibernate(Session session) {
-                List<FrameEntity> result = new ArrayList<FrameEntity>();
+                List result = new ArrayList();
                 StringBuilder hql = new StringBuilder("from FrameEntity as f where ");
                 boolean firstFlag = true;
 
@@ -265,6 +265,21 @@ public class BaseDAO extends ExtHibernateDaoSupport {
                 Query query = session.createQuery(hql.toString());
 
                 result.addAll(query.list());
+                return result;
+            }
+        });
+        return list;
+    }
+
+    public List<FrameEntity> findFramesByKeyword(final String keyword) {
+        System.out.println("baseDAO");
+        List<FrameEntity> list = (List<FrameEntity>) getHibernateTemplate().executeFind(new HibernateCallback<List<FrameEntity>>() {
+            @Override
+            public List<FrameEntity> doInHibernate(Session session) {
+                List<FrameEntity> result = new ArrayList<FrameEntity>();
+                SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM find_by_keyword(?)").addEntity(FrameEntity.class);
+                sqlQuery.setParameter(0,keyword);
+                result.addAll(sqlQuery.list());
                 return result;
             }
         });
