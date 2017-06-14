@@ -250,7 +250,7 @@
     //第一次加载本页面时，获取后台从mv传来的list
     $(window).bind("load",firstLoad);
     function firstLoad() {
-        alert("<%=request.getContextPath()%>/jsp/search/firstLoad");
+       // alert("<%=request.getContextPath()%>/jsp/search/firstLoad");
         var key = "${param.key}";
         var value = "${param.value}";
         var keyWord = "${param.keyWord}";
@@ -310,7 +310,7 @@
     }
 
     function showList() {
-        alert("进入显示阶段");
+       // alert("进入显示阶段");
         $("#pageMark").html(currentPageIndex + " / " + maxPageIndex);
         var parent = $(".imgs_wrap_4_info");
         parent.html("");

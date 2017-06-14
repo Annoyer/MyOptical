@@ -13,6 +13,8 @@ public class GlassesItemEntity {
     private String lensMaterial;
     private int frameId;
     private int presId;
+    private String leftText;
+    private String rightText;
 
     public int getGlassesItemId() {
         return glassesItemId;
@@ -70,6 +72,22 @@ public class GlassesItemEntity {
         this.presId = presId;
     }
 
+    public String getLeftText() {
+        return leftText;
+    }
+
+    public void setLeftText(String leftText) {
+        this.leftText = leftText;
+    }
+
+    public String getRightText() {
+        return rightText;
+    }
+
+    public void setRightText(String rightText) {
+        this.rightText = rightText;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,6 +102,8 @@ public class GlassesItemEntity {
         if (lensType != null ? !lensType.equals(that.lensType) : that.lensType != null) return false;
         if (lensColor != null ? !lensColor.equals(that.lensColor) : that.lensColor != null) return false;
         if (lensMaterial != null ? !lensMaterial.equals(that.lensMaterial) : that.lensMaterial != null) return false;
+        if (leftText != null ? !leftText.equals(that.leftText) : that.leftText != null) return false;
+        if (rightText != null ? !rightText.equals(that.rightText) : that.rightText != null) return false;
 
         return true;
     }
@@ -97,6 +117,8 @@ public class GlassesItemEntity {
         result = 31 * result + (lensMaterial != null ? lensMaterial.hashCode() : 0);
         result = 31 * result + frameId;
         result = 31 * result + presId;
+        result = 31 * result + (leftText != null ? leftText.hashCode() : 0);
+        result = 31 * result + (rightText != null ? rightText.hashCode() : 0);
         return result;
     }
 }

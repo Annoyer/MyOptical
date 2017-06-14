@@ -1,6 +1,7 @@
 package controller.User;
 
 import controller.BaseController;
+import model.AddressEntity;
 import model.CustomerEntity;
 import model.FrameEntity;
 import model.PrescriptionEntity;
@@ -28,15 +29,16 @@ public class MyPageController extends BaseController{
     @RequestMapping(value = "jsp/prescription")
     public ModelAndView toPrescription(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        CustomerEntity customerEntity=(CustomerEntity) request.getSession().getAttribute("customerInfo");
+        CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
         Map map=new HashMap();
-        if(customerEntity==null){
+        if(myInfo==null){
             System.out.println("还未登录");
             map.put("loginStatus",0);
         }
         else {
-            List<PrescriptionEntity> presList = myPageService.getMyPrescription(customerEntity.getCustomerId());
+            List<PrescriptionEntity> presList = myPageService.getMyPrescription(myInfo.getCustomerId());
             mv.addObject("presList",presList);
+            request.setAttribute("name", myInfo.getName());
             map.put("loginStatus",1);
         }
         mv.setViewName("prescription");
@@ -47,9 +49,17 @@ public class MyPageController extends BaseController{
     ModelAndView toMyInfo(){
         ModelAndView mv=new ModelAndView();
         CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
-        Map map=new HashMap();
-        map.put("myInfo",myInfo);
-        mv.addObject(map);
+        if(myInfo==null){
+            System.out.println("还未登录");
+            mv.addObject("loginStatus",0);
+        }
+        else {
+            List<AddressEntity> addressEntities=myPageService.getAddressList(myInfo.getCustomerId());
+            System.out.println("地址："+addressEntities.size());
+            mv.addObject("addressList",addressEntities);
+            mv.addObject("myInfo", myInfo);
+            mv.addObject("loginStatus",1);
+        }
         mv.setViewName("myInfo");
         return mv;
     }
@@ -58,11 +68,19 @@ public class MyPageController extends BaseController{
     ModelAndView toMyCollection(){
         ModelAndView mv=new ModelAndView();
         CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
-        mv.addObject("myName",myInfo.getName());
-        System.out.println("myId:" +myInfo.getCustomerId());
-        List<FrameEntity> frameEntityList=myPageService.getCollectList(myInfo.getCustomerId());
-        mv.addObject("list",frameEntityList);
+        if(myInfo==null){
+            System.out.println("还未登录");
+            mv.addObject("loginStatus",0);
+        }
+        else {
+            request.setAttribute("name", myInfo.getName());
+            System.out.println("myId:" + myInfo.getCustomerId());
+            List<FrameEntity> frameEntityList = myPageService.getCollectList(myInfo.getCustomerId());
+            mv.addObject("list", frameEntityList);
+            mv.addObject("loginStatus",1);
+        }
         mv.setViewName("myCollection");
         return mv;
     }
+
 }

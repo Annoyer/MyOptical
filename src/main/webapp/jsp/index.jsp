@@ -110,6 +110,10 @@
 <!-- Page Footer -->
     <jsp:include page="footer.jsp"></jsp:include>
 </body>
-
+<script type="text/javascript">
+    if (${not empty param.msg}){
+        alert("${param.msg}");
+    }
+</script>
 
 </html>

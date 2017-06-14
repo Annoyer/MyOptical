@@ -1,5 +1,6 @@
 package service.MyPageService;
 
+import model.AddressEntity;
 import model.FrameEntity;
 import model.PrescriptionEntity;
 import service.common.ICommService;
@@ -15,4 +16,5 @@ import java.util.List;
 public interface IMyPageService extends ICommService{
     List<FrameEntity> getCollectList(String customerId);
     List<PrescriptionEntity> getMyPrescription(String customerId);
+    List<AddressEntity> getAddressList(String customerId);
 }

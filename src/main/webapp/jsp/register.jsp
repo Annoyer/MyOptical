@@ -30,11 +30,11 @@
         </div>
         <div class="form-group">
             <label>密码</label>
-            <input class="form-control" id="register_password">
+            <input type="password" class="form-control" id="register_password">
         </div>
         <div class="form-group">
             <label>确认密码</label>
-            <input class="form-control" id="register_pw_confirm">
+            <input type="password" class="form-control" id="register_pw_confirm">
         </div>
         <div class="form-group">
             <label>昵称</label>

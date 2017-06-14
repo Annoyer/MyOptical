@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by 86761 on 2017/6/8.
+ * Created by 86761 on 2017/6/12.
  */
 public class AddressEntity {
     private int addrId;

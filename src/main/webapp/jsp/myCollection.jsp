@@ -15,10 +15,10 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style2.css"></head>
-<body>
+<body onload="loginCheckFunc()">
 <jsp:include page="header.jsp"></jsp:include>
 <div class="page-content-l"  style="align-self: center;margin-top: 50px">
-    <h2>Hello,miao!</h2>
+    <h2>Hello,${requestScope.name}!</h2>
     <hr>
     <div class="row">
         <div class="infotab col-md-3">
@@ -32,15 +32,15 @@
         <div class="my-account col-md-9">
             <c:forEach items="${list}" var="frame" step="1" varStatus="i">
                 <div class="col-xs-3 cart-item">
-                    <div class="cart-item-header" style="color: #fff"><p>glasses shop</p></div>
-                    <div class="cart-item-body">
 
+                    <div class="cart-item-body">
+                        <img src=${frame.framePhoto}>
                         <p>${frame.frameName}</p>
                         <h4>￥${frame.framePrice}</h4>
                     </div>
                     <div class="cart-item-footer row">
-                        <button type="button" class="col-xs-6 btn btn-primary btn-sm" onclick="toSetting()">购买</button>
-                        <button id="collect" type="button" class="col-xs-6 btn btn-default btn-sm" onclick="uncollectFunc()">移出收藏夹</button>
+                        <button type="button" class="col-xs-6 btn btn-primary btn-sm" onclick="window.location.href='glassesItemSetting?frameId='+${frame.frameId}">购买</button>
+                        <button id="uncollect" type="button" class="col-xs-6 btn btn-default btn-sm" onclick="unCollectFunc(${frame.frameId})">移出收藏夹</button>
                     </div>
                 </div>
             </c:forEach>
@@ -49,11 +49,36 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#collect").click(function(){
-            $(this).parents(".cart-item").remove();
-        });
-    });
+    function unCollectFunc(frameId) {
+            //alert("点击取消收藏！");
+            $.ajax({
+                type: "post",//请求方式
+                url: "user/uncollect",
+                timeout: 80000,//超时时间：8秒
+                dataType: "json",//设置返回数据的格式
+                data: {
+                    "frameId": frameId
+                },
+                //请求成功后的回调函数 data为json格式
+                success: function (data) {
+                    alert("取消收藏");
+                },
+                //请求出错的处理
+                error: function () {
+                    alert("请求出错");
+                }
+            });
+            window.location.href="myCollection";
+    }
+
+    function loginCheckFunc() {
+        if("${loginStatus}"==0)
+        {
+            alert("请先登录");
+            window.location.href="login.jsp";
+        }
+    }
+
 
 
 </script>

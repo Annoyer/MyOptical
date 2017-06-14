@@ -1,5 +1,6 @@
 package service.MyPageService.Impl;
 
+import model.AddressEntity;
 import model.FrameEntity;
 import model.PrescriptionEntity;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import service.MyPageService.IMyPageService;
 import service.common.impl.CommServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,6 +35,17 @@ public class MyPageServiceImpl extends CommServiceImpl implements IMyPageService
     }
     public List<PrescriptionEntity> getMyPrescription(String customerId){
         List<PrescriptionEntity> prescriptionEntities=baseDAO.findByProperty("customerId",customerId,PrescriptionEntity.class);
-        return prescriptionEntities;
+        List<PrescriptionEntity> myPres=new ArrayList<PrescriptionEntity>();
+        for(PrescriptionEntity prescriptionEntity:prescriptionEntities){
+            if(prescriptionEntity.getPresName()!=null){
+                myPres.add(prescriptionEntity);
+            }
+        }
+        return myPres;
+    }
+
+    public List<AddressEntity> getAddressList(String customerId){
+        List<AddressEntity> addressEntities=baseDAO.findByProperty("customerId",customerId,AddressEntity.class);
+        return addressEntities;
     }
 }

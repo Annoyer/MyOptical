@@ -1,11 +1,15 @@
 package service.OrderService;
 
 import model.*;
+import oracle.sql.TIMESTAMP;
 import org.springframework.stereotype.Service;
 import service.common.impl.CommServiceImpl;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +21,17 @@ import java.util.Map;
  */
 @Service("IOrderService")
 public class OrderServiceImpl extends CommServiceImpl implements IOrderService {
-    public void generateOrder(BigDecimal totalPrice,String customerId,Integer addrId,Map<Integer,Integer> glassesIdList){
+    public int generateOrder(BigDecimal totalPrice,String customerId,Integer addrId,Map<Integer,Integer> glassesIdList){
         OrderInfoEntity orderInfoEntity=new OrderInfoEntity();
         orderInfoEntity.setCustomerId(customerId);
         orderInfoEntity.setAddrId(addrId);
         orderInfoEntity.setTotalPrice(totalPrice);
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        orderInfoEntity.setOrderTime(timestamp);
         baseDAO.save(orderInfoEntity);
         updateGlassesStatus(glassesIdList,orderInfoEntity.getOrderId(),customerId);
+        return orderInfoEntity.getOrderId();
     }
 
     public void updateGlassesStatus(Map<Integer,Integer> glassesIdList, int orderId,String customerId){
@@ -77,5 +85,9 @@ public class OrderServiceImpl extends CommServiceImpl implements IOrderService {
             beans.add(bean);
         }
         return beans;
+    }
+
+    public OrderInfoEntity getOrder(int orderId){
+        return baseDAO.findById(orderId,OrderInfoEntity.class);
     }
 }

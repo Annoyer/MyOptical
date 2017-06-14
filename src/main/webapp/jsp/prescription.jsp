@@ -18,8 +18,8 @@
 </head>
 <body onload="loginCheckFunc()">
 <jsp:include page="header.jsp"></jsp:include>
-<div class="page-content-l"  style="align-self: center;margin-top: 20px">
-    <h2>Hello,miao!</h2>
+<div class="page-content-l"  style="align-self: center;margin-top: 50px">
+    <h2>Hello,${requestScope.name}!</h2>
     <hr>
     <div class="row">
         <div class="infotab col-md-3">
@@ -47,6 +47,7 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script type="text/javascript">
     function loginCheckFunc() {
+        alert("loginStatus"+${loginStatus});
         if("${loginStatus}"==0)
         {
             alert("请先登录");

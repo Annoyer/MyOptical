@@ -6,8 +6,7 @@
 
     <class name="model.OrderInfoEntity" table="order_info" schema="dbo" catalog="glasses_shop">
         <id name="orderId" column="order_id">
-            <generator class="native"></generator>
-        </id>
+            <generator class="native"></generator></id>
         <property name="totalPrice" column="total_price"/>
         <property name="customerId" column="customer_id"/>
         <property name="addrId" column="addr_id"/>

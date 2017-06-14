@@ -5,6 +5,7 @@ import model.InCartGlassesBean;
 import model.OrderInfoEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import service.OrderService.IOrderService;
 import service.OrderService.OrderServiceImpl;
@@ -25,6 +26,7 @@ public class OrderController {
     IOrderService orderService=new OrderServiceImpl();
 
     @RequestMapping(value = "jsp/balance")
+    @ResponseBody
     public Map generateOrder(HttpServletRequest request){
         Map result=new HashMap();
         String[] idList=request.getParameterValues("ids[]");
@@ -36,8 +38,8 @@ public class OrderController {
             map.put(Integer.valueOf(idList[i]),Integer.valueOf(countList[i]));
         }
         CustomerEntity customerEntity=(CustomerEntity) request.getSession().getAttribute("customerInfo");
-        orderService.generateOrder(totalPrice,customerEntity.getCustomerId(),1,map);
-
+        int orderId=orderService.generateOrder(totalPrice,customerEntity.getCustomerId(),1,map);
+        result.put("orderId",orderId);
         result.put("returnCode",1);
         return result;
     }
@@ -46,11 +48,18 @@ public class OrderController {
     public ModelAndView toMyOrder(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
-        mv.addObject("myName",myInfo.getName());
-        System.out.println("myId:" +myInfo.getCustomerId());
-        int orderId=Integer.valueOf(request.getParameter("orderId"));
-        List<InCartGlassesBean> beans=orderService.getGlassesItemBeans(orderId);
-        mv.addObject("glassesList",beans);
+        if(myInfo==null){
+            System.out.println("还未登录");
+        }
+        else {
+            request.setAttribute("name", myInfo.getName());
+
+            int orderId = Integer.valueOf(request.getParameter("orderId"));
+            List<InCartGlassesBean> beans = orderService.getGlassesItemBeans(orderId);
+            OrderInfoEntity orderInfoEntity=orderService.getOrder(orderId);
+            mv.addObject("glassesList", beans);
+            mv.addObject("orderInfo",orderInfoEntity);
+        }
         mv.setViewName("myOrder");
         return mv;
     }

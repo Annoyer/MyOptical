@@ -6,13 +6,14 @@
 
     <class name="model.GlassesItemEntity" table="glasses_item" schema="dbo" catalog="glasses_shop">
         <id name="glassesItemId" column="glasses_item_id">
-            <generator class="native"/>
-        </id>
+            <generator class="native"></generator></id>
         <property name="glassesPrice" column="glasses_price"/>
         <property name="lensType" column="lens_type"/>
         <property name="lensColor" column="lens_color"/>
         <property name="lensMaterial" column="lens_material"/>
         <property name="frameId" column="frame_id"/>
         <property name="presId" column="pres_id"/>
+        <property name="leftText" column="left_text"/>
+        <property name="rightText" column="right_text"/>
     </class>
 </hibernate-mapping>

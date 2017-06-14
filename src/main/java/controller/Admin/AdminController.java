@@ -4,12 +4,18 @@ import model.ManagerEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import service.AdminService.IAdminService;
 import service.AdminService.Impl.AdminServiceImpl;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,9 +83,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/jsp/admin/itemAdd",method = RequestMethod.POST)
-    @ResponseBody
-    public Map itemAdd(HttpServletRequest request){
-        Map result = new HashMap();
+    public ModelAndView itemAdd(HttpServletRequest request, @RequestParam("itemImg") CommonsMultipartFile imgFile){
+        ModelAndView mv = new ModelAndView("redirect:../index");
         int retcode;
         String msg;
         ManagerEntity managerEntity = (ManagerEntity) request.getSession().getAttribute("managerInfo");
@@ -88,9 +93,8 @@ public class AdminController {
             retcode = -1;
             msg = "您没有权限上架货品，请检查是否以管理员身份登录";
         }else{
-            String frameName = request.getParameter("frameName");
-            String framePrice = request.getParameter("framePrice");
-            String framePhoto = request.getParameter("framePhoto");
+            String frameName = request.getParameter("itemName");
+            String framePrice = request.getParameter("itemPrice");
             String userType = request.getParameter("userType");
             String glassesType = request.getParameter("glassesType");
             String color = request.getParameter("color");
@@ -102,14 +106,31 @@ public class AdminController {
             String bridgeWidth = request.getParameter("bridgeWidth");
             String templeLength = request.getParameter("templeLength");
 
+            System.out.println("fileName："+ imgFile.getOriginalFilename());
+            String fileName = imgFile.getOriginalFilename();
+            String suffix = fileName.substring(fileName.indexOf("."));
+            String projectDir = System.getProperty("catalina.home");
+            String path = projectDir + "/webapps/ROOT/jsp/css/img/商品/" + frameName + suffix;
+            System.out.println(path);
+
+            File newFile = new File(path);
+            //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+            try {
+                if (!newFile.exists()) newFile.createNewFile();
+                imgFile.transferTo(newFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String framePhoto = "css/img/商品/" + frameName;
             System.out.println("AdminController: 开始添加货品 frame: " + frameName);
             adminService.addFrame(frameName,framePrice,framePhoto,userType,glassesType,color,style,material,form,lensWidth,lensHeight,bridgeWidth,templeLength);
             retcode = 0;
             msg = "上架成功";
         }
 
-        result.put("retcode",retcode);
-        result.put("msg",msg);
-        return result;
+        mv.addObject("retcode",retcode);
+        mv.addObject("msg",msg);
+        return mv;
     }
 }

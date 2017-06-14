@@ -41,7 +41,7 @@
     <div class="tr tr-info">
         <h4 id="framename">${glasses.frameName}</h4>
 
-        <img id="framePhoto" src="images/206825_lg.jpg">
+        <img id="framePhoto" src=${glasses.framePhoto}>
     </div>
     <div class="tr tr-pre">
         <table class="table">
@@ -53,8 +53,16 @@
     </div>
     <div class="tr tr-add">
         <ul>
-            <li>防辐射镜片</li>
-            <li>刻字：miao</li>
+
+           <li>左侧刻字：
+               <c:if test="${not empty glasses.leftText}">${glasses.leftText}</c:if>
+               <c:if test="${empty glasses.leftText}">无</c:if>
+           </li>
+
+            <li>右侧刻字：
+                <c:if test="${not empty glasses.rightText}">${glasses.rightText}</c:if>
+                <c:if test="${empty glasses.rightText}">无</c:if>
+            </li>
         </ul>
     </div>
     <div class="tr tr-price">
@@ -64,8 +72,8 @@
         <input type="text" class="form-control glassesCount" value="1" style="width: 40px">
     </div>
     <div class="tr tr-operator">
-        <button type="button" class="btn btn-default btn-sm btn-block" onclick="deleteFunc();">删除</button>
-        <button type="button" class="btn btn-default btn-sm btn-block">移入收藏夹</button>
+        <button type="button" class="btn btn-default btn-sm btn-block" onclick="deleteFunc(this);" value="${glasses.glassesItemId}">删除</button>
+        <button type="button" class="btn btn-default btn-sm btn-block" onclick="toCollectFunc(this,${glasses.frameId})" value="${glasses.glassesItemId}">移入收藏夹</button>
     </div>
 </div>
 </c:forEach>
@@ -101,7 +109,7 @@
             type: "post",//请求方式
             url: "balance",
             timeout: 800000,//超时时间：8秒
-            dataType: "json",//设置返回数据的格式
+           // dataType: "json",//设置返回数据的格式
             data: {"ids[]":val,
             "counts[]":count,
             "totalPrice":total
@@ -109,14 +117,45 @@
 
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                if (data.returnCode == "1") {
+                alert(data.returnCode);
+                if (data.returnCode == 1) {
                     alert("订单创建成功！");
-                    window.location.href = "index.jsp";
+                    window.location.href = "myOrder?orderId="+data.orderId;
                 }
                 else{
                     alert("请先登录！");
                     window.location.href = "login.jsp";
                 }
+            },
+            //请求出错的处理
+            error: function (data) {
+                alert("请求出错");
+
+            }
+        });
+    }
+
+    function deleteFunc(delBtn){
+        alert(delBtn.value);
+        var glassesItemId=delBtn.value;
+
+        $.ajax({
+            type: "post",//请求方式
+            url: "cart/delete",
+            timeout: 80000,//超时时间：8秒
+            dataType: "json",//设置返回数据的格式
+            data: {
+                "glassesItemId":glassesItemId,
+            },
+
+            //请求成功后的回调函数 data为json格式
+            success: function (data) {
+                if(data.returnCode=="1"){
+                   // alert("删除成功！");
+                    window.location.href ="cart";
+                }
+                else
+                    alert("删除失败!");
             },
             //请求出错的处理
             error: function () {
@@ -125,6 +164,28 @@
         });
     }
 
+    function toCollectFunc(btn,frameId){
+        $.ajax({
+            type: "post",//请求方式
+            url: "user/collect",
+            timeout: 80000,//超时时间：8秒
+            dataType: "json",//设置返回数据的格式
+            data: {
+            "frameId": frameId
+        },
+        //请求成功后的回调函数 data为json格式
+        success: function (data) {
+            //alert("移入收藏夹");
+            deleteFunc(btn);
+            //alert("从购物车删除")
+        },
+        //请求出错的处理
+        error: function () {
+            alert("请求出错");
+        }
+        });
+
+    }
 </script>
 
 </body>

@@ -50,6 +50,20 @@ public class CartController extends BaseController {
         return mv;
     }
 
+    @RequestMapping(value="jsp/cart/delete")
+    @ResponseBody
+    public Map deleteFromCart(HttpServletRequest request){
+        Map result=new HashMap();
+        System.out.println("deleteFromCart");
+        String glassesid=request.getParameter("glassesItemId");
+        System.out.println(glassesid);
+        int glassesItemId=Integer.valueOf(glassesid);
+        cartService.removeGlassesItem(glassesItemId);
+        result.put("returnCode",1);
+        System.out.println("删除成功！");
+        return result;
+    }
+
 
 
     @RequestMapping(value="jsp/glassesItemSetting")
@@ -84,6 +98,10 @@ public class CartController extends BaseController {
         Integer rAxis=new Integer(request.getParameter("rAxis"));
         Integer lAxis=new Integer(request.getParameter("lAxis"));
         Integer pd=new Integer(request.getParameter("pd"));
+        String leftText=request.getParameter("leftText");
+        String rightText=request.getParameter("rightText");
+        String presName=request.getParameter("presName");
+
         System.out.println(rSph.toString()+' '+lSph.toString());
 
         CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");
@@ -95,32 +113,32 @@ public class CartController extends BaseController {
             String customerId = customerEntity.getCustomerId();
             System.out.println(customerId);
             cartService.addGlassesItem(frameId, customerId, lensColor, material, glassesPrice,
-                    rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd);
+                    rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd,leftText,rightText,presName);
             result.put("returnCode", 1);
         }
         return result;
     }
 
-    @RequestMapping(value = "jsp/save/prescription",method = RequestMethod.POST)
-    @ResponseBody
-    public Map savePrescription(){
-        Map map=new HashMap();
-        String presName=request.getParameter("presName");
-        BigDecimal rSph=new BigDecimal(request.getParameter("rSph"));
-        BigDecimal lSph=new BigDecimal(request.getParameter("lSph"));
-        BigDecimal rCyl=new BigDecimal(request.getParameter("rCyl"));
-        BigDecimal lCyl=new BigDecimal(request.getParameter("lCyl"));
-        Integer rAxis=new Integer(request.getParameter("rAxis"));
-        Integer lAxis=new Integer(request.getParameter("lAxis"));
-        Integer pd=new Integer(request.getParameter("pd"));
-        CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");
-        if(customerEntity==null){
-            map.put("returnCode",0);
-        }
-        else {
-            cartService.setPrescription(rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd,presName, customerEntity.getCustomerId());
-            map.put("returnCode", 1);
-        }
-        return map;
-    }
+//    @RequestMapping(value = "jsp/save/prescription",method = RequestMethod.POST)
+//    @ResponseBody
+//    public Map savePrescription(){
+//        Map map=new HashMap();
+//        String presName=request.getParameter("presName");
+//        BigDecimal rSph=new BigDecimal(request.getParameter("rSph"));
+//        BigDecimal lSph=new BigDecimal(request.getParameter("lSph"));
+//        BigDecimal rCyl=new BigDecimal(request.getParameter("rCyl"));
+//        BigDecimal lCyl=new BigDecimal(request.getParameter("lCyl"));
+//        Integer rAxis=new Integer(request.getParameter("rAxis"));
+//        Integer lAxis=new Integer(request.getParameter("lAxis"));
+//        Integer pd=new Integer(request.getParameter("pd"));
+//        CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");
+//        if(customerEntity==null){
+//            map.put("returnCode",0);
+//        }
+//        else {
+//            cartService.setPrescription(rSph, lSph, rCyl, lCyl, rAxis, lAxis, pd,presName, customerEntity.getCustomerId());
+//            map.put("returnCode", 1);
+//        }
+//        return map;
+//    }
 }

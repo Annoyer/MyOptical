@@ -24,9 +24,10 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
     public void addGlassesItem(int frameId,String customerId,
                                String lensColor,String material,BigDecimal glassesPrice,
                                BigDecimal rSph, BigDecimal lSph, BigDecimal rCyl, BigDecimal lCyl,
-                               Integer rAxis, Integer lAxis, Integer pd){
+                               Integer rAxis, Integer lAxis, Integer pd,
+                               String leftText, String rightText,String presName){
         System.out.println("addGlassesItem");
-        PrescriptionEntity prescriptionEntity=setPrescription( rSph,lSph,rCyl,lCyl, rAxis, lAxis,pd,null,null);
+        PrescriptionEntity prescriptionEntity=setPrescription( rSph,lSph,rCyl,lCyl, rAxis, lAxis,pd,presName,customerId);
 
         int presId=prescriptionEntity.getPresId();
         GlassesItemEntity glassesItemEntity=new GlassesItemEntity();
@@ -35,6 +36,8 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
         glassesItemEntity.setGlassesPrice(glassesPrice);
         glassesItemEntity.setFrameId(frameId);
         glassesItemEntity.setPresId(presId);
+        glassesItemEntity.setLeftText(leftText);
+        glassesItemEntity.setRightText(rightText);
 
         baseDAO.save(glassesItemEntity);
 
@@ -47,6 +50,7 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
 
     @Override
     public void removeGlassesItem(int glassesItemId){
+
         GlassesItemEntity glassesItemEntity=baseDAO.findById(glassesItemId, GlassesItemEntity.class);
         baseDAO.delete(glassesItemEntity);
     }
@@ -70,9 +74,10 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
                                               Integer rAxis, Integer lAxis, Integer pd,String presName,String customerId){
         System.out.println("setPrescription");
         PrescriptionEntity prescriptionEntity=new PrescriptionEntity();
-        if(presName!=null) {
+        if(presName!="") {
             prescriptionEntity.setPresName(presName);
         }
+        else prescriptionEntity.setPresName(null);
         prescriptionEntity.setrSph(rSph);
         prescriptionEntity.setrCyl(rCyl);
         prescriptionEntity.setrAxis(rAxis);

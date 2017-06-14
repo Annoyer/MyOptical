@@ -1,7 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by 86761 on 2017/6/8.
@@ -11,7 +11,7 @@ public class OrderInfoEntity {
     private BigDecimal totalPrice;
     private String customerId;
     private Integer addrId;
-    private Date orderTime;
+    private Timestamp orderTime;
 
     public int getOrderId() {
         return orderId;
@@ -45,11 +45,11 @@ public class OrderInfoEntity {
         this.addrId = addrId;
     }
 
-    public Date getOrderTime() {
+    public Timestamp getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
     }
 

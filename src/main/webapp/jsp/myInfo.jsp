@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86761
@@ -14,7 +15,7 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style2.css"></head>
-<body>
+<body onload="loginCheckFunc()">
 <jsp:include page="header.jsp"></jsp:include>
 <div class="page-content-l"  style="align-self: center;margin-top: 50px">
     <h2>Hello,${myInfo.name}!</h2>
@@ -35,30 +36,40 @@
                         <tr><td class="no-border">姓名：</td><td class="no-border">${myInfo.name}</td></tr>
                         <tr><td class="no-border">邮箱：</td><td class="no-border">${myInfo.email}</td></tr>
                         <tr><td class="no-border">手机号：</td><td class="no-border">${myInfo.phone}</td></tr>
-                        <tr><td class="no-border">购买总数：</td><td class="no-border">21</td></tr>
                     </table>
                 </div>
             </div>
             <div class=row>
                 <div class="col-md-6"><h5 style="color: #60927e">我的收货地址</h5></div>
-                <div class="col-md-6" style="text-align: right"><button class="btn btn-primary">添加地址</button></div>
+                <div class="col-md-6" style="text-align: right"><button class="btn btn-primary" >添加地址</button></div>
             </div>
+            <c:forEach items="${addressEntities}" var="addr" step="1">
             <div class="panel panel-default" style="margin-top: 5px">
                 <div class="panel-body" >
                     <div class="col-md-9">
-                        <p>地址：这是一个收货地址aaaaaaaaaaaaaaaaaaa</p>
+                        <p>${addr.state} ${addr.city} ${addr.street} ${addr.other}</p>
                     </div>
                     <div class="col-md-3" style="text-align: right; width: 150px">
                         <button type="button" class="btn btn-default btn-block">删除</button>
-                        <button type="button" class="btn btn-default btn-block">编辑</button>
                     </div>
                 </div>
             </div>
-
+            </c:forEach>
         </div>
     </div>
 </div>
         <jsp:include page="footer.jsp"></jsp:include>
+<script type="text/javascript">
+    function loginCheckFunc() {
+        if("${loginStatus}"==0)
+        {
+            alert("请先登录");
+            window.location.href="login.jsp";
+        }
+    }
 
+
+
+</script>
 </body>
 </html>

@@ -137,7 +137,7 @@
     var pageSize = 5;
 
     function getFrameInfo() {
-        alert("<%=request.getContextPath()%>/jsp/search/getSingleItem");
+       // alert("<%=request.getContextPath()%>/jsp/search/getSingleItem");
         $.ajax({
             type: "post",//请求方式
             url: "<%=request.getContextPath()%>/jsp/search/getSingleItem",
@@ -158,7 +158,7 @@
                 $('#lensWidth').html("镜框宽度：  " + data.frameInfo.lensWidth + " mm");
                 $('#bridgeWidth').html("鼻梁宽度：  " + data.frameInfo.bridgeWidth + " mm");
                 $('#templeLength').html("镜脚长度：  " + data.frameInfo.templeLength + " mm");
-                alert(data.commentList.length + "条评论");
+               // alert(data.commentList.length + "条评论");
                 allComments = data.commentList;
                 if (allComments.length == 0){
                     $('#commentListBody').html("暂无评论");
@@ -176,7 +176,7 @@
                     node = $('<li id="next"><a href="#" onclick="showComments(-2)">&raquo;</a></li>');
                     $('#commentNavbar').append(node);
 
-                    alert(maxPageIndex + "页评论");
+                   // alert(maxPageIndex + "页评论");
                     currentPageIndex = 1;
                     showComments(1);
                 }
@@ -257,7 +257,7 @@
         //收藏
         $(".btn_collect").click(function(){
             var currentBtn = $(this);
-            alert("frameId:" + thisframeId);
+            //alert("frameId:" + thisframeId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/collect",

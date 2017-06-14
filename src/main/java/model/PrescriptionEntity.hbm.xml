@@ -6,7 +6,7 @@
 
     <class name="model.PrescriptionEntity" table="prescription" schema="dbo" catalog="glasses_shop">
         <id name="presId" column="pres_id">
-            <generator class="native"/>
+            <generator class="native"></generator>
         </id>
         <property name="customerId" column="customer_id"/>
         <property name="presName" column="pres_name"/>

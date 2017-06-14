@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label>密码</label>
-            <input class="form-control" id="login_password">
+            <input type="password" class="form-control" id="login_password">
         </div>
     </div>
     <div class="offset-top-30">
@@ -67,7 +67,7 @@
                 success: function (data) {
                     alert(data.msg);
                     if (data.retcode == 0)
-                        window.location.href = "index.jsp";
+                        window.location.href = "index";
                 },
                 //请求出错的处理
                 error: function () {

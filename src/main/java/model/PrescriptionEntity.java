@@ -1,7 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by 86761 on 2017/6/8.
@@ -17,7 +17,7 @@ public class PrescriptionEntity {
     private Integer rAxis;
     private Integer lAxis;
     private Integer pd;
-    private Date presTime;
+    private Timestamp presTime;
 
     public int getPresId() {
         return presId;
@@ -99,11 +99,11 @@ public class PrescriptionEntity {
         this.pd = pd;
     }
 
-    public Date getPresTime() {
+    public Timestamp getPresTime() {
         return presTime;
     }
 
-    public void setPresTime(Date presTime) {
+    public void setPresTime(Timestamp presTime) {
         this.presTime = presTime;
     }
 
