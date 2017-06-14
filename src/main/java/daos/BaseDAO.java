@@ -234,4 +234,41 @@ public class BaseDAO extends ExtHibernateDaoSupport {
         return list;
     }
 
+    public List<FrameEntity> findFramesByAttr(final Map<String, String> attrMap) {
+        System.out.println("baseDAO");
+        List<FrameEntity> list = (List<FrameEntity>) getHibernateTemplate().executeFind(new HibernateCallback<List<FrameEntity>>() {
+            @Override
+            public List<FrameEntity> doInHibernate(Session session) {
+                List<FrameEntity> result = new ArrayList<FrameEntity>();
+                StringBuilder hql = new StringBuilder("from FrameEntity as f where ");
+                boolean firstFlag = true;
+
+                //构造查询语句，在这6个属性上建立非聚簇索引，一次查找以减少数据传输时间
+                for (Map.Entry<String,String> entry : attrMap.entrySet()) {
+                    Set<FrameEntity> singleResult = new HashSet<FrameEntity>();
+                    String key = entry.getKey();//属性名
+                    String value = entry.getValue();//属性值字符串
+                    System.out.println("SearchService_getFramesByAttrs::key=" + key + "  value=" + value);
+
+                    if (value != null && !value.isEmpty() && !value.contentEquals("") && !value.contentEquals(":")) {
+                        value = value.replaceAll(":", "','").substring(2);
+                        if (!firstFlag) {
+                            hql.append(" and ");
+                        }
+                        hql.append("f.").append(key).append(" in (").append(value).append("')");
+
+                        firstFlag = false;
+                    }
+                }
+
+                System.out.println(hql.toString());
+                Query query = session.createQuery(hql.toString());
+
+                result.addAll(query.list());
+                return result;
+            }
+        });
+        return list;
+    }
+
 }

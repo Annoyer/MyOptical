@@ -18,32 +18,8 @@ import java.util.*;
 @Service(value = "ISearchService")
 public class SearchServiceImpl extends CommServiceImpl implements ISearchService{
     @Override
-    public Set<FrameEntity> getFramesByAttrs(Map<String, String> attrMap) {
-        Set<FrameEntity> result = new HashSet<FrameEntity>();
-        boolean firstFlag = true;
-        for (Map.Entry<String,String> entry : attrMap.entrySet()){
-            Set<FrameEntity> singleResult = new HashSet<FrameEntity>();
-            String key= entry.getKey();//属性名
-            String value = entry.getValue();//属性值字符串
-            System.out.println("SearchService_getFramesByAttrs::key=" + key +"  value=" + value);
-
-            if (value != null && !value.isEmpty() && !value.contentEquals("") && !value.contentEquals(":")){
-                String[] attrs = value.split(":");//属性值分割
-                //在这6个属性上建立非聚簇索引，此时用or操作可能会引起放弃索引的全表搜索，故分开查找，在java中去重复
-                System.out.println("SearchService_getFramesByAttrs::attrslength=" + (attrs.length-1));
-                //取得某一类属性所有属性值的并集
-                for (int i=1; i<attrs.length; i++){
-                    singleResult.addAll(baseDAO.findByProperty(key,attrs[i],FrameEntity.class));
-                }
-                //和已经求好的集合做交集
-                if (firstFlag){
-                    result.addAll(singleResult);
-                    firstFlag = false;
-                }else {
-                    result.retainAll(singleResult);
-                }
-            }
-        }
+    public List<FrameEntity> getFramesByAttrs(Map<String, String> attrMap) {
+        List<FrameEntity> result = baseDAO.findFramesByAttr(attrMap);
         System.out.println("SearchService: getFramesByAttrs()查找结束，共找到" + result.size() + "个结果");
 
         return result;

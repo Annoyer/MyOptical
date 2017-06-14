@@ -16,7 +16,7 @@ import java.util.Set;
  * 功能4：根据frameId获取评论信息
  */
 public interface ISearchService extends ICommService {
-    Set<FrameEntity> getFramesByAttrs(Map<String,String> attrMap);
+    List<FrameEntity> getFramesByAttrs(Map<String,String> attrMap);
     Set<FrameEntity> getFramesByKeyword(String keyword);
     FrameEntity getFrameByFrameId(Integer frameId);
     List<CommentEntity> getAllCommentsByFrameId(Integer frameId);
