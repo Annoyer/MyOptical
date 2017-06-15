@@ -219,6 +219,9 @@
 .th-operator,.tr-operator{
 	width: 150px;
 }
+.th-comm,.tr-comm{
+	width: 600px;
+}
 
 .checkout button{
 	margin-top: 50px;

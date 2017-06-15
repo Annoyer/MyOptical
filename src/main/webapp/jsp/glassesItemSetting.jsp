@@ -151,7 +151,7 @@
 
                 </table>
                 <div class="width_90 display_right">
-                    <h4 id="lensPrice" value="0">价格：￥ 0</h4>
+                    <h4 style="display: inline;" >价格：￥</h4><h4 style="display: inline;" id="lensPrice">20.00</h4>
                 </div>
             </div>
         </div>
@@ -159,7 +159,7 @@
         <div class="offset_80">
             <div class="offset_bottom_-10">
                 <div class="text_title_xs_normal display_inlineblock">个性定制</div>
-                <label class="display_inlineblock text_title_xxs_normal margin_left_right_30"><input type="checkbox" onclick="noAdd(this)"> 不需要定制</label>
+                <label class="display_inlineblock text_title_xxs_normal margin_left_right_30"><input id="addCheck" type="checkbox"> 不需要定制</label>
             </div>
             <hr class="my_hr_long"/>
             <div class="offset_40">
@@ -177,7 +177,7 @@
 
                 </table>
                 <div class="width_90 display_right">
-                    <h4 id="additionalPrice" value="20.00">价格：￥ 20.00</h4>
+                    <h4 style="display: inline;">价格：￥ </h4><h4 style="display: inline;" id="additionalPrice">20.00</h4>
                 </div>
             </div>
         </div>
@@ -186,8 +186,8 @@
             <hr class="my_hr_long"/>
             <div class="offset_40">
                 <div class="width_90 display_center">
-                    <h3 id="totalPrice" value="${frame.framePrice}">总价：￥ ${frame.framePrice}</h3>
-                    <button class="offset_40 btn btn-lg btn_primary btn_padding_lg" onclick="settingFunc();return false">加入购物车</button>
+                    <h3 style="display: inline;">总价：￥ </h3><h3  style="display: inline;" id="totalPrice">${frame.framePrice}</h3>
+                    <button class="offset_40 btn btn-lg btn_primary btn_padding_lg" style="display: block" onclick="settingFunc();return false">加入购物车</button>
                 </div>
             </div>
         </div>
@@ -258,7 +258,9 @@
         var frameID="${frame.frameId}";
        // alert(lensMaterial);
         var lensColor=$("#lensColor").val();
-        var glassesPrice=$("#totalPrice").val();
+        var glassesPrice=document.getElementById("totalPrice").innerHTML;
+       // alert(glassesPrice);
+
         var leftText=$("#leftText").val();
         var rightText=$("#rightText").val();
         var presName=$("#btnSaveSetting").val();
@@ -303,34 +305,42 @@
 
     function lensFunc(lens) {
         if(lens.value=="普通"){
-            document.getElementById("lensPrice").value=20.00;
+            document.getElementById("lensPrice").innerHTML="20.00";
         }
         else if(lens.value=="树脂"){
-            document.getElementById("lensPrice").value=40.00;
+            document.getElementById("lensPrice").innerHTML="40.00";
         }
         else if(lens.value=="防蓝光"){
-            document.getElementById("lensPrice").value=80.00;
+            document.getElementById("lensPrice").innerHTML="80.00";
         }
         //alert(document.getElementById("lensPrice").value);
-        var total=parseFloat(document.getElementById("totalPrice").value);
-        document.getElementById("totalPrice").value=total+parseFloat(document.getElementById("lensPrice").value);
-        document.getElementById("lensPrice").innerHTML="价格：￥ "+document.getElementById("lensPrice").value;
-        document.getElementById("totalPrice").innerHTML="价格：￥ "+total.toString();
+        var total=parseFloat(document.getElementById("totalPrice").innerHTML);
+        total=total+parseFloat(document.getElementById("lensPrice").innerHTML);
+        document.getElementById("lensPrice").innerHTML=document.getElementById("lensPrice").innerHTML;
+        document.getElementById("totalPrice").innerHTML=total.toString();
 
     }
 
-    function noAdd(checkbox) {
-        if(checkbox.checked){
-            document.getElementById("additionalPrice").value=0;
-            document.getElementById("totalPrice").value-=document.getElementById("additionalPrice").value;
-            document.getElementById("totalPrice").innerHTML="价格：￥ "+document.getElementById("totalPrice").value}
-        else{
-            document.getElementById("additionalPrice").value=20;
-            document.getElementById("totalPrice").value+=document.getElementById("additionalPrice").value;
-            document.getElementById("totalPrice").innerHTML="价格：￥ "+document.getElementById("totalPrice").value}
+    $("#addCheck").click(function () {
+           var total=parseFloat(document.getElementById("totalPrice").innerHTML);
+       if(this.checked){
+          // alert("noadd Checked!");
+           document.getElementById("additionalPrice").innerHTML="0.00";
+           total=total-20;
+           document.getElementById("totalPrice").innerHTML=total.toString();
+       }
 
-        document.getElementById("additionalPrice").innerHTML="价格：￥ "+document.getElementById("additionalPrice").value;
-    }
+       else {
+         //  alert("no add unchecked!");
+           document.getElementById("additionalPrice").innerHTML="20.00";
+           total=total+20;
+           document.getElementById("totalPrice").innerHTML=total.toString();
+       }
+       document.getElementById("totalPrice").innerHTML=total.toString();
+
+    });
+
+
 
 </script>
 </body>

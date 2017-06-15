@@ -277,7 +277,7 @@ public class BaseDAO extends ExtHibernateDaoSupport {
             @Override
             public List<FrameEntity> doInHibernate(Session session) {
                 List<FrameEntity> result = new ArrayList<FrameEntity>();
-                SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM find_by_keyword(?)").addEntity(FrameEntity.class);
+                SQLQuery sqlQuery = session.createSQLQuery("SELECT * FROM find_by_keyword2(?)").addEntity(FrameEntity.class);
                 sqlQuery.setParameter(0,keyword);
                 result.addAll(sqlQuery.list());
                 return result;

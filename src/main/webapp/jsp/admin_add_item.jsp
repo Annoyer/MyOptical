@@ -217,10 +217,11 @@
 </body>
 
 <script type="text/javascript">
+    $(window).bind("load", getFrameInfo);
 
     $(document).ready(function(){
         $("#btnAddSubmit").click( function () {
-            alert("catch submit btn click");
+            //alert("catch submit btn click");
             var name = $("#itemName").val();
             var price = $("#itemPrice").val();
 

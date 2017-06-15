@@ -53,16 +53,8 @@
     </div>
     <div class="tr tr-add">
         <ul>
-
-           <li>左侧刻字：
-               <c:if test="${not empty glasses.leftText}">${glasses.leftText}</c:if>
-               <c:if test="${empty glasses.leftText}">无</c:if>
-           </li>
-
-            <li>右侧刻字：
-                <c:if test="${not empty glasses.rightText}">${glasses.rightText}</c:if>
-                <c:if test="${empty glasses.rightText}">无</c:if>
-            </li>
+           <li>左侧刻字：${glasses.leftText}</li>
+            <li>右侧刻字：${glasses.rightText}</li>
         </ul>
     </div>
     <div class="tr tr-price">
@@ -117,7 +109,7 @@
 
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                alert(data.returnCode);
+                //alert(data.returnCode);
                 if (data.returnCode == 1) {
                     alert("订单创建成功！");
                     window.location.href = "myOrder?orderId="+data.orderId;
@@ -136,7 +128,7 @@
     }
 
     function deleteFunc(delBtn){
-        alert(delBtn.value);
+        //alert(delBtn.value);
         var glassesItemId=delBtn.value;
 
         $.ajax({

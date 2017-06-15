@@ -1,6 +1,7 @@
 package controller.Order;
 
 import model.CustomerEntity;
+import model.FrameEntity;
 import model.InCartGlassesBean;
 import model.OrderInfoEntity;
 import org.springframework.stereotype.Controller;
@@ -62,5 +63,27 @@ public class OrderController {
         }
         mv.setViewName("myOrder");
         return mv;
+    }
+
+    @RequestMapping(value = "jsp/commentFrame")
+    public ModelAndView toComment(HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+        int frameId=Integer.parseInt(request.getParameter("frameId"));
+        FrameEntity frameEntity=orderService.getFrameByFrameId(frameId);
+        mv.addObject("frame",frameEntity);
+        mv.setViewName("commentFrame");
+        return mv;
+    }
+
+    @RequestMapping(value="jsp/order/postComment")
+    @ResponseBody
+    public Map postComment(HttpServletRequest request){
+        Map result=new HashMap();
+        String commentStr=request.getParameter("commentStr");
+        int frameId=Integer.parseInt(request.getParameter("frameId"));
+        CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
+        orderService.postComment(commentStr,myInfo.getCustomerId(),frameId);
+        result.put("returnCode",1);
+        return result;
     }
 }

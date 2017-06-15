@@ -196,43 +196,43 @@
 
     <div>
         <ul class="imgs_wrap_4_info">
-            <li class="item_list_show" data-frameId="">
-                <div class="item_wrap_brief">
-                    <img class="item_img_4_info" src="css/img/child.png"/>
-                    <div class="item_info_price">¥100.00</div>
-                </div>
+            <%--<li class="item_list_show" data-frameId="">--%>
+                <%--<div class="item_wrap_brief">--%>
+                    <%--<img class="item_img_4_info" src="css/img/child.png"/>--%>
+                    <%--<div class="item_info_price">¥100.00</div>--%>
+                <%--</div>--%>
 
-                <div class="item_panel" style="display: none">
-                    <img class="item_img_4_info" src="css/img/child.png"/>
-                    <div class="item_info_price">¥100.00</div>
-                    <!--js需求：加载页面时从后台获取该眼镜的颜色类别，加载对应颜色的色框，点击色框更换图片-->
-                    <%--<div class="item_info_color_selector">--%>
-                        <%--<div class="item_info_color"></div>--%>
-                        <%--<div class="item_info_color"></div>--%>
-                        <%--<div class="item_info_color"></div>--%>
-                        <%--<div class="item_info_color"></div>--%>
+                <%--<div class="item_panel" style="display: none">--%>
+                    <%--<img class="item_img_4_info" src="css/img/child.png"/>--%>
+                    <%--<div class="item_info_price">¥100.00</div>--%>
+                    <%--<!--js需求：加载页面时从后台获取该眼镜的颜色类别，加载对应颜色的色框，点击色框更换图片-->--%>
+                    <%--&lt;%&ndash;<div class="item_info_color_selector">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<div class="item_info_color"></div>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<div class="item_info_color"></div>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<div class="item_info_color"></div>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<div class="item_info_color"></div>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                    <%--<div class="item_info_brief">--%>
+                        <%--材质：TR钛塑--%>
+                        <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;可选瞳距：65-76&ndash;%&gt;--%>
                     <%--</div>--%>
-                    <div class="item_info_brief">
-                        材质：TR钛塑
-                        <%--<br>--%>
-                        <%--可选瞳距：65-76--%>
-                    </div>
-                    <div class="display_inline">
-                        <div class="btn btn_primary btn-xs btn_collect">
-                            <span class="glyphicon glyphicon-heart-empty"></span>
-                            收藏
-                        </div>
-                        <div class="btn btn_primary btn-xs btn_uncollect">
-                            <span class="glyphicon glyphicon-heart"></span>
-                            取消
-                        </div>
-                        <div class="btn btn_primary btn-xs" id="btnBuy" onclick="toBuy()">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                            购买
-                        </div>
-                    </div>
-                </div>
-            </li>
+                    <%--<div class="display_inline">--%>
+                        <%--<div class="btn btn_primary btn-xs btn_collect">--%>
+                            <%--<span class="glyphicon glyphicon-heart-empty"></span>--%>
+                            <%--收藏--%>
+                        <%--</div>--%>
+                        <%--<div class="btn btn_primary btn-xs btn_uncollect">--%>
+                            <%--<span class="glyphicon glyphicon-heart"></span>--%>
+                            <%--取消--%>
+                        <%--</div>--%>
+                        <%--<div class="btn btn_primary btn-xs" id="btnBuy" onclick="toBuy()">--%>
+                            <%--<span class="glyphicon glyphicon-shopping-cart"></span>--%>
+                            <%--购买--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</li>--%>
         </ul>
     </div>
 </div>
@@ -345,11 +345,13 @@
 
         $(".item_img_4_info").unbind("click").click(function(){
             var frameId = $(this).parent().parent().data("frameid");
-            alert(frameId);
+            //alert(frameId);
             if (${not empty sessionScope.managerInfo}){
-                window.location.href = "admin_single_item.jsp?frameId=" + frameId
+                window.location.href = "admin_single_item?frameId=" + frameId
+            }else{
+                window.location.href = "single_item?frameId=" + frameId;
             }
-            window.location.href = "single_item.jsp?frameId=" + frameId;
+
         });
 
 
@@ -357,7 +359,7 @@
         $(".btn_collect").unbind("click").click(function(){
             var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameid");
-            alert("frameId:" + frameId);
+            //alert("frameId:" + frameId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/collect",
@@ -394,7 +396,7 @@
         $(".btn_uncollect").unbind("click").click(function(){
             var currentBtn = $(this);
             var frameId = $(this).parent().parent().parent().data("frameId");
-            alert("frameId:" + frameId);
+            //alert("frameId:" + frameId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/uncollect",
@@ -431,7 +433,7 @@
 
     $(document).ready(function(){
         $("#btnPanelSubmit").unbind("click").click( function () {
-            alert("catch submit btn click");
+          //  alert("catch submit btn click");
             var glasses_type = "";
             var color = "";
             var style = "";
@@ -457,7 +459,7 @@
                         alert("选择面板出错");
                 }
             });
-            alert("usertype=" + user_type + "\nglassestype=" + glasses_type + "\nstyle=" + style + "\ncolor=" + color + "\nform=" + form + '\nmaterial=' + material);
+           // alert("usertype=" + user_type + "\nglassestype=" + glasses_type + "\nstyle=" + style + "\ncolor=" + color + "\nform=" + form + '\nmaterial=' + material);
             $.ajax({
                 type: "post",//请求方式
                 url: "<%=request.getContextPath()%>/jsp/search/panelOptions",

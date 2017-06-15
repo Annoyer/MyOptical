@@ -90,4 +90,21 @@ public class OrderServiceImpl extends CommServiceImpl implements IOrderService {
     public OrderInfoEntity getOrder(int orderId){
         return baseDAO.findById(orderId,OrderInfoEntity.class);
     }
+
+    @Override
+    public FrameEntity getFrameByFrameId(Integer frameId) {
+        FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);
+        return frameInfo;
+    }
+
+    @Override
+    public void postComment(String comment,String customerId,int frameId){
+        CommentEntity commentEntity=new CommentEntity();
+        commentEntity.setCustomerId(customerId);
+        commentEntity.setCommText(comment);
+        commentEntity.setFrameId(frameId);
+        commentEntity.setCommTime(new Timestamp(new Date().getTime()));
+        baseDAO.save(commentEntity);
+        System.out.println("评论保存成功");
+    }
 }

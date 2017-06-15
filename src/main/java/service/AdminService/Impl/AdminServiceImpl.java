@@ -1,5 +1,6 @@
 package service.AdminService.Impl;
 
+import model.CommentEntity;
 import model.CustomerEntity;
 import model.FrameEntity;
 import model.ManagerEntity;
@@ -8,7 +9,9 @@ import service.AdminService.IAdminService;
 import service.common.impl.CommServiceImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,12 +62,33 @@ public class AdminServiceImpl extends CommServiceImpl implements IAdminService {
         int lw = 0;
         int bw = 0;
         int tl = 0;
-        if (lensWidth != null) lh = Integer.parseInt(lensWidth);
-        if (lensHeight != null) lw = Integer.parseInt(lensHeight);
-        if (templeLength != null) bw = Integer.parseInt(templeLength);
-        if (bridgeWidth != null) tl = Integer.parseInt(bridgeWidth);
+        if (lensWidth != null && !lensWidth.isEmpty()) lh = Integer.parseInt(lensWidth);
+        if (lensHeight != null && !lensHeight.isEmpty()) lw = Integer.parseInt(lensHeight);
+        if (templeLength != null && !templeLength.isEmpty()) bw = Integer.parseInt(templeLength);
+        if (bridgeWidth != null && !bridgeWidth.isEmpty()) tl = Integer.parseInt(bridgeWidth);
         BigDecimal price = BigDecimal.valueOf(Double.parseDouble(framePrice));
         baseDAO.executeSQL(sql, new Object[]{frameName,glassesType,userType,price,color,style,form,material,framePhoto,lw,lh,bw,tl,0});
+    }
+
+    @Override
+    public FrameEntity getAdminFrameByFrameId(Integer frameId) {
+        FrameEntity frameInfo = baseDAO.findById(frameId,FrameEntity.class);
+        Integer times = frameInfo.getAccessTime();
+        if (times == null){
+            frameInfo.setAccessTime(1);
+        }else {
+            frameInfo.setAccessTime(times+1);
+        }
+        baseDAO.update(frameInfo);
+        return frameInfo;
+    }
+
+    @Override
+    public List<CommentEntity> getAdminAllCommentsByFrameId(Integer frameId) {
+        //    List<CommentEntity> commentEntityList = baseDAO.getCommentsByPage(frameId,pageNum,pageSize);
+        List<CommentEntity> commentEntityList = new ArrayList<CommentEntity>();
+        commentEntityList.addAll(baseDAO.findByProperty("frameId",frameId,CommentEntity.class));
+        return commentEntityList;
     }
 
 

@@ -88,9 +88,9 @@ public class CartController extends BaseController {
         String material=request.getParameter("lensMaterial");
         System.out.println(material);
         //String lensType=request.getParameter("lensType");
-
+        String price=request.getParameter("glassesPrice");
+        System.out.println(price.toString());
         BigDecimal glassesPrice=new BigDecimal(request.getParameter("glassesPrice"));
-        System.out.println(glassesPrice.toString());
         BigDecimal rSph=new BigDecimal(request.getParameter("rSph"));
         BigDecimal lSph=new BigDecimal(request.getParameter("lSph"));
         BigDecimal rCyl=new BigDecimal(request.getParameter("rCyl"));

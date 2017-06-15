@@ -1,5 +1,6 @@
 package service.OrderService;
 
+import model.FrameEntity;
 import model.InCartGlassesBean;
 import model.OrderInfoEntity;
 import service.common.ICommService;
@@ -17,4 +18,6 @@ public interface IOrderService extends ICommService {
     List<OrderInfoEntity> getOrders(String customerId);
     List<InCartGlassesBean> getGlassesItemBeans(int orderId);
     OrderInfoEntity getOrder(int orderId);
+    void postComment(String comment,String customerId,int frameId);
+    FrameEntity getFrameByFrameId(Integer frameId);
 }

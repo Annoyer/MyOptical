@@ -18,21 +18,13 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container"  style="align-self: center;margin-top: 50px">
-    <h2>Hello,${requestScope.name}!</h2>
+    <h2>交易成功! 本次消费 ${orderInfo.totalPrice} 元。</h2> <h5>${orderInfo.orderTime}</h5>
     <hr>
-    <div class="row">
-        <div class="infotab col-md-3">
-            <ul class="nav2 nav-pills nav-stacked">
-                <li><a href="myInfo">我的基本信息</a></li>
-                <li ><a href="prescription">我的规格</a></li>
-                <li><a class="active" href="myOrder">我的订单</a></li>
-                <li><a href="myCollection">我的收藏</a></li>
-            </ul>
 
-        </div>
-        <div class="my-account col-md-9">
-            <div class="order-item">
-                <h3>${orderInfo.orderTime}</h3>
+
+        <div class="center">
+            <div class="order-item row">
+
                 <c:forEach items="${glassesList}" var="glasses" step="1">
                     <div class="order-glasses-item row">
                         <div class="tr tr-info">
@@ -56,12 +48,22 @@
                         <div class="tr tr-price">
                             <h3>￥${glasses.glassesPrice}</h3>
                         </div>
+                        <div class="tr tr-operator">
+                            <button type="button" class="btn btn-default btn-success btn-lg btn-block" onclick="commentFunc(${glasses.frameId})">评价</button>
+                        </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
-    </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+
+<script type="text/javascript">
+    function commentFunc(thisFrameId) {
+       // alert("frameId="+thisFrameId);
+        window.location.href="commentFrame?frameId="+thisFrameId;
+    }
+
+</script>
 </body>
 </html>

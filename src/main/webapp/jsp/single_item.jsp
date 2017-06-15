@@ -19,15 +19,15 @@
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onload="getFrameInfo()">
+<body>
 <!-- Page Header -->
 <jsp:include page="header.jsp" flush="true" ></jsp:include>
 
 <div class="offset_80">
     <div class="page_content">
-        <div class="text_title" id="itemId"></div>
+        <div class="text_title" id="itemId">${frameInfo.frameName}</div>
         <div class="item_img_wrapper_lg">
-            <img class="img_fill" id="itemImgLg" src=""/>
+            <img class="img_fill" id="itemImgLg" src="${frameInfo.framePhoto}"/>
         </div>
         <%--<div class="offset_40">--%>
             <%--<div class="color_panel">--%>
@@ -41,7 +41,7 @@
         <div class="offset_40">
             <div class="display_inlineblock">
                 <div class="display_sm_inlineblocks display_center">
-                    <div class="text_content" id="itemPrice">¥399.00</div>
+                    <div class="text_content" id="itemPrice">¥${frameInfo.framePrice}</div>
                 </div>
                 <div class="divider_vertical"> | </div>
                 <div class="display_sm_inlineblocks display_center">
@@ -71,20 +71,20 @@
                 <table class="table_attribute">
                     <tbody>
                     <tr>
-                        <td id="userType">款式：  </td>
-                        <td id="lensHeight">镜框高度：  </td>
+                        <td id="userType">款式：  ${frameInfo.userType}</td>
+                        <td id="lensHeight">镜框高度：  ${frameInfo.lensHeight} mm</td>
                     </tr>
                     <tr>
-                        <td id="form">框型：  </td>
-                        <td id="lensWidth">镜框宽度：  </td>
+                        <td id="form">框型：  ${frameInfo.form}</td>
+                        <td id="lensWidth">镜框宽度：  ${frameInfo.lensWidth} mm</td>
                     </tr>
                     <tr>
-                        <td id="glassesType">功能：  </td>
-                        <td id="bridgeWidth">鼻梁宽度：  </td>
+                        <td id="glassesType">功能：  ${frameInfo.glassesType}</td>
+                        <td id="bridgeWidth">鼻梁宽度：  ${frameInfo.bridgeWidth} mm</td>
                     </tr>
                     <tr>
-                        <td id="material">材质：  </td>
-                        <td id="templeLength">镜脚长度：  </td>
+                        <td id="material">材质：  ${frameInfo.material}</td>
+                        <td id="templeLength">镜脚长度：  ${frameInfo.templeLength} mm</td>
                     </tr>
                     </tbody>
                 </table>
@@ -131,10 +131,16 @@
 
 <script type="text/javascript">
     var thisframeId = "${param.frameId}";
+    var msg = "${msg}";
+    if (msg == "failure"){
+        alert("系统忙");
+        window.location.href = "index";
+    }
     var allComments = null;
     var maxPageIndex = 0;
     var currentPageIndex = 0;
     var pageSize = 5;
+    $(window).bind("load", getFrameInfo);
 
     function getFrameInfo() {
        // alert("<%=request.getContextPath()%>/jsp/search/getSingleItem");
@@ -147,17 +153,6 @@
             timeout: 80000,//超时时间：8秒
             //请求成功后的回调函数 data为json格式
             success: function (data) {
-                $('#itemId').html(data.frameInfo.frameName);
-                $('#itemImgLg').attr('src',data.frameInfo.framePhoto);
-                $('#itemPrice').html("￥ " + data.frameInfo.framePrice);
-                $('#userType').html("款式：  " + data.frameInfo.userType);
-                $('#form').html("框型：  " + data.frameInfo.form);
-                $('#glassesType').html("功能：  " + data.frameInfo.glassesType);
-                $('#material').html("材质：  " + data.frameInfo.material);
-                $('#lensHeight').html("镜框高度：  " + data.frameInfo.lensHeight + " mm");
-                $('#lensWidth').html("镜框宽度：  " + data.frameInfo.lensWidth + " mm");
-                $('#bridgeWidth').html("鼻梁宽度：  " + data.frameInfo.bridgeWidth + " mm");
-                $('#templeLength').html("镜脚长度：  " + data.frameInfo.templeLength + " mm");
                // alert(data.commentList.length + "条评论");
                 allComments = data.commentList;
                 if (allComments.length == 0){

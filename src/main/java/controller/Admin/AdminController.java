@@ -1,5 +1,7 @@
 package controller.Admin;
 
+import model.CommentEntity;
+import model.FrameEntity;
 import model.ManagerEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +13,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import service.AdminService.IAdminService;
 import service.AdminService.Impl.AdminServiceImpl;
+import service.SearchService.ISearchService;
+import service.SearchService.Impl.SearchServiceImpl;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,6 +69,26 @@ public class AdminController {
             System.out.println("UserBasicController: 开始注销");
             request.getSession().removeAttribute("managerInfo");
         }
+    }
+
+    @RequestMapping(value = "/jsp/admin_single_item")
+    public ModelAndView toAdminSingleItem(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin_single_item");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
+
+        FrameEntity frameInfo = adminService.getAdminFrameByFrameId(frameId);
+        if (frameInfo != null){
+            mv.addObject("msg","success");
+            mv.addObject("frameInfo",frameInfo);
+            List<CommentEntity> commentList = adminService.getAdminAllCommentsByFrameId(frameId);
+            mv.addObject("commentList",commentList);
+            System.out.println("找到关于frameId：" + frameId + "的" + commentList.size() + "条评论");
+        }else{
+            mv.addObject("msg","failure");
+        }
+
+        return mv;
     }
 
     @RequestMapping(value = "/jsp/admin/itemWithdraw",method = RequestMethod.POST)
@@ -119,7 +144,7 @@ public class AdminController {
             String fileName = imgFile.getOriginalFilename();
             String suffix = fileName.substring(fileName.indexOf("."));
             String projectDir = System.getProperty("catalina.home");
-            String path = projectDir + "/webapps/ROOT/jsp/css/img/商品/" + frameName + suffix;
+            String path = projectDir.replace("\\","/") + "/webapps/ROOT/jsp/css/img/商品/" + frameName + suffix;
             System.out.println(path);
 
             File newFile = new File(path);
@@ -131,7 +156,7 @@ public class AdminController {
                 e.printStackTrace();
             }
 
-            String framePhoto = "css/img/商品/" + frameName;
+            String framePhoto = "css/img/商品/" + frameName + suffix;
             System.out.println("AdminController: 开始添加货品 frame: " + frameName);
             adminService.addFrame(frameName,framePrice,framePhoto,userType,glassesType,color,style,material,form,lensWidth,lensHeight,bridgeWidth,templeLength);
             retcode = 0;

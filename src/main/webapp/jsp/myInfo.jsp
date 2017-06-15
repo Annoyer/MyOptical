@@ -43,14 +43,14 @@
                 <div class="col-md-6"><h5 style="color: #60927e">我的收货地址</h5></div>
                 <div class="col-md-6" style="text-align: right"><button class="btn btn-primary" >添加地址</button></div>
             </div>
-            <c:forEach items="${addressEntities}" var="addr" step="1">
+            <c:forEach items="${addressList}" var="addr" step="1">
             <div class="panel panel-default" style="margin-top: 5px">
                 <div class="panel-body" >
                     <div class="col-md-9">
                         <p>${addr.state} ${addr.city} ${addr.street} ${addr.other}</p>
                     </div>
                     <div class="col-md-3" style="text-align: right; width: 150px">
-                        <button type="button" class="btn btn-default btn-block">删除</button>
+                        <button id="delAddr" type="button" class="btn btn-default btn-block">删除</button>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,12 @@
             window.location.href="login.jsp";
         }
     }
-
+    $(document).ready(function(){
+        $("#delAddr").click(function(){
+            $
+            $(this).parents(".panel-default").remove();
+        });
+    });
 
 
 </script>

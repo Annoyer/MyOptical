@@ -192,7 +192,7 @@
         //根据关键字搜索，在图片上设置跳转到单个页面的带参数超链接
         $("#btnSearchSubmit").click(function () {
             var keyWord = $("#searchBar").val();
-            alert("searchKey=" + keyWord);
+           // alert("searchKey=" + keyWord);
             if (keyWord != ""){
                 window.location.href = "search_items.jsp?keyWord=" + keyWord;
             }else{
@@ -204,7 +204,7 @@
         $(".naver_searchvalue").click(function () {
             var key = $(this).parent().data("v");
             var value = $(this).html();
-            alert("k:" + key + "  v:" + value);
+           // alert("k:" + key + "  v:" + value);
             window.location.href = "search_items.jsp?key=" + key +"&value=" + value;
 //            $.ajax({
 //                type: "post",//请求方式

@@ -134,6 +134,7 @@ public class UserBasicController extends BaseController {
     @RequestMapping(value = "/jsp/user/uncollect",method = RequestMethod.POST)
     @ResponseBody
     public Map uncollectFrame(){
+        System.out.println("uncollect");
         Map result = new HashMap();
         int retcode;
         CustomerEntity customerEntity = (CustomerEntity) request.getSession().getAttribute("customerInfo");

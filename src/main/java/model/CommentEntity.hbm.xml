@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="model.CommentEntity" table="comment" schema="dbo" catalog="glasses_shop">
-        <id name="commId" column="comm_id"/>
+        <id name="commId" column="comm_id">
+            <generator class="native"/>
+        </id>
         <property name="frameId" column="frame_id"/>
         <property name="commText" column="comm_text"/>
         <property name="commPhoto" column="comm_photo"/>

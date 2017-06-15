@@ -50,10 +50,10 @@
 
 <script type="text/javascript">
     function unCollectFunc(frameId) {
-            //alert("点击取消收藏！");
+            alert("frameId:"+frameId);
             $.ajax({
                 type: "post",//请求方式
-                url: "user/uncollect",
+                url: "/user/uncollect",
                 timeout: 80000,//超时时间：8秒
                 dataType: "json",//设置返回数据的格式
                 data: {

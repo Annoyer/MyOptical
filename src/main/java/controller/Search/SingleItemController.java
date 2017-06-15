@@ -30,14 +30,14 @@ public class SingleItemController extends BaseController {
 
     @RequestMapping(value = "/jsp/search/getSingleItem")
     @ResponseBody
-    public Map toSingleItem(HttpServletRequest request){
+    public Map getSingleItemComment(HttpServletRequest request){
         Map result = new HashMap();
         Integer frameId = Integer.parseInt(request.getParameter("thisframeId"));
 
         FrameEntity frameInfo = searchService.getFrameByFrameId(frameId);
         if (frameInfo != null){
             result.put("msg","success");
-            result.put("frameInfo",frameInfo);
+//            result.put("frameInfo",frameInfo);
             List<CommentEntity> commentList = searchService.getAllCommentsByFrameId(frameId);
             result.put("commentList",commentList);
             System.out.println("找到关于frameId：" + frameId + "的" + commentList.size() + "条评论");
@@ -46,6 +46,26 @@ public class SingleItemController extends BaseController {
         }
 
         return result;
+    }
+
+    @RequestMapping(value = "/jsp/single_item")
+    public ModelAndView toSingleItem(HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("single_item");
+        Integer frameId = Integer.parseInt(request.getParameter("frameId"));
+
+        FrameEntity frameInfo = searchService.getFrameByFrameId(frameId);
+        if (frameInfo != null){
+            mv.addObject("msg","success");
+            mv.addObject("frameInfo",frameInfo);
+            List<CommentEntity> commentList = searchService.getAllCommentsByFrameId(frameId);
+            mv.addObject("commentList",commentList);
+            System.out.println("找到关于frameId：" + frameId + "的" + commentList.size() + "条评论");
+        }else{
+            mv.addObject("msg","failure");
+        }
+
+        return mv;
     }
 
     //分页还没做
