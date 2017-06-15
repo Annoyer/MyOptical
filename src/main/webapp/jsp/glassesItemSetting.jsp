@@ -19,8 +19,10 @@
 
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+
 <!-- Page Header -->
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -48,6 +50,14 @@
                 <div class="text_title_xs_normal display_inlineblock">镜片选择</div>
 
                 <button id="btnSaveSetting" class="btn btn_rectangle btn_primary btn-sm" style="float: right; margin-right: 10px;"  onclick="saveFunc(this)" value=""><span class="glyphicon glyphicon-floppy-disk"></span> 保存设置</button>
+                <div class="form-group" style="width: 100px;float: right; margin-right: 10px;margin-top: 10px">
+                    <select  id="presSelect" class="form-control input-sm" onchange="selectedFunc()">
+                        <option>（我的处方）</option>
+                            <c:forEach items="${list}" var="pres" step="1" varStatus="status">
+                        <option>${pres.presName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
             <hr class="my_hr_long"/>
             <div class="offset_40">
@@ -187,8 +197,10 @@
             <div class="offset_40">
                 <div class="width_90 display_center">
                     <h3 style="display: inline;">总价：￥ </h3><h3  style="display: inline;" id="totalPrice">${frame.framePrice}</h3>
-                    <button class="offset_40 btn btn-lg btn_primary btn_padding_lg" style="display: block" onclick="settingFunc();return false">加入购物车</button>
-                </div>
+                    <div class="width_90 display_center">
+                   <button class="offset_40 btn btn-lg btn_primary btn_padding_lg" style="display: block" onclick="settingFunc();return false">加入购物车</button>
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -198,6 +210,11 @@
 <jsp:include page="footer.jsp"></jsp:include>
 
 <script type="text/javascript">
+
+
+
+
+
     function saveFunc(btn) {
 
        // alert("save!");
@@ -340,7 +357,81 @@
 
     });
 
+    function selectedFunc(){
+        var sphl=document.getElementById("sphL").options;
+        var sphr=document.getElementById("sphR").options;
+        var cyll=document.getElementById("cylL").options;
+        var cylr=document.getElementById("cylR").options;
+        var axisl=document.getElementById("axisL").options;
+        var axisr=document.getElementById("axisR").options;
+        var pd=document.getElementById("pd").options;
+        //alert("length="+myOptions.length);
+        var vs = $('select  option:selected').val();
+        var i=$('select  option:selected').index()-1;
+        var x;
+       // alert(vs);
+        //alert(i);
+        $.ajax({
+            type: "post",//请求方式
+            url: "get/prescription",
+            timeout: 80000,//超时时间：8秒
+            dataType: "json",//设置返回数据的格式
+            data: {
+                "presIndex":i
+            },
+            success: function (data) {
+                if(data.returnCode=="1"){
+                    //alert("hey！");
 
+                    for(x=0;x<sphr.length;x++){
+                        if(sphr[x].value==data.rSph){
+                            sphr[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<sphl.length;x++){
+                        if(sphl[x].value==data.lSph){
+                            sphl[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<cyll.length;x++){
+                        if(cyll[x].value==data.lCyl){
+                            cyll[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<cylr.length;x++){
+                        if(cylr[x].value==data.rCyl){
+                            //alert("lAxis="+data.lAxis);
+                            cylr[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<axisl.length;x++){
+                        if(axisl[x].value==data.lAxis){
+                            axisl[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<axisr.length;x++){
+                        if(axisr[x].value==data.rAxis){
+                            axisr[x].selected=true;
+                        }
+                    }
+                    for(x=0;x<pd.length;x++){
+                        if(pd[x].value==data.pd){
+                            pd[x].selected=true;
+                        }
+                    }
+                }
+                if(data.returnCode=="0"){
+                    alert("请先登录！");
+                    window.location.href="login";
+                }
+            },
+            //请求出错的处理
+            error: function () {
+                alert("不使用处方");
+            }
+        });
+
+    }
 
 </script>
 </body>

@@ -138,4 +138,15 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
         }
         return beans;
     }
+@Override
+    public List<PrescriptionEntity> getMyPrescription(String customerId){
+        List<PrescriptionEntity> prescriptionEntities=baseDAO.findByProperty("customerId",customerId,PrescriptionEntity.class);
+        List<PrescriptionEntity> myPres=new ArrayList<PrescriptionEntity>();
+        for(PrescriptionEntity prescriptionEntity:prescriptionEntities){
+            if(prescriptionEntity.getPresName()!=null){
+                myPres.add(prescriptionEntity);
+            }
+        }
+        return myPres;
+    }
 }

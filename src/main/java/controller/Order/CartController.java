@@ -1,10 +1,7 @@
 package controller.Order;
 
 import controller.BaseController;
-import model.CustomerEntity;
-import model.FrameEntity;
-import model.GlassesItemEntity;
-import model.InCartGlassesBean;
+import model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,11 +66,37 @@ public class CartController extends BaseController {
     @RequestMapping(value="jsp/glassesItemSetting")
     public ModelAndView toGlassesItemSettingPage(HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
+        CustomerEntity myInfo=(CustomerEntity) request.getSession().getAttribute("customerInfo");
         int frameId=Integer.parseInt(request.getParameter("frameId"));
         FrameEntity frameEntity=cartService.getFrameEntity(frameId);
+        if(myInfo!=null){
+        List<PrescriptionEntity> prescriptionEntities=cartService.getMyPrescription(myInfo.getCustomerId());
+        mv.addObject("list",prescriptionEntities);
+        }
         mv.setViewName("glassesItemSetting");
         mv.addObject("frame",frameEntity);
         return mv;
+    }
+
+    @RequestMapping(value = "jsp/get/prescription")
+    @ResponseBody
+    public Map getPres(HttpServletRequest request) {
+        Map result=new HashMap();
+        CustomerEntity myInfo = (CustomerEntity) request.getSession().getAttribute("customerInfo");
+        int presIndex = Integer.parseInt(request.getParameter("presIndex"));
+        if (myInfo != null){
+            List<PrescriptionEntity> list = cartService.getMyPrescription(myInfo.getCustomerId());
+            PrescriptionEntity prescriptionEntity=list.get(presIndex);
+            result.put("lSph",prescriptionEntity.getlSph());
+            result.put("lCyl",prescriptionEntity.getlCyl());
+            result.put("lAxis",prescriptionEntity.getlAxis());
+            result.put("rSph",prescriptionEntity.getrSph());
+            result.put("rCyl",prescriptionEntity.getrCyl());
+            result.put("rAxis",prescriptionEntity.getrAxis());
+            result.put("pd",prescriptionEntity.getPd());
+            result.put("returnCode",1);
+        }
+        return result;
     }
 
     @RequestMapping(value = "jsp/glassesItem/Setting",method = RequestMethod.POST)

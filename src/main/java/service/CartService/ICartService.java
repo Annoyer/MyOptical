@@ -30,4 +30,5 @@ public interface ICartService extends ICommService {
     FrameEntity getFrameEntity(int frameId);
     List<FrameEntity> getGlassesFrameList(List<GlassesItemEntity> glassesItemEntities);
     List<InCartGlassesBean> getGlassesItemBeans(String customerId);
+    List<PrescriptionEntity> getMyPrescription(String customerId);
 }
