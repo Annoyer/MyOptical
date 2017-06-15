@@ -102,6 +102,15 @@ public class UserBasicController extends BaseController {
         return result;
     }
 
+    @RequestMapping(value = "/jsp/unlogin",method = RequestMethod.POST)
+    @ResponseBody
+    public void unlogin(HttpServletRequest request){
+        if (request.getSession().getAttribute("customerInfo") != null){
+            System.out.println("UserBasicController: 开始注销");
+            request.getSession().removeAttribute("customerInfo");
+        }
+    }
+
     //0-成功，1-已收藏，-1-未登录
     @RequestMapping(value = "/jsp/user/collect", method = RequestMethod.POST)
     @ResponseBody

@@ -37,8 +37,10 @@
                 <button id="shopping" class="btn btn-link" onclick="toCart()"></button>
             </div>
             <div class="col-md-1">
+                <a href="" id="linkUnlogin" style="font-size: 12px;display: none;">注销</a>
                 <a href="admin_login.jsp" id="linkLogin" style="font-size: 12px;">管理员入口</a>
                 <a href="admin_add_item.jsp" id="linkAddItem" style="font-size: 12px;display: none;">商品上架</a>
+                <a href="" id="linkAdminUnlogin" style="font-size: 12px;display: none;">管理员注销</a>
             </div>
         </div>
 
@@ -142,9 +144,51 @@
         if (${not empty sessionScope.managerInfo}){
             $("#linkLogin").css("display","none");
             $("#linkAddItem").css("display","inline-block");
+            $("#linkAdminUnlogin").css("display","inline-block");
+            $("#linkUnlogin").css("display","none");
+        }
+        if (${not empty sessionScope.customerInfo}){
+            $("#linkLogin").css("display","inline-block");
+            $("#linkAddItem").css("display","none");
+            $("#linkAdminUnlogin").css("display","none");
+            $("#linkUnlogin").css("display","inline-block");
         }
     });
     $(document).ready(function(){
+        $("#linkUnlogin").click(function () {
+            $.ajax({
+                type: "post",//请求方式
+                url: "unlogin",
+                timeout: 80000,//超时时间：8秒
+                //请求成功后的回调函数 data为json格式
+                success: function () {
+                    alert("注销成功");
+                },
+                //请求出错的处理
+                error: function () {
+                    alert("请求出错");
+                }
+            })
+
+        });
+
+        $("#linkAdminUnlogin").click(function () {
+            $.ajax({
+                type: "post",//请求方式
+                url: "admin/adminUnlogin",
+                timeout: 80000,//超时时间：8秒
+                //请求成功后的回调函数 data为json格式
+                success: function () {
+                    alert("注销成功");
+                },
+                //请求出错的处理
+                error: function () {
+                    alert("请求出错");
+                }
+            })
+
+        });
+
         //根据关键字搜索，在图片上设置跳转到单个页面的带参数超链接
         $("#btnSearchSubmit").click(function () {
             var keyWord = $("#searchBar").val();

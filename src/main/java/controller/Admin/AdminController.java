@@ -57,6 +57,15 @@ public class AdminController {
         return result;
     }
 
+    @RequestMapping(value = "/jsp/admin/adminUnlogin",method = RequestMethod.POST)
+    @ResponseBody
+    public void unlogin(HttpServletRequest request){
+        if (request.getSession().getAttribute("managerInfo") != null){
+            System.out.println("UserBasicController: 开始注销");
+            request.getSession().removeAttribute("managerInfo");
+        }
+    }
+
     @RequestMapping(value = "/jsp/admin/itemWithdraw",method = RequestMethod.POST)
     @ResponseBody
     public Map itemWithdraw(HttpServletRequest request){
