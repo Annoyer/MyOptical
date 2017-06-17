@@ -119,6 +119,7 @@
 </body>
 
 <script type="text/javascript">
+    $(window).bind("load",getFrameInfo);
 
     var thisframeId = "${param.frameId}";
     var msg = "${msg}";

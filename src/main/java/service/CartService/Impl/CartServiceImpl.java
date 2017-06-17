@@ -119,6 +119,8 @@ public class CartServiceImpl extends CommServiceImpl implements ICartService {
             GlassesItemEntity glassesItemEntity=baseDAO.findById(glassesId,GlassesItemEntity.class);
             bean.setGlassesItemId(glassesId);
             bean.setGlassesPrice(glassesItemEntity.getGlassesPrice());
+            bean.setLeftText(glassesItemEntity.getLeftText());
+            bean.setRightText(glassesItemEntity.getRightText());
 
             FrameEntity frameEntity=baseDAO.findById(glassesItemEntity.getFrameId(),FrameEntity.class);
             bean.setFrameId(frameEntity.getFrameId());

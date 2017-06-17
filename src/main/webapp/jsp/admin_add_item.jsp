@@ -217,11 +217,10 @@
 </body>
 
 <script type="text/javascript">
-    $(window).bind("load", getFrameInfo);
 
     $(document).ready(function(){
         $("#btnAddSubmit").click( function () {
-            //alert("catch submit btn click");
+            alert("开始上架");
             var name = $("#itemName").val();
             var price = $("#itemPrice").val();
 
