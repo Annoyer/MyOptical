@@ -395,7 +395,7 @@
         //取消收藏
         $(".btn_uncollect").unbind("click").click(function(){
             var currentBtn = $(this);
-            var frameId = $(this).parent().parent().parent().data("frameId");
+            var frameId = $(this).parent().parent().parent().data("frameid");
             //alert("frameId:" + frameId);
             $.ajax({
                 type: "post",//请求方式

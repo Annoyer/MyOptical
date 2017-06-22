@@ -288,7 +288,7 @@
         //取消收藏
         $(".btn_uncollect").click(function(){
             var currentBtn = $(this);
-            alert("frameId:" + thisframeId);
+        //    alert("frameId:" + thisframeId);
             $.ajax({
                 type: "post",//请求方式
                 url: "user/uncollect",
